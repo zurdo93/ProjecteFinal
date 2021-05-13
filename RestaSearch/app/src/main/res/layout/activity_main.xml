@@ -10,7 +10,7 @@
         android:id="@+id/txt_prova"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/Poppins_Light"
+        android:fontFamily="@font/poppins_light"
         android:text="S'ha afegit correctament"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"

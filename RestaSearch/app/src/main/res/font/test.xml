@@ -9,9 +9,4 @@
         android:fontWeight="400"
         android:font="@font/poppins_italic"
         />
-    <font
-        android:fontStyle="normal"
-        android:fontWeight="400"
-        android:font="@font/girassol_regular"
-        />
 </font-family>

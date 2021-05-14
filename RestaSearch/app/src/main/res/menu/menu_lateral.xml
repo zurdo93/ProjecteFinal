@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_inici"
+            android:title="@string/menu_inici"/>
+
+        <item
+            android:id="@+id/nav_preferits"
+            android:title="@string/menu_preferits"/>
+
+        <item
+            android:id="@+id/nav_historial"
+            android:title="@string/menu_historial"/>
+
+        <item
+            android:id="@+id/nav_idioma"
+            android:title="@string/menu_idioma"/>
+
+        <item
+            android:id="@+id/nav_privacitat_us"
+            android:title="@string/menu_privacitat_us"/>
+
+    </group>
+
+</menu>

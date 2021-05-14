@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">#0251EE</color>
-    <color name="secondary">#40C9E4</color>
+    <!-- Colors app -->
+    <color name="primary_color">#FF0251EE</color>
+    <color name="secondary_color">#FF4F95B4</color>
+
 </resources>

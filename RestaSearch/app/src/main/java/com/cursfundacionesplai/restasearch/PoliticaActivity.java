@@ -28,6 +28,13 @@ public class PoliticaActivity extends AppCompatActivity {
         checkPolicy = findViewById(R.id.box_policy);
         accept = findViewById(R.id.btn_accept);
 
+        /*
+        Si el valor que ens arriba del sharedpreferences es true, posem el botó i el checkbox amb
+        visibilitat gone.
+
+        També ho utilitzarem per mostrar o no la toolbar.
+         */
+
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class PoliticaActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class PoliticaActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     CheckBox checkPolicy;
-    Button accept;
+    Button btnAccept;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +26,21 @@ public class PoliticaActivity extends AppCompatActivity {
         prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         editor = prefs.edit();
 
-        checkPolicy = findViewById(R.id.box_policy);
-        accept = findViewById(R.id.btn_accept);
+        checkPolicy = this.findViewById(R.id.box_policy);
+        btnAccept = this.findViewById(R.id.btn_accept);
 
         /*
-        Si el valor que ens arriba del sharedpreferences es true, posem el botó i el checkbox amb
+        Todo: Si el valor que ens arriba del sharedpreferences es true, posem el botó i el checkbox amb
         visibilitat gone.
-
         També ho utilitzarem per mostrar o no la toolbar.
          */
 
-        accept.setOnClickListener(new View.OnClickListener() {
+        if(prefs.getBoolean("key_shared_prefs_policy",false)){
+            btnAccept.setVisibility(View.GONE);
+            checkPolicy.setVisibility(View.GONE);
+        }
+
+        btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isChecked = checkPolicy.isChecked();

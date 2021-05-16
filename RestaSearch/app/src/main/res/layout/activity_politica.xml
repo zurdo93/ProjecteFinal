@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".PoliticaActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"/>
+
     <Button
         android:id="@+id/btn_accept"
         android:layout_width="0dp"
@@ -35,24 +39,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".1" />
+        app:layout_constraintGuide_percent=".05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.95" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/box_policy"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"

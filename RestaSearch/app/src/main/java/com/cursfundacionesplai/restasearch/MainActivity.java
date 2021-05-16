@@ -4,61 +4,97 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LocationListener {
 
+    private static String PROVIDER = LocationManager.NETWORK_PROVIDER;
 
     SharedPreferences prefs;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+    ToolbarEx toolbarEx;
+
+    MapsFragment mapsFragment;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle(R.string.menu_inici);
+
         prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-
         boolean acceptedPolicy = prefs.getBoolean("key_shared_prefs_policy", false);
-
         if (!acceptedPolicy) {
             startActivity(new Intent(this, PoliticaActivity.class));
         }
 
-        //Amb això creem una variable toolbar i la vinculem amb la que tenim a la vista
-        Toolbar toolbar = this.findViewById(R.id.toolbar);
-        setSupportActionBar((Toolbar) this.findViewById(R.id.toolbar));
+        //Inicialitzem la classe que s'encarregarà de controlar la toolbar
+        toolbarEx = new ToolbarEx(this,
+                this.findViewById(R.id.toolbar),
+                this.findViewById(R.id.drawer_layout),
+                this.findViewById(R.id.navigation_view));
 
-        //Vinculem el drawerLayout amb el de la vista i li afegim la toolbar
-        drawerLayout = this.findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,
-                R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView = this.findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        toolbarEx.getNavigationView().setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return MainActivity.this.onNavigationItemSelected(item);
+                return toolbarEx.onNavigationItemSelected(item);
             }
         });
 
-        MenuItem menuItem = navigationView.getMenu().getItem(0);
-        onNavigationItemSelected(menuItem);
-        menuItem.setChecked(true);
+        mapsFragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.lin_map, mapsFragment).commit();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+        else{
+            locationManager.requestLocationUpdates(PROVIDER, 0, 0, this);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case 1:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        locationManager.requestLocationUpdates(PROVIDER, 0, 0, this);
+                    }
+                }
+                break;
+        }
     }
 
     @Override
@@ -66,40 +102,34 @@ public class MainActivity extends AppCompatActivity {
         /*Aquest metode serveix per si tenim el menú desplegat i li donem al boto de tornar enradera,
           ens tanqui el menú i no ens torni a la pantalla anterior
          */
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if (toolbarEx.getDrawerLayout().isDrawerOpen(GravityCompat.START)) {
+            toolbarEx.getDrawerLayout().closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
 
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int titol;
-        switch (item.getItemId()){
-            case R.id.nav_inici:
-                titol = R.string.menu_inici;
-                break;
-            case R.id.nav_preferits:
-                titol = R.string.menu_preferits;
-                break;
-            case R.id.nav_historial:
-                titol = R.string.menu_historial;
-                break;
-            case R.id.nav_idioma:
-                titol = R.string.menu_idioma;
-                break;
-            case R.id.nav_privacitat_us:
-                titol = R.string.menu_privacitat_us;
-                Intent intent = new Intent(MainActivity.this,PoliticaActivity.class);
-                intent.putExtra("titol",getResources().getString(R.string.menu_privacitat_us));
-                startActivity(intent);
-                break;
-            default:
-                throw new IllegalArgumentException("Aquesta opció encara no està implementada");
-        }
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        double lat = location.getLatitude();
+        double lng = location.getLongitude();
 
-        setTitle(titol);
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        mapsFragment.loadPossition("Jo", new LatLng(lat, lng));
+        mapsFragment.possitionCamera(new LatLng(lat, lng));
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
     }
 }

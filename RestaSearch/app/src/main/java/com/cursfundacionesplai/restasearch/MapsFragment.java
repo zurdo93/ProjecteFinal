@@ -61,11 +61,19 @@ public class MapsFragment extends Fragment {
     }
 
     public void loadPossition(String title, LatLng possition){
+        /*
+        Aquest mètode s'encarrega de netejar els markers que hi hagin posat de la nostre localització.
+        Això ho haurem de canviar perquè si posem els markers dels restaurants, aquesta funció ens
+        els borrarà
+         */
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(possition).title(title));
     }
 
     public void possitionCamera(LatLng possition){
+        /*
+        Aquesta funció s'encarrega de centrar la càmara en la posició que estem actualment
+         */
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 15));
     }
 }

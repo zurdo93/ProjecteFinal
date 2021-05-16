@@ -41,20 +41,35 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
+        Li posem el títol a la pantalla
+         */
         setTitle(R.string.menu_inici);
 
+        /*
+        Agafem el valor del sharedPreferences per saber si hem de mostrar la pantalla de política
+        de privacitat o no.
+         */
         prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
         boolean acceptedPolicy = prefs.getBoolean("key_shared_prefs_policy", false);
         if (!acceptedPolicy) {
-            startActivity(new Intent(this, PoliticaActivity.class));
+            Intent intent = new Intent(this, PoliticaActivity.class);
+            intent.putExtra("titol", getResources().getString(R.string.menu_privacitat_us));
+            startActivity(intent);
         }
 
-        //Inicialitzem la classe que s'encarregarà de controlar la toolbar
+        /*
+        Inicialitzem la classe que s'encarregarà de controlar la toolbar i li pasem les referencies
+        dels objectes de la vista
+         */
         toolbarEx = new ToolbarEx(this,
                 this.findViewById(R.id.toolbar),
                 this.findViewById(R.id.drawer_layout),
                 this.findViewById(R.id.navigation_view));
 
+        /*
+        Definim el listener per tal de que al fer un clic ens redirigeixi a les diferents pantalles
+         */
         toolbarEx.getNavigationView().setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -62,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
+        /*
+        Inicialitzem el mapa i la localització
+         */
         mapsFragment = new MapsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.lin_map, mapsFragment).commit();
 
@@ -72,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onResume() {
         super.onResume();
 
+        /*
+        Demanem els permisos en el cas de que no els tinguem. Si els tenim agafem la localització
+         */
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -99,8 +120,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onBackPressed() {
-        /*Aquest metode serveix per si tenim el menú desplegat i li donem al boto de tornar enradera,
-          ens tanqui el menú i no ens torni a la pantalla anterior
+        /*
+        Aquest metode serveix per si tenim el menú desplegat i li donem al boto de tornar enradera,
+        ens tanqui el menú i no ens torni a la pantalla anterior
          */
         if (toolbarEx.getDrawerLayout().isDrawerOpen(GravityCompat.START)) {
             toolbarEx.getDrawerLayout().closeDrawer(GravityCompat.START);
@@ -111,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        /*
+        Agafem la localització i posem un punt en el mapa i centrem la càmara
+         */
         double lat = location.getLatitude();
         double lng = location.getLongitude();
 

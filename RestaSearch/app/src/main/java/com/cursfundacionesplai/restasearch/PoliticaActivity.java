@@ -42,8 +42,6 @@ public class PoliticaActivity extends AppCompatActivity {
                 this.findViewById(R.id.drawer_layout),
                 this.findViewById(R.id.navigation_view));
 
-
-
         if(prefs.getBoolean("key_shared_prefs_policy",false)){
             btnAccept.setVisibility(View.GONE);
             checkPolicy.setVisibility(View.GONE);

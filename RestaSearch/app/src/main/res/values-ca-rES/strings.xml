@@ -7,4 +7,8 @@
     <string name="menu_historial">Historial</string>
     <string name="menu_idioma">Idioma</string>
     <string name="menu_privacitat_us">Privacitat i condicions d\'ús</string>
+    <string name="filtres_restaurant_obert">Obert</string>
+    <string name="filtres_distancia">Distancia</string>
+    <string name="filtres_valoracio">Valoració</string>
+    <string name="filtres_preu">Preu</string>
 </resources>

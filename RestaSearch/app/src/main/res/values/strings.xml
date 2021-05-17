@@ -16,6 +16,12 @@
     <string name="menu_idioma">Language</string>
     <string name="menu_privacitat_us">Privacy and conditions of use</string>
 
+    <!-- Filtres -->
+    <string name="filtres_restaurant_obert">Opened</string>
+    <string name="filtres_distancia">Distance</string>
+    <string name="filtres_preu">Price</string>
+    <string name="filtres_valoracio">Rating</string>
+
     <!--Preu
     price_level — The price level of the place, on a scale of 0 to 4. The exact amount indicated by a specific value will vary from region to region. Price levels are interpreted as follows:
     0 — Free

@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Colors app -->
-    <color name="primary_color">#FF0251EE</color>
+    <color name="primary_color">#FF115DB0</color>
     <color name="secondary_color">#FF4F95B4</color>
+    <color name="terciary_color">#FF09468A</color>
 
 </resources>

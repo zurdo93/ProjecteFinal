@@ -14,7 +14,16 @@
     <string name="menu_preferits">Preferits</string>
     <string name="menu_historial">Historial</string>
     <string name="menu_idioma">Idioma</string>
-    <string name="menu_privacitat_us">Privacitat i condicinos d\'ús</string>
+    <string name="menu_privacitat_us">Privacitat i condicions d\'ús</string>
+
+    <!--Preu
+    price_level — The price level of the place, on a scale of 0 to 4. The exact amount indicated by a specific value will vary from region to region. Price levels are interpreted as follows:
+    0 — Free
+    1 — Inexpensive
+    2 — Moderate
+    3 — Expensive
+    4 — Very Expensive -->
+
 
     <!-- Política privacitat i condicions d'ús -->
     <string name="privacitat_us_catala">POLÍTICA DE PRIVACITAT

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_accept_policy">Acceptar</string>
+    <string name="checkbox_accept_policy">He leído y acepto la Política de Privacidad.</string>
+    <string name="menu_inici">Inicio</string>
+    <string name="menu_preferits">Favoritos</string>
+    <string name="menu_historial">Historial</string>
+    <string name="menu_idioma">Idioma</string>
+    <string name="menu_privacitat_us">Privacidad y condiciones de uso</string>
+</resources>

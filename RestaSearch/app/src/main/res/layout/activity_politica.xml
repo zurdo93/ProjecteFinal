@@ -24,6 +24,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/rounded_buttons"
+            android:backgroundTint="@color/secondary_color"
             android:fontFamily="@font/poppins_light"
             android:text="@string/button_accept_policy"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -74,6 +75,7 @@
                     android:id="@+id/txt_politica_privacitat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_light"
                     android:text="@string/label_policy" />
             </LinearLayout>
         </ScrollView>

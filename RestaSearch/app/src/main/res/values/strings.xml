@@ -1,20 +1,20 @@
 <resources>
-    <string name="app_name">RestaSearch</string>
+    <string name="app_name" translatable="false">RestaSearch</string>
 
-    <string name="button_accept_policy">Acceptar</string>
+    <string name="button_accept_policy">Accept</string>
 
-    <string name="checkbox_accept_policy">He leído y acepto la Política de Privacidad.</string>
-    <string name="label_policy">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a purus dignissim metus imperdiet pharetra. Vivamus aliquam leo sed mollis venenatis. In pretium id turpis non pellentesque. Aenean vehicula urna blandit metus pellentesque lacinia. Vestibulum eget leo nisl. Ut at consequat quam. Sed nec placerat neque, eu finibus odio. Duis laoreet posuere venenatis. Quisque consectetur vitae neque et fringilla. Quisque volutpat nibh at libero porttitor congue. Donec dictum tincidunt diam, sed venenatis nunc ornare in. Nulla et sem in sem ullamcorper ullamcorper non vel tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ut velit eu nisi tempor tempor at blandit erat.  Nulla at pellentesque orci. Morbi tempus porta tincidunt. In ut leo tellus. Donec nec accumsan nulla. Fusce at placerat tellus, id sodales nisi. Mauris nec diam velit. Pellentesque viverra accumsan mi id iaculis. Pellentesque posuere, ipsum et tempor euismod, diam diam imperdiet nibh, non malesuada ante metus nec augue. Vestibulum purus tortor, malesuada ac auctor et, dapibus ac neque. Vestibulum in tempor massa, id lobortis nunc.  Donec imperdiet, velit ac mollis faucibus, ex urna varius enim, sed tempor nibh nulla non ex. Mauris mauris massa, dapibus id facilisis id, mollis a diam. Nullam velit diam, rutrum eu tincidunt vel, suscipit nec risus. Aliquam at tortor sapien. Fusce venenatis maximus iaculis. Aenean nunc mi, eleifend vel placerat vitae, porta a quam. Proin in sagittis risus, ac iaculis odio. Etiam sed maximus est, sed vulputate turpis. Cras mollis leo et metus congue, sed tincidunt enim dapibus. Morbi eu eros lorem. Phasellus quis quam vel leo maximus hendrerit sit amet eu turpis. Aenean ultricies felis ut semper accumsan.  In efficitur urna eu convallis venenatis. Etiam imperdiet leo sed tellus dignissim, quis malesuada mi varius. Pellentesque malesuada a justo at convallis. Sed turpis diam, pulvinar ut augue id, scelerisque dapibus ante. Quisque pellentesque sapien massa, egestas sodales tellus mattis quis. Vivamus venenatis ligula et ligula volutpat, ac fermentum libero ultricies. Pellentesque vel pretium enim. Duis et convallis lacus. Morbi vel turpis id enim luctus maximus. Nulla tortor sem, blandit at augue at, accumsan pellentesque lectus.  Fusce sit amet turpis elementum, sollicitudin purus elementum, mattis nisi. Duis interdum metus non metus pretium efficitur sed sit amet justo. Sed eget enim id erat auctor varius. Praesent laoreet dolor ut scelerisque ultricies. Fusce consectetur magna ac ligula consectetur rhoncus. Phasellus bibendum, orci eget euismod tincidunt, justo diam scelerisque sapien, at condimentum sem sapien in quam. Nunc vulputate dui justo, id ultricies tortor rutrum vel. Maecenas ac magna eget nulla blandit ultrices. Nulla vulputate venenatis orci a sodales. Nullam in urna dictum, consequat leo a, porta turpis. Cras tincidunt felis ligula, id ultrices elit tincidunt eget. Cras libero dolor, sagittis in ex elementum, ullamcorper pretium velit.</string>
+    <string name="checkbox_accept_policy">I have read and accept the privacy policy.</string>
+    <string name="label_policy" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a purus dignissim metus imperdiet pharetra. Vivamus aliquam leo sed mollis venenatis. In pretium id turpis non pellentesque. Aenean vehicula urna blandit metus pellentesque lacinia. Vestibulum eget leo nisl. Ut at consequat quam. Sed nec placerat neque, eu finibus odio. Duis laoreet posuere venenatis. Quisque consectetur vitae neque et fringilla. Quisque volutpat nibh at libero porttitor congue. Donec dictum tincidunt diam, sed venenatis nunc ornare in. Nulla et sem in sem ullamcorper ullamcorper non vel tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ut velit eu nisi tempor tempor at blandit erat.  Nulla at pellentesque orci. Morbi tempus porta tincidunt. In ut leo tellus. Donec nec accumsan nulla. Fusce at placerat tellus, id sodales nisi. Mauris nec diam velit. Pellentesque viverra accumsan mi id iaculis. Pellentesque posuere, ipsum et tempor euismod, diam diam imperdiet nibh, non malesuada ante metus nec augue. Vestibulum purus tortor, malesuada ac auctor et, dapibus ac neque. Vestibulum in tempor massa, id lobortis nunc.  Donec imperdiet, velit ac mollis faucibus, ex urna varius enim, sed tempor nibh nulla non ex. Mauris mauris massa, dapibus id facilisis id, mollis a diam. Nullam velit diam, rutrum eu tincidunt vel, suscipit nec risus. Aliquam at tortor sapien. Fusce venenatis maximus iaculis. Aenean nunc mi, eleifend vel placerat vitae, porta a quam. Proin in sagittis risus, ac iaculis odio. Etiam sed maximus est, sed vulputate turpis. Cras mollis leo et metus congue, sed tincidunt enim dapibus. Morbi eu eros lorem. Phasellus quis quam vel leo maximus hendrerit sit amet eu turpis. Aenean ultricies felis ut semper accumsan.  In efficitur urna eu convallis venenatis. Etiam imperdiet leo sed tellus dignissim, quis malesuada mi varius. Pellentesque malesuada a justo at convallis. Sed turpis diam, pulvinar ut augue id, scelerisque dapibus ante. Quisque pellentesque sapien massa, egestas sodales tellus mattis quis. Vivamus venenatis ligula et ligula volutpat, ac fermentum libero ultricies. Pellentesque vel pretium enim. Duis et convallis lacus. Morbi vel turpis id enim luctus maximus. Nulla tortor sem, blandit at augue at, accumsan pellentesque lectus.  Fusce sit amet turpis elementum, sollicitudin purus elementum, mattis nisi. Duis interdum metus non metus pretium efficitur sed sit amet justo. Sed eget enim id erat auctor varius. Praesent laoreet dolor ut scelerisque ultricies. Fusce consectetur magna ac ligula consectetur rhoncus. Phasellus bibendum, orci eget euismod tincidunt, justo diam scelerisque sapien, at condimentum sem sapien in quam. Nunc vulputate dui justo, id ultricies tortor rutrum vel. Maecenas ac magna eget nulla blandit ultrices. Nulla vulputate venenatis orci a sodales. Nullam in urna dictum, consequat leo a, porta turpis. Cras tincidunt felis ligula, id ultrices elit tincidunt eget. Cras libero dolor, sagittis in ex elementum, ullamcorper pretium velit.</string>
 
-    <string name="navigation_drawer_open">RestaSearchMenuOpen</string>
-    <string name="navigation_drawer_close">RestaSearchMenuClose</string>
+    <string name="navigation_drawer_open" translatable="false">RestaSearchMenuOpen</string>
+    <string name="navigation_drawer_close" translatable="false">RestaSearchMenuClose</string>
 
     <!-- Menu -->
-    <string name="menu_inici">Inici</string>
-    <string name="menu_preferits">Preferits</string>
-    <string name="menu_historial">Historial</string>
-    <string name="menu_idioma">Idioma</string>
-    <string name="menu_privacitat_us">Privacitat i condicions d\'ús</string>
+    <string name="menu_inici">Home</string>
+    <string name="menu_preferits">Favorites</string>
+    <string name="menu_historial">History</string>
+    <string name="menu_idioma">Language</string>
+    <string name="menu_privacitat_us">Privacy and conditions of use</string>
 
     <!--Preu
     price_level — The price level of the place, on a scale of 0 to 4. The exact amount indicated by a specific value will vary from region to region. Price levels are interpreted as follows:
@@ -26,7 +26,7 @@
 
 
     <!-- Política privacitat i condicions d'ús -->
-    <string name="privacitat_us_catala">POLÍTICA DE PRIVACITAT
+    <string name="privacitat_us_catala" translatable="false">POLÍTICA DE PRIVACITAT
 Darrera actualització: Maig 2021.
 1. INFORMACIÓ A L’USUARI
 RestaSearch, S.L., com a Responsable del Tractament, l’informa que, segons el que disposa en el Reglament (UE) 2016/679, de 27 d’abril, (RGPD) i en la L.O. 3/2018, de 5 de desembre, de protecció de dades i garantia dels drets digitals (LOPDGDD), tractarem les seves dades tal com es reflexa en la present Política de Privacitat.
@@ -83,7 +83,7 @@ Els requisits d’aquesta Política complementen, i no reemplacen, qualsevol alt
 Aquesta Política està subjecta a revisions periòdiques i l’empresa pot modificar-la en qualsevol moment. Quan això passi, l’avisarem de qualsevol canvi i li demanarem que torni a llegir la versió més recent de la nostra Política i que confirmi la seva acceptació.
 
 </string>
-    <string name="privacitat_us_castella">POLITICA DE PRIVACIDAD
+    <string name="privacitat_us_castella" translatable="false">POLITICA DE PRIVACIDAD
 Última actualización: Mayo 2021.
 1. INFORMACIÓN AL USUARIO
 RestaSearch, S.L., como Responsable del Tratamiento, le informa que, según lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril, (RGPD) y en la L.O. 3/2018, de 5 de diciembre, de protección de datos y garantía de los derechos digitales (LOPDGDD), trataremos su datos tal y como reflejamos en la presente Política de Privacidad.
@@ -139,7 +139,7 @@ Los requisitos de esta Política complementan, y no reemplazan, cualquier otro r
 Esta Política está sujeta a revisiones periódicas y la empresa puede modificarla en cualquier momento. Cuando esto ocurra, le avisaremos de cualquier cambio y le pediremos que vuelva a leer la versión más reciente de nuestra Política y que confirme su aceptación.
 
 </string>
-    <string name="privacitat_us_angles">PRIVACY POLICY
+    <string name="privacitat_us_angles" translatable="false">PRIVACY POLICY
 Last update: May 2021.
 1. INFORMATION TO THE USER
 RestaSearch, S.L., as Data Controller, informs you that, in accordance with the provisions of Regulation (EU) 2016/679, of 27 April, (RGPD) and in the O.L. 3/2018, of December 5, on data protection and guarantee of digital rights (LOPDGDD), we will treat your data as we reflect in this Privacy Policy.

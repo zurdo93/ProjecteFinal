@@ -18,13 +18,20 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
+import com.novoda.merlin.Merlin;
+import com.novoda.merlin.MerlinsBeard;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -35,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     MapsFragment mapsFragment;
     LocationManager locationManager;
+
+    Merlin merlin;
+    MerlinsBeard merlinsBeard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             intent.putExtra("titol", getResources().getString(R.string.menu_privacitat_us));
             startActivity(intent);
         }
+
+        merlin = new Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().build(this);
+        merlinsBeard = MerlinsBeard.from(this);
 
         /*
         Inicialitzem la classe que s'encarregarà de controlar la toolbar i li pasem les referencies
@@ -84,6 +97,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         getSupportFragmentManager().beginTransaction().replace(R.id.lin_map, mapsFragment).commit();
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        // si te conexio amb wifi o amb dades, mostrar el contenidor d'anuncis
+        if (merlinsBeard.isConnectedToWifi() || merlinsBeard.isConnectedToMobileNetwork()) {
+
+            Log.d("miki", "TE INTERNET");
+
+            // Vincula el contenidor d'anuncis
+            AdView ad = findViewById(R.id.adView);
+
+            // crear una peticio per generar un anunci
+            AdRequest adRequest = new AdRequest.Builder().build();
+
+            // carregar l'anunci generat al contenidor d'anuncis
+            ad.loadAd(adRequest);
+        }
     }
 
     @Override

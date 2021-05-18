@@ -29,7 +29,6 @@ import android.widget.Button;
 
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
-
 import com.novoda.merlin.Merlin;
 import com.novoda.merlin.MerlinsBeard;
 
@@ -43,17 +42,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     MapsFragment mapsFragment;
     LocationManager locationManager;
-
-    Merlin merlin;
-    MerlinsBeard merlinsBeard;
+    WSHelper wsHelper;
 
     Button btnDistance;
     Button btnPreu;
     Button btnValoracio;
 
-    WSHelper wsHelper;
 
-    LatLng position = new LatLng(0,0);
+    LatLng possition = new LatLng(0,0);
     double radius = 10;
 
     @Override
@@ -100,13 +96,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        /*
-        Inicialitzem el mapa i la localització
-         */
-        mapsFragment = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.lin_map, mapsFragment).commit();
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        wsHelper = new WSHelper(this);
 
         // funcio estatica d'una clase per carregar un anunci en un contenidor d'anuncis
         AdsHelper.loadAd(this, findViewById(R.id.adView));//Sistema de filtres mitjançant alerts.
@@ -142,13 +132,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                 radius = 50;
                                 break;
                         }
-                        mapsFragment.afegirCercle(position, radius);
+                        marcarRestaurants();
                     }
                 });
 
                 alert.show();
             }
         });
+
         btnPreu = findViewById(R.id.btn_preu);
         btnPreu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,13 +160,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
         //endregion
-
-        wsHelper = new WSHelper(this);
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStart() {
+        super.onStart();
+
+        /*
+        Inicialitzem el mapa i la localització
+         */
+        mapsFragment = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.lin_map, mapsFragment).commit();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
@@ -225,6 +222,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
     }
 
+    //region Funcions Mapa
+    public void marcarRestaurants(){
+         /*
+        Cridem a les funcions per posar la càmara en la nostre posició i perquè busqui els restaurants
+        que estan dins del radi que hem especificat
+         */
+        mapsFragment.possitionCamera(possition);
+        mapsFragment.afegirCercle(possition,radius);
+        wsHelper.buscarRestaurants(possition, mapsFragment);
+    }
+
     @Override
     public void onLocationChanged(@NonNull Location location) {
         /*
@@ -232,18 +240,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
          */
         double lat = location.getLatitude();
         double lng = location.getLongitude();
-        position = new LatLng(lat, lng);
+        possition = new LatLng(lat, lng);
         /*double latEnd = EndP.latitude;
         double lngEnd = EndP.longitude;*/
 
-        /*
-        Cridem a les funcions per posar la càmara en la nostre posició i perquè busqui els restaurants
-        que estan dins del radi que hem especificat
-         */
-        mapsFragment.possitionCamera(new LatLng(lat, lng));
-        mapsFragment.afegirCercle(position,radius);
-        wsHelper.buscarRestaurants(position, mapsFragment);
-
+        marcarRestaurants();
     }
 
     @Override
@@ -260,4 +261,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void onProviderDisabled(@NonNull String provider) {
 
     }
+    //endregion
 }

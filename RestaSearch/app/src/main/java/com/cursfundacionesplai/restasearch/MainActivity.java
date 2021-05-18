@@ -1,13 +1,9 @@
 package com.cursfundacionesplai.restasearch;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.content.Context;
@@ -20,18 +16,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.material.internal.NavigationMenuItemView;
-import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
-import com.novoda.merlin.Merlin;
-import com.novoda.merlin.MerlinsBeard;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -43,12 +30,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     MapsFragment mapsFragment;
     LocationManager locationManager;
 
-    Merlin merlin;
-    MerlinsBeard merlinsBeard;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LanguageHelper.loadSavedLanguage(this);
+
         setContentView(R.layout.activity_main);
 
         /*
@@ -60,16 +47,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Agafem el valor del sharedPreferences per saber si hem de mostrar la pantalla de política
         de privacitat o no.
          */
-        prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        boolean acceptedPolicy = prefs.getBoolean("key_shared_prefs_policy", false);
+        prefs = getSharedPreferences(Keys.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        boolean acceptedPolicy = prefs.getBoolean(Keys.PREFS_SAVE_POLICY, false);
         if (!acceptedPolicy) {
             Intent intent = new Intent(this, PoliticaActivity.class);
             intent.putExtra("titol", getResources().getString(R.string.menu_privacitat_us));
             startActivity(intent);
         }
-
-        merlin = new Merlin.Builder().withConnectableCallbacks().withDisconnectableCallbacks().build(this);
-        merlinsBeard = MerlinsBeard.from(this);
 
         /*
         Inicialitzem la classe que s'encarregarà de controlar la toolbar i li pasem les referencies
@@ -98,25 +82,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // si te conexio amb wifi o amb dades, mostrar el contenidor d'anuncis
-        if (merlinsBeard.isConnectedToWifi() || merlinsBeard.isConnectedToMobileNetwork()) {
+        // funcio estatica d'una clase per carregar un anunci en un contenidor d'anuncis
+        AdsHelper.loadAd(this, findViewById(R.id.adView));
+    }
 
-            Log.d("miki", "TE INTERNET");
-
-            // Vincula el contenidor d'anuncis
-            AdView ad = findViewById(R.id.adView);
-
-            // crear una peticio per generar un anunci
-            AdRequest adRequest = new AdRequest.Builder().build();
-
-            // carregar l'anunci generat al contenidor d'anuncis
-            ad.loadAd(adRequest);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("miki", "onPause: ");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        Log.d("miki", "onResume: ");
 
         /*
         Demanem els permisos en el cas de que no els tinguem. Si els tenim agafem la localització

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="button_accept_policy">Acceptar</string>
+    <string name="button_accept_policy">Aceptar</string>
     <string name="checkbox_accept_policy">He leído y acepto la Política de Privacidad.</string>
     <string name="menu_inici">Inicio</string>
     <string name="menu_preferits">Favoritos</string>
@@ -11,4 +11,9 @@
     <string name="filtres_distancia">Distáncia</string>
     <string name="filtres_valoracio">Valoración</string>
     <string name="filtres_preu">Precio</string>
+    <string name="language_choose">Escoge tu idioma.</string>
+    <string name="language_en">inglés</string>
+    <string name="language_es">español</string>
+    <string name="language_ca">catalán</string>
+    <string name="button_cancel">cancelar</string>
 </resources>

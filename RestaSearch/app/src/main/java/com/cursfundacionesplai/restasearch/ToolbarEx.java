@@ -1,6 +1,5 @@
 package com.cursfundacionesplai.restasearch;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
@@ -70,7 +69,11 @@ public class ToolbarEx {
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        System.gc();
+
         Intent intent;
+
         switch (item.getItemId()){
             case R.id.nav_inici:
                 intent = new Intent(activity,MainActivity.class);
@@ -85,13 +88,12 @@ public class ToolbarEx {
                 intent.putExtra("titol",activity.getResources().getString(R.string.menu_historial));
                 break;
             case R.id.nav_idioma:
-                intent = new Intent(activity,PoliticaActivity.class);
-                intent.putExtra("titol",activity.getResources().getString(R.string.menu_idioma));
+                intent = new Intent(activity, IdiomaActivity.class);
+                //intent.putExtra("titol",activity.getResources().getString(R.string.menu_idioma));
                 break;
             case R.id.nav_privacitat_us:
                 intent = new Intent(activity,PoliticaActivity.class);
                 intent.putExtra("titol",activity.getResources().getString(R.string.menu_privacitat_us));
-
                 break;
             default:
                 throw new IllegalArgumentException("Aquesta opció encara no està implementada");

@@ -11,4 +11,9 @@
     <string name="filtres_distancia">Distancia</string>
     <string name="filtres_valoracio">Valoració</string>
     <string name="filtres_preu">Preu</string>
+    <string name="language_choose">Triar el teu idioma.</string>
+    <string name="language_en">anglès</string>
+    <string name="language_es">castellà</string>
+    <string name="language_ca">català</string>
+    <string name="button_cancel">cancel·lar</string>
 </resources>

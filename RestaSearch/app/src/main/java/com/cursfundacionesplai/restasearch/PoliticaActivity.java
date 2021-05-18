@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,12 +27,15 @@ public class PoliticaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LanguageHelper.loadSavedLanguage(this);
+
         setContentView(R.layout.activity_politica);
 
         Bundle extras = getIntent().getExtras();
         setTitle(extras.getString("titol"));
 
-        prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences(Keys.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         editor = prefs.edit();
 
         checkPolicy = this.findViewById(R.id.box_policy);
@@ -42,7 +46,7 @@ public class PoliticaActivity extends AppCompatActivity {
                 this.findViewById(R.id.drawer_layout),
                 this.findViewById(R.id.navigation_view));
 
-        if(prefs.getBoolean("key_shared_prefs_policy",false)){
+        if(prefs.getBoolean(Keys.PREFS_SAVE_POLICY,false)){
             btnAccept.setVisibility(View.GONE);
             checkPolicy.setVisibility(View.GONE);
 
@@ -55,21 +59,21 @@ public class PoliticaActivity extends AppCompatActivity {
         }
         else{
             toolbarEx.getToolbar().setVisibility(View.GONE);
-
-            btnAccept.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean isChecked = checkPolicy.isChecked();
-                    if (isChecked) {
-                        editor.putBoolean("key_shared_prefs_policy", true);
-                        editor.apply();
-
-                        finish();
-                    }
-                }
-            });
         }
 
+        btnAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("miki", "onClick: ");
+                boolean isChecked = checkPolicy.isChecked();
+                if (isChecked) {
+                    editor.putBoolean(Keys.PREFS_SAVE_POLICY, true);
+                    editor.apply();
+
+                    finish();
+                }
+            }
+        });
 
     }
 }

@@ -15,9 +15,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item> -->
 
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryDark">@color/primary_color</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/primary_color</item>
+        <item name="colorPrimary">@color/terciary_color</item>
+        <item name="colorPrimaryDark">@color/terciary_color</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/terciary_color</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
         <item name="drawerArrowStyle">@style/Theme.DrawerArrowStyle</item>
     </style>

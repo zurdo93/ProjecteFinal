@@ -10,5 +10,8 @@ public class HistorialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial);
+
+        Bundle extras = getIntent().getExtras();
+        setTitle(extras.getString("titol"));
     }
 }

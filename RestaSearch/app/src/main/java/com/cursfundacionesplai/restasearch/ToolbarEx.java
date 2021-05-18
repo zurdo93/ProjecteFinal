@@ -77,15 +77,15 @@ public class ToolbarEx {
                 intent.putExtra("titol",activity.getResources().getString(R.string.menu_inici));
                 break;
             case R.id.nav_preferits:
-                intent = new Intent(activity,PoliticaActivity.class);
+                intent = new Intent(activity,PreferitsActivity.class);
                 intent.putExtra("titol",activity.getResources().getString(R.string.menu_preferits));
                 break;
             case R.id.nav_historial:
-                intent = new Intent(activity,PoliticaActivity.class);
+                intent = new Intent(activity,HistorialActivity.class);
                 intent.putExtra("titol",activity.getResources().getString(R.string.menu_historial));
                 break;
             case R.id.nav_idioma:
-                intent = new Intent(activity,PoliticaActivity.class);
+                intent = new Intent(activity,IdiomaActivity.class);
                 intent.putExtra("titol",activity.getResources().getString(R.string.menu_idioma));
                 break;
             case R.id.nav_privacitat_us:

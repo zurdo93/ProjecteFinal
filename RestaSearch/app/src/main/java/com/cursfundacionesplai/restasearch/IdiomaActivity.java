@@ -10,5 +10,8 @@ public class IdiomaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idioma);
+
+        Bundle extras = getIntent().getExtras();
+        setTitle(extras.getString("titol"));
     }
 }

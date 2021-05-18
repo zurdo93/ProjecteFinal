@@ -1,14 +1,11 @@
 package com.cursfundacionesplai.restasearch;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,22 +19,22 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdListener;
+import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
+import com.cursfundacionesplai.restasearch.helpers.WSHelper;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.material.internal.NavigationMenuItemView;
-import com.google.android.material.internal.NavigationMenuView;
+
 import com.google.android.material.navigation.NavigationView;
-import com.novoda.merlin.Endpoint;
+
 import com.novoda.merlin.Merlin;
 import com.novoda.merlin.MerlinsBeard;
+
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
 
@@ -55,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     Button btnDistance;
     Button btnPreu;
     Button btnValoracio;
+
+    WSHelper wsHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             // carregar l'anunci generat al contenidor d'anuncis
             ad.loadAd(adRequest);
         }
+
         //Sistema de filtres mitjançant alerts.
         //region Filtres
         btnDistance = findViewById(R.id.btn_distancia);
@@ -182,6 +182,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
     //endregion
+
+
+        wsHelper = new WSHelper(this);
+
     }
 
     @Override
@@ -242,9 +246,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         /*double latEnd = EndP.latitude;
         double lngEnd = EndP.longitude;*/
 
-        mapsFragment.loadPossition("Jo", new LatLng(lat, lng));
+        /*
+        Cridem a les funcions per posar la càmara en la nostre posició i perquè busqui els restaurants
+        que estan dins del radi que hem especificat
+         */
         mapsFragment.possitionCamera(new LatLng(lat, lng));
         mapsFragment.afegirCercle(position,radius);
+        wsHelper.buscarRestaurants(new LatLng(lat,lng), mapsFragment);
 
     }
 

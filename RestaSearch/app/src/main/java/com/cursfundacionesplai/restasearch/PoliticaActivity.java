@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
+import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.google.android.material.navigation.NavigationView;
 
 public class PoliticaActivity extends AppCompatActivity {

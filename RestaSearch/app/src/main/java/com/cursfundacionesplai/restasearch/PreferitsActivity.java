@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
+
 public class PreferitsActivity extends AppCompatActivity {
 
     @Override
@@ -13,5 +15,8 @@ public class PreferitsActivity extends AppCompatActivity {
         LanguageHelper.loadSavedLanguage(this);
 
         setContentView(R.layout.activity_preferits);
+
+        Bundle extras = getIntent().getExtras();
+        setTitle(extras.getString("titol"));
     }
 }

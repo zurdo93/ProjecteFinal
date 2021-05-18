@@ -1,4 +1,4 @@
-package com.cursfundacionesplai.restasearch;
+package com.cursfundacionesplai.restasearch.helpers;
 
 import android.content.Context;
 import android.util.Log;

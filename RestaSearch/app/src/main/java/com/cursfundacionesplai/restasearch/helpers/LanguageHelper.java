@@ -1,10 +1,12 @@
-package com.cursfundacionesplai.restasearch;
+package com.cursfundacionesplai.restasearch.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+
+import com.cursfundacionesplai.restasearch.Keys;
 
 import java.util.Locale;
 

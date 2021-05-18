@@ -2,14 +2,11 @@ package com.cursfundacionesplai.restasearch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
+import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 
 public class IdiomaActivity extends AppCompatActivity {
 
@@ -44,6 +41,5 @@ public class IdiomaActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.text.DecimalFormat;
 
 public class MapsFragment extends Fragment {
 
@@ -66,7 +72,6 @@ public class MapsFragment extends Fragment {
         Això ho haurem de canviar perquè si posem els markers dels restaurants, aquesta funció ens
         els borrarà
          */
-        mMap.clear();
         mMap.addMarker(new MarkerOptions().position(possition).title(title));
     }
 
@@ -74,6 +79,33 @@ public class MapsFragment extends Fragment {
         /*
         Aquesta funció s'encarrega de centrar la càmara en la posició que estem actualment
          */
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 12));
+
     }
+
+    public void afegirCercle (LatLng position, double radius) {
+        /* Determina el radi que es mostrarà
+        quan estableixis el teu radi de cerca (per Km a la rondona) */
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(position);
+        mMap.clear();
+        Marker marker = mMap.addMarker(markerOptions);
+        Circle circle = mMap.addCircle(
+                new CircleOptions()
+                        .center(position)
+                        .radius(radius*1000)
+                        .strokeWidth(3f)
+                        .strokeColor(R.color.secondary_color)
+                        .fillColor(getActivity().getResources().getColor(R.color.circle_color))
+        );
+
+    }
+
+    public void clearMarkers(){
+        /*
+        Ens neteja els markers que hi hagin per poder-ne afegir de nous
+         */
+        mMap.clear();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.cursfundacionesplai.restasearch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -11,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +22,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdListener;
@@ -27,9 +31,11 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.internal.NavigationMenuView;
 import com.google.android.material.navigation.NavigationView;
+import com.novoda.merlin.Endpoint;
 import com.novoda.merlin.Merlin;
 import com.novoda.merlin.MerlinsBeard;
 
@@ -45,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     Merlin merlin;
     MerlinsBeard merlinsBeard;
+
+    Button btnDistance;
+    Button btnPreu;
+    Button btnValoracio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +122,66 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             // carregar l'anunci generat al contenidor d'anuncis
             ad.loadAd(adRequest);
         }
+        //Sistema de filtres mitjançant alerts.
+        //region Filtres
+        btnDistance = findViewById(R.id.btn_distancia);
+        btnDistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setTitle("Determina la Distancia (en Km)");
+                String[] botons = {"10 km ", "20 km ", "30 km ", "40 km ", "50 km "};
+                alert.setItems(botons, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                radius = 10;
+                                break;
+
+                            case 1:
+                                radius = 20;
+                                break;
+
+                            case 2:
+                                radius = 30;
+                                break;
+
+                            case 3:
+                                radius = 40;
+                                break;
+
+                            case 4:
+                                radius = 50;
+                                break;
+                        }
+                        mapsFragment.afegirCercle(position, radius);
+                    }
+                });
+
+                alert.show();
+            }
+        });
+        btnPreu = findViewById(R.id.btn_preu);
+        btnPreu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setTitle("Determina el rang de preu");
+                String[] botons = {"Molt Barato", "Barato", "Mitjà", "Car", "Molt Car"};
+                alert.setItems(botons, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                     switch (which){
+                         case 0:
+                             
+
+                     }
+                    }
+                });
+            }
+        });
+    //endregion
     }
 
     @Override
@@ -159,6 +229,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
     }
 
+    LatLng position = new LatLng(0,0);
+    double radius = 10;
     @Override
     public void onLocationChanged(@NonNull Location location) {
         /*
@@ -166,9 +238,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
          */
         double lat = location.getLatitude();
         double lng = location.getLongitude();
+        position = new LatLng(lat, lng);
+        /*double latEnd = EndP.latitude;
+        double lngEnd = EndP.longitude;*/
 
         mapsFragment.loadPossition("Jo", new LatLng(lat, lng));
         mapsFragment.possitionCamera(new LatLng(lat, lng));
+        mapsFragment.afegirCercle(position,radius);
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.text.DecimalFormat;
 
 public class MapsFragment extends Fragment {
 
@@ -74,6 +80,47 @@ public class MapsFragment extends Fragment {
         /*
         Aquesta funció s'encarrega de centrar la càmara en la posició que estem actualment
          */
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 12));
     }
+        /* Determina el radi que es mostrarà
+        quan estableixis el teu radi de cerca (per Km a la rondona) */
+
+    public void afegirCercle (LatLng position, double radius) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(position);
+        mMap.clear();
+        Marker marker = mMap.addMarker(markerOptions);
+        Circle circle = mMap.addCircle(
+                new CircleOptions()
+                        .center(position)
+                        .radius(radius*1000)
+                        .strokeWidth(3f)
+                        .strokeColor(R.color.secondary_color)
+                        .fillColor(getActivity().getResources().getColor(R.color.circle_color))
+        );
+
+    }
+    /*private LatLng calcularEndPoint(LatLng StartP) {
+        double r = 6378.1; //Radius of the Earth
+        double brng = 1.57; //Bearing is 90 degrees converted to radians.
+        double d = 15; //Distance in km
+
+        //lat2  52.20444 - the lat result I'm hoping for
+        //lon2  0.36056 - the long result I'm hoping for.
+
+        double lat1 = Math.toRadians(52.20472); //Current lat point converted to radians
+        double lon1 = Math.toRadians(0.14056); //Current long point converted to radians
+
+        double lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/r) +
+                Math.cos(lat1)*Math.sin(d/r)*Math.cos(brng));
+
+        double lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(d/r)*Math.cos(lat1),
+                Math.cos(d/r)-Math.sin(lat1)*Math.sin(lat2));
+
+        lat2 = Math.toDegrees(lat2);
+        lon2 = Math.toDegrees(lon2);
+        Log.d("daniel", lat2+"");
+        Log.d("daniel", lon2+"");
+        return new LatLng(lat2,lon2);
+    }*/
 }

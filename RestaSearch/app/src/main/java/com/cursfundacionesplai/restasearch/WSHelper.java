@@ -10,5 +10,5 @@ public class WSHelper {
     private static String STATUS_CODE_INVALID_REQUEST = "INVALID_REQUEST";
     private static String STATUS_CODE_NOT_FOUND = "NOT_FOUND";
 
-    
+
 }

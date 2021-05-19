@@ -75,12 +75,11 @@ public class MapsFragment extends Fragment {
         mMap.addMarker(new MarkerOptions().position(possition).title(title));
     }
 
-    public void possitionCamera(LatLng possition){
+    public void possitionCamera(LatLng possition, int zoom){
         /*
         Aquesta funció s'encarrega de centrar la càmara en la posició que estem actualment
          */
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 12));
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, zoom));
     }
 
     public void afegirCercle (LatLng position, double radius) {
@@ -89,23 +88,14 @@ public class MapsFragment extends Fragment {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(position);
         mMap.clear();
-        Marker marker = mMap.addMarker(markerOptions);
         Circle circle = mMap.addCircle(
                 new CircleOptions()
                         .center(position)
-                        .radius(radius*1000)
+                        .radius(radius+12000)
                         .strokeWidth(3f)
                         .strokeColor(R.color.secondary_color)
                         .fillColor(getActivity().getResources().getColor(R.color.circle_color))
         );
 
     }
-
-    public void clearMarkers(){
-        /*
-        Ens neteja els markers que hi hagin per poder-ne afegir de nous
-         */
-        mMap.clear();
-    }
-
 }

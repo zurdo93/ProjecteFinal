@@ -46,7 +46,7 @@ public class WSHelper {
         restaurants = new ArrayList<>();
     }
 
-    public void buscarRestaurants(LatLng possition, MapsFragment mapsFragment){
+    public void buscarRestaurants(LatLng possition, double radius, int priceLevel, boolean restaurantOpen, MapsFragment mapsFragment){
         /*
         Aquí és on es posarà la informació dels filtres i despres es passaran a una funció per
         que ens crei la URL
@@ -55,8 +55,12 @@ public class WSHelper {
         Map<String, Object> values = new HashMap<>();
 
         values.put("location", possition.latitude+","+possition.longitude);
-        values.put("radius", 50000d);
+        values.put("minprice", priceLevel);
+        values.put("maxprice", priceLevel);
+        values.put("type", "restaurant");
+        values.put("keyword", "restaurant,food");
         values.put("key","AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw");
+        values.put("radius", radius);
         url = posarFiltre(values);
 
         /*
@@ -75,6 +79,7 @@ public class WSHelper {
                         //Agafem l'array de results i el convertim a una array de restaurants i els guardem
                         JSONArray result = response.getJSONArray("results");
                         ArrayList<Restaurant> results = new ArrayList<>(Arrays.asList(gson.fromJson(String.valueOf(result),Restaurant[].class)));
+                        restaurants.clear();
                         restaurants.addAll(results);
                     }
                     //Todo: falta tindre en compte els altres STATUS_CODE
@@ -83,13 +88,21 @@ public class WSHelper {
                 }
 
                 //Netejem els markers que hi hagin i podem els dels restaurants
-                mapsFragment.clearMarkers();
                 for(Restaurant restaurant : restaurants){
                     LatLng possition = new LatLng(
                             restaurant.getGeometry().getLocation().getLat(),
                             restaurant.getGeometry().getLocation().getLng()
                     );
-                    mapsFragment.loadPossition(restaurant.getName(), possition);
+
+                    if(restaurantOpen){
+                        if(restaurant.getOpening_hours().isOpen_now()){
+                            mapsFragment.loadPossition(restaurant.getName(), possition);
+                        }
+                    }
+                    else{
+                        mapsFragment.loadPossition(restaurant.getName(), possition);
+                    }
+
                 }
             }
         }, new Response.ErrorListener() {

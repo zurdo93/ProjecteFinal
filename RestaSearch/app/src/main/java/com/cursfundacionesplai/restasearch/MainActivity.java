@@ -18,6 +18,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import com.cursfundacionesplai.restasearch.helpers.AdsHelper;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
@@ -48,9 +51,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     Button btnPreu;
     Button btnValoracio;
 
+    RatingBar ratingBar;
 
     LatLng possition = new LatLng(0,0);
     double radius = 10;
+
+    int price_level = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +113,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                alert.setTitle("Determina la Distancia (en Km)");
-                String[] botons = {"10 km ", "20 km ", "30 km ", "40 km ", "50 km "};
+                alert.setTitle(getResources().getString(R.string.alert_distancia));
+                String[] botons = {"10 km", "20 km", "30 km", "40 km", "50 km"};
                 alert.setItems(botons, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -145,20 +152,63 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                alert.setTitle("Determina el rang de preu");
-                String[] botons = {"Molt Barato", "Barato", "Mitjà", "Car", "Molt Car"};
+                alert.setTitle(getResources().getString(R.string.alert_preu));
+                String[] botons = {getResources().getString(R.string.alert_price_1),
+                        getResources().getString(R.string.alert_price_2),
+                        getResources().getString(R.string.alert_price_3),
+                        getResources().getString(R.string.alert_price_4)};
                 alert.setItems(botons, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
+                        switch (which) {
                             case 0:
-
-
+                                price_level = 1;
+                                break;
+                            case 1:
+                                price_level = 2;
+                                break;
+                            case 2:
+                                price_level = 3;
+                                break;
+                            case 3:
+                                price_level = 4;
+                                break;
                         }
                     }
                 });
+                alert.show();
             }
         });
+        btnValoracio = findViewById(R.id.btn_valoracio);
+        //ratingBar = findViewById(R.id.ratingBar);
+        btnValoracio.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setTitle(getResources().getString(R.string.alert_rating_text));
+                LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.alert_rating_layout,null);
+                ratingBar = view.findViewById(R.id.ratingBar);
+                alert.setView(view);
+                Log.d("daniel", "rating:"+ (ratingBar == null));
+                alert.setPositiveButton(getResources().getString(R.string.button_accept_policy), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String rating = getResources().getString(R.string.alert_rating_stars) + ratingBar.getRating();
+                        Toast.makeText(getApplicationContext(), "\n" + rating, Toast.LENGTH_LONG).show();
+                    }
+                });
+                alert.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alert.show();
+            }
+        });
+
         //endregion
     }
 

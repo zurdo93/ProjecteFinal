@@ -8,7 +8,7 @@
     <string name="menu_idioma">Idioma</string>
     <string name="menu_privacitat_us">Privacidad y condiciones de uso</string>
     <string name="filtres_restaurant_obert">Abierto</string>
-    <string name="filtres_distancia">Distáncia</string>
+    <string name="filtres_distancia">Distancia</string>
     <string name="filtres_valoracio">Valoración</string>
     <string name="filtres_preu">Precio</string>
     <string name="language_choose">Escoge tu idioma.</string>
@@ -16,4 +16,13 @@
     <string name="language_es">español</string>
     <string name="language_ca">catalán</string>
     <string name="button_cancel">cancelar</string>
+    <string name="alert_distancia">Determina la distancia</string>
+    <string name="alert_preu">Escoge el precio</string>
+    <string name="alert_valoracio">Escoge la valoración</string>
+    <string name="alert_rating_text">Deja tu valoración</string>
+    <string name="alert_price_1">Barato</string>
+    <string name="alert_rating_stars">Valoracion:</string>
+    <string name="alert_price_2">Moderado</string>
+    <string name="alert_price_3">Caro</string>
+    <string name="alert_price_4">Muy Caro</string>
 </resources>

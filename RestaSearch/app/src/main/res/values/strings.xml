@@ -30,7 +30,6 @@
     3 — Expensive
     4 — Very Expensive -->
 
-
     <!-- Política privacitat i condicions d'ús -->
     <string name="privacitat_us_catala" translatable="false">POLÍTICA DE PRIVACITAT
 Darrera actualització: Maig 2021.
@@ -208,4 +207,13 @@ This Policy is subject to periodic reviews and the company can modify it at any 
     <string name="language_es">spanish</string>
     <string name="language_ca">catalan</string>
     <string name="button_cancel">cancel</string>
+    <string name="alert_distancia">Choose distance</string>
+    <string name="alert_preu">Choose price</string>
+    <string name="alert_valoracio">Choose the rating</string>
+    <string name="alert_rating_text">Leave your rating</string>
+    <string name="alert_price_1">Inexpensive</string>
+    <string name="alert_rating_stars">Rating:</string>
+    <string name="alert_price_2">Moderate</string>
+    <string name="alert_price_3">Expensive</string>
+    <string name="alert_price_4">Very Expensive</string>
 </resources>

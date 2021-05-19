@@ -9,10 +9,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.cursfundacionesplai.restasearch.EstablimentDialog;
 import com.cursfundacionesplai.restasearch.MapsFragment;
 import com.cursfundacionesplai.restasearch.models.Restaurant;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,7 +103,7 @@ public class WSHelper {
 
                     if(restaurantOpen) {
                         if(restaurant.getOpening_hours().isOpen_now()) {
-                            mapsFragment.loadPossition(restaurant.getPlaces_id(), restaurant.getName(), possition);
+                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
                             if (rating != 0) {
                                 
                             }
@@ -111,7 +113,7 @@ public class WSHelper {
 
                     }
                     else{
-                        mapsFragment.loadPossition(restaurant.getPlaces_id(), restaurant.getName(), possition);
+                        mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
                     }
                 }
             }

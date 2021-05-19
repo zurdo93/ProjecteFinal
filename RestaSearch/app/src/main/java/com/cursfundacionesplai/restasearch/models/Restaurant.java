@@ -9,7 +9,7 @@ public class Restaurant {
     private String name;
     private OpeningHours opening_hours;
     private ArrayList<Photo> photos;
-    private String places_id;
+    private String place_id;
     private PlusCode plus_code;
     private int price_level;
     private double rating;
@@ -40,7 +40,7 @@ public class Restaurant {
         this.name = name;
         this.opening_hours = openingHours;
         this.photos = photos;
-        this.places_id = placesId;
+        this.place_id = placesId;
         this.plus_code = plusCode;
         this.price_level = priceLevel;
         this.rating = rating;
@@ -99,12 +99,12 @@ public class Restaurant {
         this.photos = photos;
     }
 
-    public String getPlaces_id() {
-        return places_id;
+    public String getPlace_id() {
+        return place_id;
     }
 
-    public void setPlaces_id(String places_id) {
-        this.places_id = places_id;
+    public void setPlace_id(String places_id) {
+        this.place_id = places_id;
     }
 
     public PlusCode getPlus_code() {

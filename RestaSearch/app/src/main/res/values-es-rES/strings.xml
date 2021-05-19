@@ -30,4 +30,7 @@
     <string name="alert_distance_3">30+km</string>
     <string name="alert_distance_4">40+km</string>
     <string name="alert_distance_5">50+km</string>
+    <string name="label_establiment_global_rating">Clasificación global: <b>%s</b></string>
+    <string name="label_establiment_total_reviews">Número de críticas: <b>%s</b></string>
+    <string name="label_establiment_loading">Cargando datos</string>
 </resources>

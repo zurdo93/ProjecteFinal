@@ -59,12 +59,11 @@ public class MapsFragment extends Fragment {
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    Log.d("miki", "onMarkerClick: " + keys.containsKey(marker.getTitle()));
 
                     // comprovar si existeix l'id del establiment
                     if (keys.containsKey(marker.getTitle())) {
                         // Generar el dialeg passant l'id
-                        Log.d("miki", "key: " + keys.get(marker.getTitle()));
+
                         EstablimentDialog.display(getFragmentManager(), keys.get(marker.getTitle()));
                     }
 
@@ -100,8 +99,6 @@ public class MapsFragment extends Fragment {
         els borrarà
          */
         mMap.addMarker(new MarkerOptions().position(possition).title(title));
-
-        Log.d("miki", "placeid: " + placeId + ", title: " + title);
 
         keys.put(title, placeId);
     }

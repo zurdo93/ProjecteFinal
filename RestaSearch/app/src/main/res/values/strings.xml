@@ -223,4 +223,7 @@ This Policy is subject to periodic reviews and the company can modify it at any 
     <string name="alert_distance_5">50+km</string>
 
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="label_establiment_global_rating">Global rating: <b>%s</b></string>
+    <string name="label_establiment_total_reviews">Number of reviews: <b>%s</b></string>
+    <string name="label_establiment_loading">Loading data</string>
 </resources>

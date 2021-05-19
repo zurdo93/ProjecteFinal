@@ -106,12 +106,11 @@ public class MapsFragment extends Fragment {
         keys.put(title, placeId);
     }
 
-    public void possitionCamera(LatLng possition){
+    public void possitionCamera(LatLng possition, int zoom){
         /*
         Aquesta funció s'encarrega de centrar la càmara en la posició que estem actualment
          */
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, 12));
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(possition, zoom));
     }
 
     public void afegirCercle (LatLng position, double radius) {
@@ -120,11 +119,11 @@ public class MapsFragment extends Fragment {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(position);
         mMap.clear();
-        Marker marker = mMap.addMarker(markerOptions);
+        keys.clear();
         Circle circle = mMap.addCircle(
                 new CircleOptions()
                         .center(position)
-                        .radius(radius*1000)
+                        .radius(radius+12000)
                         .strokeWidth(3f)
                         .strokeColor(R.color.secondary_color)
                         .fillColor(getActivity().getResources().getColor(R.color.circle_color))

@@ -16,4 +16,18 @@
     <string name="language_es">castellà</string>
     <string name="language_ca">català</string>
     <string name="button_cancel">cancel·lar</string>
+    <string name="alert_distancia">Tria la distancia</string>
+    <string name="alert_preu">Escull el preu</string>
+    <string name="alert_valoracio">Tria la valoració</string>
+    <string name="alert_rating_text">Deixa la teva valoració</string>
+    <string name="alert_price_1">Barat</string>
+    <string name="alert_rating_stars">Valoració:</string>
+    <string name="alert_price_2">Moderat</string>
+    <string name="alert_price_3">Car</string>
+    <string name="alert_price_4">Molt Car</string>
+    <string name="alert_distance_1">10km</string>
+    <string name="alert_distance_2">20+km</string>
+    <string name="alert_distance_3">30+km</string>
+    <string name="alert_distance_4">40+km</string>
+    <string name="alert_distance_5">50+km</string>
 </resources>

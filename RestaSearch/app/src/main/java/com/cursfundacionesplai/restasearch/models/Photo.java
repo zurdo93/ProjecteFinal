@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Photo {
     private int height;
-    private ArrayList<String> htmlAttributions;
-    private String photoReference;
+    private ArrayList<String> html_attributions;
+    private String photo_reference;
     private int width;
 
     public Photo(Integer height, ArrayList<String> htmlAttributions, String photoReference, Integer width) {
         this.height = height;
-        this.htmlAttributions = htmlAttributions;
-        this.photoReference = photoReference;
+        this.html_attributions = htmlAttributions;
+        this.photo_reference = photoReference;
         this.width = width;
     }
 
@@ -23,20 +23,20 @@ public class Photo {
         this.height = height;
     }
 
-    public ArrayList<String> getHtmlAttributions() {
-        return htmlAttributions;
+    public ArrayList<String> getHtml_attributions() {
+        return html_attributions;
     }
 
-    public void setHtmlAttributions(ArrayList<String> htmlAttributions) {
-        this.htmlAttributions = htmlAttributions;
+    public void setHtml_attributions(ArrayList<String> html_attributions) {
+        this.html_attributions = html_attributions;
     }
 
-    public String getPhotoReference() {
-        return photoReference;
+    public String getPhoto_reference() {
+        return photo_reference;
     }
 
-    public void setPhotoReference(String photoReference) {
-        this.photoReference = photoReference;
+    public void setPhoto_reference(String photo_reference) {
+        this.photo_reference = photo_reference;
     }
 
     public Integer getWidth() {

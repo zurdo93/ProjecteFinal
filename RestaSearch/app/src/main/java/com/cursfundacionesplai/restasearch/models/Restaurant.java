@@ -7,16 +7,16 @@ public class Restaurant {
     private Geometry geometry;
     private String icon;
     private String name;
-    private OpeningHours openingHours;
+    private OpeningHours opening_hours;
     private ArrayList<Photo> photos;
-    private String placesId;
-    private PlusCode plusCode;
-    private int priceLevel;
+    private String places_id;
+    private PlusCode plus_code;
+    private int price_level;
     private double rating;
     private String reference;
     private String scope;
     private ArrayList<String> types;
-    private int userRatingsTotal;
+    private int user_ratings_total;
     private String vicinity;
 
     public Restaurant(String business_status,
@@ -38,16 +38,16 @@ public class Restaurant {
         this.geometry = geometry;
         this.icon = icon;
         this.name = name;
-        this.openingHours = openingHours;
+        this.opening_hours = openingHours;
         this.photos = photos;
-        this.placesId = placesId;
-        this.plusCode = plusCode;
-        this.priceLevel = priceLevel;
+        this.places_id = placesId;
+        this.plus_code = plusCode;
+        this.price_level = priceLevel;
         this.rating = rating;
         this.reference = reference;
         this.scope = scope;
         this.types = types;
-        this.userRatingsTotal = userRatingsTotal;
+        this.user_ratings_total = userRatingsTotal;
         this.vicinity = vicinity;
     }
 
@@ -83,12 +83,12 @@ public class Restaurant {
         this.name = name;
     }
 
-    public OpeningHours getOpeningHours() {
-        return openingHours;
+    public OpeningHours getOpening_hours() {
+        return opening_hours;
     }
 
-    public void setOpeningHours(OpeningHours openingHours) {
-        this.openingHours = openingHours;
+    public void setOpening_hours(OpeningHours opening_hours) {
+        this.opening_hours = opening_hours;
     }
 
     public ArrayList<Photo> getPhotos() {
@@ -99,28 +99,28 @@ public class Restaurant {
         this.photos = photos;
     }
 
-    public String getPlacesId() {
-        return placesId;
+    public String getPlaces_id() {
+        return places_id;
     }
 
-    public void setPlacesId(String placesId) {
-        this.placesId = placesId;
+    public void setPlaces_id(String places_id) {
+        this.places_id = places_id;
     }
 
-    public PlusCode getPlusCode() {
-        return plusCode;
+    public PlusCode getPlus_code() {
+        return plus_code;
     }
 
-    public void setPlusCode(PlusCode plusCode) {
-        this.plusCode = plusCode;
+    public void setPlus_code(PlusCode plus_code) {
+        this.plus_code = plus_code;
     }
 
-    public int getPriceLevel() {
-        return priceLevel;
+    public int getPrice_level() {
+        return price_level;
     }
 
-    public void setPriceLevel(int priceLevel) {
-        this.priceLevel = priceLevel;
+    public void setPrice_level(int price_level) {
+        this.price_level = price_level;
     }
 
     public double getRating() {
@@ -155,12 +155,12 @@ public class Restaurant {
         this.types = types;
     }
 
-    public int getUserRatingsTotal() {
-        return userRatingsTotal;
+    public int getUser_ratings_total() {
+        return user_ratings_total;
     }
 
-    public void setUserRatingsTotal(int userRatingsTotal) {
-        this.userRatingsTotal = userRatingsTotal;
+    public void setUser_ratings_total(int user_ratings_total) {
+        this.user_ratings_total = user_ratings_total;
     }
 
     public String getVicinity() {

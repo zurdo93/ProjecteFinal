@@ -19,6 +19,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import com.cursfundacionesplai.restasearch.helpers.AdsHelper;
@@ -28,10 +29,14 @@ import com.google.android.material.navigation.NavigationView;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.RatingBar;
+import android.widget.Toast;
+
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
-import com.novoda.merlin.Merlin;
-import com.novoda.merlin.MerlinsBeard;
 
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -48,10 +53,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     Button btnDistance;
     Button btnPreu;
     Button btnValoracio;
-
+    RatingBar ratingBar;
+    Switch swtRestaurantObert;
 
     LatLng possition = new LatLng(0,0);
-    double radius = 10;
+    double radius = 10000;
+    boolean initialMovementCamera = true;
+    boolean restaurantOpen = false;
+    int priceLevel = 1;
+    float rating = 0;
+    double[] radiusArray = {10000,20000,30000,40000,50000};
+    int[] priceLevelArray = {1,2,3,4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +72,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         LanguageHelper.loadSavedLanguage(this);
 
         setContentView(R.layout.activity_main);
-
-        /*
-        Li posem el títol a la pantalla
-         */
         setTitle(R.string.menu_inici);
+        wsHelper = new WSHelper(this);
+
+        btnDistance = findViewById(R.id.btn_distancia);
+        btnPreu = findViewById(R.id.btn_preu);
+        swtRestaurantObert = findViewById(R.id.swt_restaurant_obert);
+        btnValoracio = findViewById(R.id.btn_valoracio);
 
         /*
         Agafem el valor del sharedPreferences per saber si hem de mostrar la pantalla de política
@@ -83,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         dels objectes de la vista
          */
         toolbarEx = new ToolbarEx(this,
-                this.findViewById(R.id.toolbar),
-                this.findViewById(R.id.drawer_layout),
-                this.findViewById(R.id.navigation_view));
+                findViewById(R.id.toolbar),
+                findViewById(R.id.drawer_layout),
+                findViewById(R.id.navigation_view));
 
         /*
         Definim el listener per tal de que al fer un clic ens redirigeixi a les diferents pantalles
@@ -97,43 +111,24 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        wsHelper = new WSHelper(this);
-
         // funcio estatica d'una clase per carregar un anunci en un contenidor d'anuncis
         AdsHelper.loadAd(this, findViewById(R.id.adView));//Sistema de filtres mitjançant alerts.
         //region Filtres
-        btnDistance = findViewById(R.id.btn_distancia);
         btnDistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                alert.setTitle("Determina la Distancia (en Km)");
-                String[] botons = {"10 km ", "20 km ", "30 km ", "40 km ", "50 km "};
+                alert.setTitle(getResources().getString(R.string.alert_distancia));
+                String[] botons = {getResources().getString(R.string.alert_distance_1),
+                        getResources().getString(R.string.alert_distance_2),
+                        getResources().getString(R.string.alert_distance_3),
+                        getResources().getString(R.string.alert_distance_4),
+                        getResources().getString(R.string.alert_distance_5)};
                 alert.setItems(botons, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                radius = 10;
-                                break;
-
-                            case 1:
-                                radius = 20;
-                                break;
-
-                            case 2:
-                                radius = 30;
-                                break;
-
-                            case 3:
-                                radius = 40;
-                                break;
-
-                            case 4:
-                                radius = 50;
-                                break;
-                        }
-                        marcarRestaurants();
+                        radius = radiusArray[which];
+                        marcarRestaurants(true);
                     }
                 });
 
@@ -141,23 +136,61 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        btnPreu = findViewById(R.id.btn_preu);
         btnPreu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                alert.setTitle("Determina el rang de preu");
-                String[] botons = {"Molt Barato", "Barato", "Mitjà", "Car", "Molt Car"};
+                alert.setTitle(getResources().getString(R.string.alert_preu));
+                String[] botons = {getResources().getString(R.string.alert_price_1),
+                        getResources().getString(R.string.alert_price_2),
+                        getResources().getString(R.string.alert_price_3),
+                        getResources().getString(R.string.alert_price_4)};
                 alert.setItems(botons, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
-                            case 0:
-
-
-                        }
+                        priceLevel = priceLevelArray[which];
+                        marcarRestaurants(true);
                     }
                 });
+                alert.show();
+            }
+        });
+
+        //ratingBar = findViewById(R.id.ratingBar);
+        btnValoracio.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                alert.setTitle(getResources().getString(R.string.alert_rating_text));
+                LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.alert_rating_layout,null);
+                ratingBar = view.findViewById(R.id.ratingBar);
+                alert.setView(view);
+                Log.d("daniel", "rating:"+ (ratingBar == null));
+                alert.setPositiveButton(getResources().getString(R.string.button_accept_policy), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        rating = ratingBar.getRating();
+                        String rating = getResources().getString(R.string.alert_rating_stars) + ratingBar.getRating();
+                        Toast.makeText(getApplicationContext(), "\n" + rating, Toast.LENGTH_LONG).show();
+                    }
+                });
+                alert.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alert.show();
+            }
+        });
+
+        swtRestaurantObert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                restaurantOpen = isChecked;
+                wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
             }
         });
         //endregion
@@ -193,6 +226,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         else{
             locationManager.requestLocationUpdates(PROVIDER, 0, 0, this);
         }
+
+        initialMovementCamera = true;
     }
 
     @Override
@@ -224,20 +259,35 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     //region Funcions Mapa
-    public void marcarRestaurants(){
+    public void marcarRestaurants(boolean fromRadi){
          /*
         Cridem a les funcions per posar la càmara en la nostre posició i perquè busqui els restaurants
         que estan dins del radi que hem especificat
          */
-        mapsFragment.possitionCamera(possition);
+        int zoom;
+
+        //Todo: actualitzar el zoom
+        if(radius == 10000){
+            zoom = 10;
+        }
+        else if (radius == 20000 || radius == 30000){
+            zoom = 9;
+        }
+        else{
+            zoom = 8;
+        }
+
+        if(fromRadi){
+            mapsFragment.possitionCamera(possition, zoom);
+        }
         mapsFragment.afegirCercle(possition,radius);
-        wsHelper.buscarRestaurants(possition, mapsFragment);
+        wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
         /*
-        Agafem la localització i posem un punt en el mapa i centrem la càmara
+        Agafem la localització i mostrarem els restaurants que tenim dins del radi que hem especificat
          */
         double lat = location.getLatitude();
         double lng = location.getLongitude();
@@ -245,7 +295,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         /*double latEnd = EndP.latitude;
         double lngEnd = EndP.longitude;*/
 
-        marcarRestaurants();
+        marcarRestaurants(initialMovementCamera);
+        initialMovementCamera = false;
     }
 
     @Override

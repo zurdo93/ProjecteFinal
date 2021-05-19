@@ -114,7 +114,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                 alert.setTitle(getResources().getString(R.string.alert_distancia));
-                String[] botons = {"10 km", "20 km", "30 km", "40 km", "50 km"};
+                String[] botons = {getResources().getString(R.string.alert_distance_1),
+                        getResources().getString(R.string.alert_distance_2),
+                        getResources().getString(R.string.alert_distance_3),
+                        getResources().getString(R.string.alert_distance_4),
+                        getResources().getString(R.string.alert_distance_5)};
                 alert.setItems(botons, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

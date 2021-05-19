@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     boolean initialMovementCamera = true;
     boolean restaurantOpen = false;
     int priceLevel = 1;
-
+    float rating = 0;
     double[] radiusArray = {10000,20000,30000,40000,50000};
     int[] priceLevelArray = {1,2,3,4};
 
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 alert.setPositiveButton(getResources().getString(R.string.button_accept_policy), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        rating = ratingBar.getRating();
                         String rating = getResources().getString(R.string.alert_rating_stars) + ratingBar.getRating();
                         Toast.makeText(getApplicationContext(), "\n" + rating, Toast.LENGTH_LONG).show();
                     }

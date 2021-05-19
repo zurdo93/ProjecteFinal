@@ -46,7 +46,12 @@ public class WSHelper {
         restaurants = new ArrayList<>();
     }
 
-    public void buscarRestaurants(LatLng possition, double radius, int priceLevel, boolean restaurantOpen, MapsFragment mapsFragment){
+    public void buscarRestaurants(LatLng possition,
+                                  double radius,
+                                  int priceLevel,
+                                  boolean restaurantOpen,
+                                  float rating,
+                                  MapsFragment mapsFragment){
         /*
         Aquí és on es posarà la informació dels filtres i despres es passaran a una funció per
         que ens crei la URL
@@ -94,10 +99,16 @@ public class WSHelper {
                             restaurant.getGeometry().getLocation().getLng()
                     );
 
-                    if(restaurantOpen){
-                        if(restaurant.getOpening_hours().isOpen_now()){
+                    if(restaurantOpen) {
+                        if(restaurant.getOpening_hours().isOpen_now()) {
                             mapsFragment.loadPossition(restaurant.getName(), possition);
+                            if (rating != 0) {
+                                
+                            }
                         }
+                    }
+                    else if(rating != 0){
+
                     }
                     else{
                         mapsFragment.loadPossition(restaurant.getName(), possition);

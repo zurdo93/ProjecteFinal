@@ -208,4 +208,6 @@ This Policy is subject to periodic reviews and the company can modify it at any 
     <string name="language_es">spanish</string>
     <string name="language_ca">catalan</string>
     <string name="button_cancel">cancel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

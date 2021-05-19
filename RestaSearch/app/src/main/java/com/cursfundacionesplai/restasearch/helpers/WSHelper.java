@@ -89,7 +89,7 @@ public class WSHelper {
                             restaurant.getGeometry().getLocation().getLat(),
                             restaurant.getGeometry().getLocation().getLng()
                     );
-                    mapsFragment.loadPossition(restaurant.getName(), possition);
+                    mapsFragment.loadPossition(restaurant.getPlacesId(), restaurant.getName(), possition);
                 }
             }
         }, new Response.ErrorListener() {

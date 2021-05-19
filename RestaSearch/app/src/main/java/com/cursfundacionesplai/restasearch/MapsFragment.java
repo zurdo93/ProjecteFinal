@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,12 +21,17 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class MapsFragment extends Fragment {
 
     GoogleMap mMap;
+    Context context;
+
+    private HashMap<String, String> keys;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -39,12 +46,31 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
+
             mMap = googleMap;
+            keys = new HashMap<>();
             /*
             LatLng sydney = new LatLng(-34, 151);
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
             */
+
+            // Afegir listener al clica un marcador
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    Log.d("miki", "onMarkerClick: " + keys.containsKey(marker.getTitle()));
+
+                    // comprovar si existeix l'id del establiment
+                    if (keys.containsKey(marker.getTitle())) {
+                        // Generar el dialeg passant l'id
+                        Log.d("miki", "key: " + keys.get(marker.getTitle()));
+                        EstablimentDialog.display(getFragmentManager(), keys.get(marker.getTitle()));
+                    }
+
+                    return false;
+                }
+            });
         }
     };
 
@@ -53,6 +79,7 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        context = container.getContext();
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
@@ -66,13 +93,17 @@ public class MapsFragment extends Fragment {
         }
     }
 
-    public void loadPossition(String title, LatLng possition){
+    public void loadPossition(String placeId, String title, LatLng possition){
         /*
         Aquest mètode s'encarrega de netejar els markers que hi hagin posat de la nostre localització.
         Això ho haurem de canviar perquè si posem els markers dels restaurants, aquesta funció ens
         els borrarà
          */
         mMap.addMarker(new MarkerOptions().position(possition).title(title));
+
+        Log.d("miki", "placeid: " + placeId + ", title: " + title);
+
+        keys.put(title, placeId);
     }
 
     public void possitionCamera(LatLng possition){
@@ -106,6 +137,6 @@ public class MapsFragment extends Fragment {
         Ens neteja els markers que hi hagin per poder-ne afegir de nous
          */
         mMap.clear();
+        keys.clear();
     }
-
 }

@@ -21,6 +21,7 @@
     <string name="filtres_distancia">Distance</string>
     <string name="filtres_preu">Price</string>
     <string name="filtres_valoracio">Rating</string>
+    <string name="filtres_netejar">Clean Filters</string>
 
     <!--Preu
     price_level — The price level of the place, on a scale of 0 to 4. The exact amount indicated by a specific value will vary from region to region. Price levels are interpreted as follows:
@@ -209,7 +210,7 @@ This Policy is subject to periodic reviews and the company can modify it at any 
     <string name="button_cancel">cancel</string>
     <string name="alert_distancia">Choose distance</string>
     <string name="alert_preu">Choose price</string>
-    <string name="alert_valoracio">Choose the rating</string>
+    <string name="alert_valoracio">Choose the minimum rating</string>
     <string name="alert_rating_text">Leave your rating</string>
     <string name="alert_price_1">Inexpensive</string>
     <string name="alert_rating_stars">Rating:</string>

@@ -18,7 +18,7 @@
     <string name="button_cancel">cancel·lar</string>
     <string name="alert_distancia">Tria la distancia</string>
     <string name="alert_preu">Escull el preu</string>
-    <string name="alert_valoracio">Tria la valoració</string>
+    <string name="alert_valoracio">Tria la valoració mínima</string>
     <string name="alert_rating_text">Deixa la teva valoració</string>
     <string name="alert_price_1">Barat</string>
     <string name="alert_rating_stars">Valoració:</string>
@@ -33,4 +33,5 @@
     <string name="label_establiment_global_rating">Qualificació global: <b>%s</b></string>
     <string name="label_establiment_total_reviews">Número de ressenyes: <b>%s</b></string>
     <string name="label_establiment_loading">Carregant dades</string>
+    <string name="filtres_netejar">Netejar Filtres</string>
 </resources>

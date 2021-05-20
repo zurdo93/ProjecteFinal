@@ -6,7 +6,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.content.Context;
@@ -30,13 +29,12 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -51,17 +49,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     WSHelper wsHelper;
 
     Button btnDistance;
-    Button btnPreu;
-    Button btnValoracio;
+    Button btnPrice;
+    Button btnRating;
+    Button btnClear;
     RatingBar ratingBar;
-    Switch swtRestaurantObert;
+    SwitchMaterial swtRestaurantOpened;
 
     LatLng possition = new LatLng(0,0);
-    double radius = 10000;
+    double radius;
+    int priceLevel;
+    float rating;
+
     boolean initialMovementCamera = true;
     boolean restaurantOpen = false;
-    int priceLevel = 1;
-    float rating = 0;
+
     double[] radiusArray = {10000,20000,30000,40000,50000};
     int[] priceLevelArray = {1,2,3,4};
 
@@ -75,10 +76,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setTitle(R.string.menu_inici);
         wsHelper = new WSHelper(this);
 
-        btnDistance = findViewById(R.id.btn_distancia);
-        btnPreu = findViewById(R.id.btn_preu);
-        swtRestaurantObert = findViewById(R.id.swt_restaurant_obert);
-        btnValoracio = findViewById(R.id.btn_valoracio);
+        btnDistance = findViewById(R.id.btn_distance);
+        btnPrice = findViewById(R.id.btn_price);
+        btnRating = findViewById(R.id.btn_rating);
+        btnClear = findViewById(R.id.btn_clean);
+        swtRestaurantOpened = findViewById(R.id.swt_restaurant_opened);
 
         /*
         Agafem el valor del sharedPreferences per saber si hem de mostrar la pantalla de política
@@ -128,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         radius = radiusArray[which];
-                        marcarRestaurants(true);
+                        markRestaurant(true);
                     }
                 });
 
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        btnPreu.setOnClickListener(new View.OnClickListener() {
+        btnPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         priceLevel = priceLevelArray[which];
-                        marcarRestaurants(true);
+                        markRestaurant(true);
                     }
                 });
                 alert.show();
@@ -157,23 +159,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         });
 
         //ratingBar = findViewById(R.id.ratingBar);
-        btnValoracio.setOnClickListener(new View.OnClickListener() {
+        btnRating.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                 alert.setTitle(getResources().getString(R.string.alert_rating_text));
+
                 LayoutInflater inflater = MainActivity.this.getLayoutInflater();
                 View view = inflater.inflate(R.layout.alert_rating_layout,null);
+
                 ratingBar = view.findViewById(R.id.ratingBar);
                 alert.setView(view);
                 Log.d("daniel", "rating:"+ (ratingBar == null));
+
                 alert.setPositiveButton(getResources().getString(R.string.button_accept_policy), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         rating = ratingBar.getRating();
-                        String rating = getResources().getString(R.string.alert_rating_stars) + ratingBar.getRating();
-                        Toast.makeText(getApplicationContext(), "\n" + rating, Toast.LENGTH_LONG).show();
+                        markRestaurant(true);
+
+                        /*String rating = getResources().getString(R.string.alert_rating_stars) + ratingBar.getRating();
+                        Toast.makeText(getApplicationContext(), "\n" + rating, Toast.LENGTH_LONG).show();*/
                     }
                 });
                 alert.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
@@ -186,7 +193,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
 
-        swtRestaurantObert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cleanFilter();
+                markRestaurant(true);
+            }
+        });
+
+        swtRestaurantOpened.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 restaurantOpen = isChecked;
@@ -194,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
         });
         //endregion
+
+        cleanFilter();
     }
 
     @Override
@@ -259,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     //region Funcions Mapa
-    public void marcarRestaurants(boolean fromRadi){
+    public void markRestaurant(boolean isCamera){
          /*
         Cridem a les funcions per posar la càmara en la nostre posició i perquè busqui els restaurants
         que estan dins del radi que hem especificat
@@ -277,11 +294,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             zoom = 8;
         }
 
-        if(fromRadi){
+        if(isCamera){
             mapsFragment.possitionCamera(possition, zoom);
         }
         mapsFragment.afegirCercle(possition,radius);
         wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
+    }
+
+    public void cleanFilter(){
+        radius = 10000;
+        priceLevel = 1;
+        rating = 0;
     }
 
     @Override
@@ -295,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         /*double latEnd = EndP.latitude;
         double lngEnd = EndP.longitude;*/
 
-        marcarRestaurants(initialMovementCamera);
+        markRestaurant(initialMovementCamera);
         initialMovementCamera = false;
     }
 

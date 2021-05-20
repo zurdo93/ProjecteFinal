@@ -18,7 +18,7 @@
     <string name="button_cancel">cancelar</string>
     <string name="alert_distancia">Determina la distancia</string>
     <string name="alert_preu">Escoge el precio</string>
-    <string name="alert_valoracio">Escoge la valoración</string>
+    <string name="alert_valoracio">Escoge la valoración mínima</string>
     <string name="alert_rating_text">Deja tu valoración</string>
     <string name="alert_price_1">Barato</string>
     <string name="alert_rating_stars">Valoracion:</string>
@@ -33,4 +33,5 @@
     <string name="label_establiment_global_rating">Clasificación global: <b>%s</b></string>
     <string name="label_establiment_total_reviews">Número de críticas: <b>%s</b></string>
     <string name="label_establiment_loading">Cargando datos</string>
+    <string name="filtres_netejar">Limpiar Filtros</string>
 </resources>

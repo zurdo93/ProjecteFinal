@@ -43,6 +43,16 @@ public class WSHelper {
     private static String STATUS_CODE_INVALID_REQUEST = "INVALID_REQUEST";
     private static String STATUS_CODE_NOT_FOUND = "NOT_FOUND";
 
+    /*
+    Todo: quan cliquem la valoració no es necessari tornar a buscar tots els restaurants.
+    El que es pot fer es netejar els markers que hi hagin posats i després agafar l'array de
+    restaurants que ja tenim i filtrar-los. Així no sobrecarreguem l'app amb moltes crides
+
+    Todo: acabar de mirar si funciona tot correctament i que es mostrin bé els valors.
+    Me trobat amb problemes de que al buscar restaurants per un preu, la URL la fa correctament
+    però els resultats no coincideixen amb els restaurants que es mostren al mapa.
+     */
+
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
         restaurants = new ArrayList<>();
@@ -103,14 +113,20 @@ public class WSHelper {
 
                     if(restaurantOpen) {
                         if(restaurant.getOpening_hours().isOpen_now()) {
-                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
                             if (rating != 0) {
-                                
+                                if(restaurant.getRating() >= rating){
+                                    mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
+                                }
+                            }
+                            else{
+                                mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
                             }
                         }
                     }
                     else if(rating != 0){
-
+                        if(restaurant.getRating() >= rating){
+                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
+                        }
                     }
                     else{
                         mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);

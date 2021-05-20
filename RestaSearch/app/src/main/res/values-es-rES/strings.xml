@@ -30,8 +30,8 @@
     <string name="alert_distance_3">30+km</string>
     <string name="alert_distance_4">40+km</string>
     <string name="alert_distance_5">50+km</string>
-    <string name="label_establiment_global_rating">Clasificación global: <b>%1$s</b></string>
-    <string name="label_establiment_total_reviews">Número de críticas: <b>%1$s</b></string>
+    <string name="label_establiment_global_rating">Clasificación global: <b>%1$.1f</b></string>
+    <string name="label_establiment_total_reviews">Número de críticas: <b>%1$d</b></string>
     <string name="label_establiment_loading">Cargando datos</string>
     <string name="filtres_netejar">Limpiar Filtros</string>
     <string name="privacy_update_date">Última actualización: Mayo 2021.</string>

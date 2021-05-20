@@ -18,6 +18,27 @@ public class Restaurant {
     private ArrayList<String> types;
     private int user_ratings_total;
     private String vicinity;
+    private String formattedAdress;
+    private String internationalPhoneNumber;
+
+    public String getFormattedAdress() {
+        return formattedAdress;
+    }
+
+    public void setFormattedAdress(String formattedAdress) {
+        this.formattedAdress = formattedAdress;
+    }
+
+    public String getInternationalPhoneNumber() {
+        return internationalPhoneNumber;
+    }
+
+    public void setInternationalPhoneNumber(String internationalPhoneNumber) {
+        this.internationalPhoneNumber = internationalPhoneNumber;
+    }
+
+    public Restaurant() {
+    }
 
     public Restaurant(String business_status,
                       Geometry geometry,

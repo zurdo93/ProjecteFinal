@@ -9,12 +9,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.cursfundacionesplai.restasearch.EstablimentDialog;
 import com.cursfundacionesplai.restasearch.MapsFragment;
 import com.cursfundacionesplai.restasearch.models.Restaurant;
+import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,6 +136,47 @@ public class WSHelper {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("RESTASEARCH", "Error al buscar els restaurants");
+            }
+        });
+
+        cuaPeticions.add(jsonObjectRequest);
+    }
+
+    public void getEstablimentDetails(String placeId, CustomResponse.EstablimentDetail listener) {
+
+        String key = "AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw";
+        String fields = "business_status,opening_hours,review,photo,user_ratings_total,price_level,rating,formatted_address,international_phone_number,name";
+        String url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + placeId + "&fields=" + fields + "&language=es&key=" + key;
+
+        jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getString("status").equals("OK")) {
+
+                        Log.d("miki", "onResponse: getting results");
+
+                        JSONObject result = response.getJSONObject("result");
+
+                        Restaurant r = new Restaurant();
+                        r.setName(result.getString("name"));
+                        r.setFormattedAdress(result.getString("formatted_address"));
+                        r.setInternationalPhoneNumber(result.getString("international_phone_number"));
+                        r.setRating(result.getDouble("rating"));
+                        r.setUser_ratings_total(result.getInt("user_ratings_total"));
+
+                        listener.onResponse(r);
+                    }
+                } catch (JSONException e) {
+                    Log.d("miki", "onErrorResponse: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("miki", "onErrorResponse: " + error.getMessage());
+                listener.onResponse(null);
             }
         });
 

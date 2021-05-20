@@ -5,9 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class MapsFragment extends Fragment {
@@ -60,12 +57,18 @@ public class MapsFragment extends Fragment {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
 
-                    // comprovar si existeix l'id del establiment
-                    if (keys.containsKey(marker.getTitle())) {
-                        // Generar el dialeg passant l'id
+                    // crear una mica de delay per que al clicar a un marcador quedi mes elegant
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            // comprovar si existeix l'id del establiment
+                            if (keys.containsKey(marker.getTitle())) {
+                                // Generar el dialeg passant l'id
 
-                        EstablimentDialog.display(getFragmentManager(), keys.get(marker.getTitle()));
-                    }
+                                EstablimentDialog.display(getFragmentManager(), keys.get(marker.getTitle()), marker.getTitle());
+                            }
+                        }
+                    },500);
 
                     return false;
                 }

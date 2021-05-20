@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name" translatable="false">RestaSearch</string>
 
-    <string name="button_accept_policy">Accept</string>
-
-    <string name="checkbox_accept_policy">I have read and accept the privacy policy.</string>
-    <string name="label_policy" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a purus dignissim metus imperdiet pharetra. Vivamus aliquam leo sed mollis venenatis. In pretium id turpis non pellentesque. Aenean vehicula urna blandit metus pellentesque lacinia. Vestibulum eget leo nisl. Ut at consequat quam. Sed nec placerat neque, eu finibus odio. Duis laoreet posuere venenatis. Quisque consectetur vitae neque et fringilla. Quisque volutpat nibh at libero porttitor congue. Donec dictum tincidunt diam, sed venenatis nunc ornare in. Nulla et sem in sem ullamcorper ullamcorper non vel tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ut velit eu nisi tempor tempor at blandit erat.  Nulla at pellentesque orci. Morbi tempus porta tincidunt. In ut leo tellus. Donec nec accumsan nulla. Fusce at placerat tellus, id sodales nisi. Mauris nec diam velit. Pellentesque viverra accumsan mi id iaculis. Pellentesque posuere, ipsum et tempor euismod, diam diam imperdiet nibh, non malesuada ante metus nec augue. Vestibulum purus tortor, malesuada ac auctor et, dapibus ac neque. Vestibulum in tempor massa, id lobortis nunc.  Donec imperdiet, velit ac mollis faucibus, ex urna varius enim, sed tempor nibh nulla non ex. Mauris mauris massa, dapibus id facilisis id, mollis a diam. Nullam velit diam, rutrum eu tincidunt vel, suscipit nec risus. Aliquam at tortor sapien. Fusce venenatis maximus iaculis. Aenean nunc mi, eleifend vel placerat vitae, porta a quam. Proin in sagittis risus, ac iaculis odio. Etiam sed maximus est, sed vulputate turpis. Cras mollis leo et metus congue, sed tincidunt enim dapibus. Morbi eu eros lorem. Phasellus quis quam vel leo maximus hendrerit sit amet eu turpis. Aenean ultricies felis ut semper accumsan.  In efficitur urna eu convallis venenatis. Etiam imperdiet leo sed tellus dignissim, quis malesuada mi varius. Pellentesque malesuada a justo at convallis. Sed turpis diam, pulvinar ut augue id, scelerisque dapibus ante. Quisque pellentesque sapien massa, egestas sodales tellus mattis quis. Vivamus venenatis ligula et ligula volutpat, ac fermentum libero ultricies. Pellentesque vel pretium enim. Duis et convallis lacus. Morbi vel turpis id enim luctus maximus. Nulla tortor sem, blandit at augue at, accumsan pellentesque lectus.  Fusce sit amet turpis elementum, sollicitudin purus elementum, mattis nisi. Duis interdum metus non metus pretium efficitur sed sit amet justo. Sed eget enim id erat auctor varius. Praesent laoreet dolor ut scelerisque ultricies. Fusce consectetur magna ac ligula consectetur rhoncus. Phasellus bibendum, orci eget euismod tincidunt, justo diam scelerisque sapien, at condimentum sem sapien in quam. Nunc vulputate dui justo, id ultricies tortor rutrum vel. Maecenas ac magna eget nulla blandit ultrices. Nulla vulputate venenatis orci a sodales. Nullam in urna dictum, consequat leo a, porta turpis. Cras tincidunt felis ligula, id ultrices elit tincidunt eget. Cras libero dolor, sagittis in ex elementum, ullamcorper pretium velit.</string>
-
     <string name="navigation_drawer_open" translatable="false">RestaSearchMenuOpen</string>
     <string name="navigation_drawer_close" translatable="false">RestaSearchMenuClose</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="button_cancel">cancel</string>
 
     <!-- Menu -->
     <string name="menu_inici">Home</string>
@@ -31,183 +28,13 @@
     3 — Expensive
     4 — Very Expensive -->
 
-    <!-- Política privacitat i condicions d'ús -->
-    <string name="privacitat_us_catala" translatable="false">POLÍTICA DE PRIVACITAT
-Darrera actualització: Maig 2021.
-1. INFORMACIÓ A L’USUARI
-RestaSearch, S.L., com a Responsable del Tractament, l’informa que, segons el que disposa en el Reglament (UE) 2016/679, de 27 d’abril, (RGPD) i en la L.O. 3/2018, de 5 de desembre, de protecció de dades i garantia dels drets digitals (LOPDGDD), tractarem les seves dades tal com es reflexa en la present Política de Privacitat.
-En aquesta Política de Privacitat descrivim com recollim les seves dades personals i perquè els recollim, què fem amb ells, amb qui els compartim, com els protegim i les seves opcions pel que fa al tractament de les seves dades personals.
-Aquesta Política s’aplica al tractament de les seves dades personals recollides per l’empresa per a la prestació dels seus serveis. Si accepta les mesures d’aquesta Política, accepta que tractem les seves dades personals com es defineix en aquesta Política.
-
-2. CONTACTE
-Denominació social: RestaSearch, S.L.
-Nom comercial: RestaSearch
-CIF: 00000000X
-Domicili: Carrer de Cartellà, 8, 17007 Girona
-e-mail: RestaSearch@restasearch.com
-
-3. PRINCIPIS CLAU
-Sempre hem estat compromesos amb prestar els nostres serveis amb el més alt grau de qualitat, el que inclou tractar les seves dades amb seguretat i transparència. Els nostres principis son:
-•	Legalitat: Només recopilarem les seves dades personals per a fins específics, explícits i legítims.
-•	Minimització de dades: Limitem la recollida de dades de caràcter personal al que es estrictament rellevant i necessari per als fins per al que s’han recopilat.
-•	Limitació de la Finalitat: Només recollirem les seves dades personals per als fins declarats i només segons els seus desitjos.
-•	Precisió: Mantindrem les seves dades personals exactes i actualitzades.
-•	Seguretat de les Dades: Aplicarem les mesures tècniques i organitzatives adequades i proporcionals als riscos per garantir que les seves dades no pateixin danys, tals com divulgació o accés no autoritzat, la destrucció accidental o il·lícita o la seva pèrdua accidental o alteració i qualsevol altre forma de tractament il·lícit.
-•	Accés y Rectificació: Disposem de medis per a que accedeixi o rectifiqui les seves dades quan ho consideri oportú.
-•	Conservació: Conservem les seves dades personals de manera legal i apropiada i només mentre es necessari per als fins per els que s’han recopilat.
-•	Les transferències internacionals: Quan es doni el cas de que les dades vagin a ser transferides fora de la UE/EEE es protegiran adequadament.
-•	Tercers: L’accés i transferència de dades personals a tercers es duen a terme d’acord amb les lleis i reglaments aplicables i amb les garanties contractuals adequades.
-•	Marketing Directe i cookies: Complim amb la legislació aplicable en matèria de publicitat i cookies.
-4. RECOLLIDA I TRACTAMENT DE LES SEVES DADES PERSONALS
-Els tipus de dades que es poden sol·licitar i tractar son:
-•	Dades de caràcter identificatiu.
-També recollim de forma automàtica dades sobre la seva visita al nostre lloc web  segons es descriu en la política de cookies.
-Sempre que sol·licitem les Dades personals, l’informarem amb claredat de quines dades personals recollim i amb quina finalitat. En general, recollim i tractem les seves dades personals amb el propòsit de:
-•	Proporcionar informació, serveis, productes, informació rellevant i novetats en el sector.
-•	Envio de comunicacions.
-5. LEGITIMIDAD
-D’acord amb la normativa de protecció de dades aplicable, les seves dades personals podran tractar-se sempre que:
-•	Ens ha donat el seu consentiment als efectes del tractament. Per suposat podrà retirar el seu consentiment en qualsevol moment.
-•	Per requeriment legal.
-•	Per existir un interès legítim que no es vegi menyscabat per els seus drets de privacitat, com per exemple l’enviament de informació comercial bé per subscripció al nostre newsletter o per la seva condició de client.
-•	Per ser necessària para la prestació d’algun dels nostres serveis mitjançant la relació contractual entre vostè i nosaltres.
-6. COMUNICACIÓN DE DATOS PERSONALES
-Les dades poden ser comunicades a empreses relacionades amb RESTASEARCH, S.L. per a la prestació dels diversos serveis en qualitat d’Encarregats del Tractament. L’empresa no realitzarà cap cessió, a no se que hi hagi obligació legal.
-7. SUS DERECHOS
-En relació a la recollida i tractament de les dades personals, pot posar-se en contacte amb nosaltres en qualsevol moment per:
-•	Accedir a les seves dades personals i a qualsevol altre informació indicada en el Article 15.1 del RGPD.
-•	Rectificar les seves dades personals que siguin inexactes o estiguin incompletes d’acord amb l’Article 16 del RGPD.
-•	Suprimir les seves dades personals d’acord amb l’Article 17 del RGPD.
-•	Limitar el tractament de les seves dades personals d’acord amb l’Article 18 del RGPD.
-•	Sol·licitar la portabilitat de les seves dades d’acord amb l’Article 20 del RGPD.
-•	Oposar-se al tractament de les seves dades personals d’acord amb l’article 21 del RGPD.
-Si ha atorgat el seu consentiment per alguna finalitat concreta, té dret a retirar el consentiment atorgat en qualsevol moment, sense que això afecti a la licitud del tractament basat en el consentiment previ a la seva retirada rrhh.
-Pot exercir aquests drets enviant comunicació, motivada y acreditada, a restasearch@restasearch.com
-També té dret a presentar una reclamació davant l’Autoritat de control competent (www.aepd.es) si considera que el tractament no se ajusta a la normativa vigent.
-8. INFORMACIÓN LEGAL
-Els requisits d’aquesta Política complementen, i no reemplacen, qualsevol altre requisit existent sota la llei de protecció de dades aplicable, que serà la que prevalgui en qualsevol cas.
-Aquesta Política està subjecta a revisions periòdiques i l’empresa pot modificar-la en qualsevol moment. Quan això passi, l’avisarem de qualsevol canvi i li demanarem que torni a llegir la versió més recent de la nostra Política i que confirmi la seva acceptació.
-
-</string>
-    <string name="privacitat_us_castella" translatable="false">POLITICA DE PRIVACIDAD
-Última actualización: Mayo 2021.
-1. INFORMACIÓN AL USUARIO
-RestaSearch, S.L., como Responsable del Tratamiento, le informa que, según lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril, (RGPD) y en la L.O. 3/2018, de 5 de diciembre, de protección de datos y garantía de los derechos digitales (LOPDGDD), trataremos su datos tal y como reflejamos en la presente Política de Privacidad.
-En esta Política de Privacidad describimos cómo recogemos sus datos personales y por qué los recogemos, qué hacemos con ellos, con quién los compartimos, cómo los protegemos y sus opciones en cuanto al tratamiento de sus datos personales.
-Esta Política se aplica al tratamiento de sus datos personales recogidos por la empresa para la prestación de sus servicios. Si acepta las medidas de esta Política, acepta que tratemos sus datos personales como se define en esta Política.
-2. CONTACTO
-Denominación social: RestaSearch, S.L.
-Nombre comercial: RestaSearch
-CIF: 00000000X
-Domicilio: Carrer de Cartellà, 8, 17007 Girona
-e-mail: RestaSearch@restasearch.com
-
-3. PRINCIPIOS CLAVE
-Siempre hemos estado comprometidos con prestar nuestros servicios con el más alto grado de calidad, lo que incluye tratar sus datos con seguridad y transparencia. Nuestros principios son:
-•	Legalidad: Solo recopilaremos sus Datos personales para fines específicos, explícitos y legítimos.
-•	Minimización de datos: Limitamos la recogida de datos de carácter personal a lo que es estrictamente relevante y necesario para los fines para los que se han recopilado.
-•	Limitación de la Finalidad: Solo recogeremos sus datos personales para los fines declarados y solo según sus deseos.
-•	Precisión: Mantendremos sus datos personales exactos y actualizados.
-•	Seguridad de los Datos: Aplicamos las medidas técnicas y organizativas adecuadas y proporcionales a los riesgos para garantizar que sus datos no sufran daños, tales como divulgación o acceso no autorizado, la destrucción accidental o ilícita o su pérdida accidental o alteración y cualquier otra forma de tratamiento ilícito.
-•	Acceso y Rectificación: Disponemos de medios para que acceda o rectifique sus datos cuando lo considere oportuno.
-•	Conservación: Conservamos sus datos personales de manera legal y apropiada y solo mientras es necesario para los fines para los que se han recopilado.
-•	Las transferencias internacionales: cuando se dé el caso de que sus datos vayan a ser transferidos fuera de la UE/EEE se protegerán adecuadamente.
-•	Terceros: El acceso y transferencia de datos personales a terceros se llevan a cabo de acuerdo con las leyes y reglamentos aplicables y con las garantías contractuales adecuadas.
-•	Marketing Directo y cookies: Cumplimos con la legislación aplicable en materia de publicidad y cookies.
-4. RECOGIDA Y TRATAMIENTO DE SUS DATOS PERSONALES
-Las tipos de datos que se pueden solicitar y tratar son:
-•	Datos de carácter identificativo.
-También recogemos de forma automática datos sobre su visita a nuestro sitio web  según se describe en la política de cookies.
-Siempre que solicitemos sus Datos personales, le informaremos con claridad de qué datos personales recogemos y con qué fin. En general, recogemos y tratamos sus datos personales con el propósito de:
-•	Proporcionar información, servicios, productos, información relevante y novedades en el sector.
-•	Envío de comunicaciones.
-5. LEGITIMIDAD
-De acuerdo con la normativa de protección de datos aplicable, sus datos personales podrán tratarse siempre que:
-•	Nos ha dado su consentimiento a los efectos del tratamiento. Por supuesto podrá retirar su consentimiento en cualquier momento.
-•	Por requerimiento legal.
-•	Por exisitr un interés legítimo que no se vea menoscabado por sus derechos de privacidad, como por ejemplo el envío de información comercial bien por suscripción a nuestra newsletter o por su condición de cliente.
-•	Por se necesaria para la prestación de alguno de nuestros servicios mediante relación contractual entre usted y nosotros.
-6. COMUNICACIÓN DE DATOS PERSONALES
-Los datos pueden ser comunicados a empresas relacionadas con RESTASEARCH, S.L. para la prestación de los diversos servicios en calidad de Encargados del Tratamiento. La empresa no realizará ninguna cesión, salvo por obligación legal.
-7. SUS DERECHOS
-En relación con la recogida y tratamiento de sus datos personales, puede ponerse en contacto con nosotros en cualquier momento para:
-•	Acceder a sus datos personales y a cualquier otra información indicada en el Artículo 15.1 del RGPD.
-•	Rectificar sus datos personales que sean inexactos o estén incompletos de acuerdo con el Artículo 16 del RGPD.
-•	Suprimir sus datos personales de acuerdo con el Artículo 17 del RGPD.
-•	Limitar el tratamiento de sus datos personales de acuerdo con el Artículo 18 del RGPD.
-•	Solicitar la portabilidad de sus datos de acuerdo con el Artículo 20 del RGPD.
-•	Oponerse al tratamiento de sus datos personales de acuerdo con el artículo 21 del RGPD.
-Si ha otorgado su consentimiento para alguna finalidad concreta, tiene derecho a retirar el consentimiento otorgado en cualquier momento, sin que ello afecte a la licitud del tratamiento basado en el consentimiento previo a su retirada rrhh.
-Puede ejercer estos derechos enviando comunicación, motivada y acreditada, a restasearch@restasearch.com
-También tiene derecho a presentar una reclamación ante la Autoridad de control competente (www.aepd.es) si considera que el tratamiento no se ajusta a la normativa vigente.
-8. INFORMACIÓN LEGAL
-Los requisitos de esta Política complementan, y no reemplazan, cualquier otro requisito existente bajo la ley de protección de datos aplicable, que será la que prevalezca en cualquier caso.
-Esta Política está sujeta a revisiones periódicas y la empresa puede modificarla en cualquier momento. Cuando esto ocurra, le avisaremos de cualquier cambio y le pediremos que vuelva a leer la versión más reciente de nuestra Política y que confirme su aceptación.
-
-</string>
-    <string name="privacitat_us_angles" translatable="false">PRIVACY POLICY
-Last update: May 2021.
-1. INFORMATION TO THE USER
-RestaSearch, S.L., as Data Controller, informs you that, in accordance with the provisions of Regulation (EU) 2016/679, of 27 April, (RGPD) and in the O.L. 3/2018, of December 5, on data protection and guarantee of digital rights (LOPDGDD), we will treat your data as we reflect in this Privacy Policy.
-
-In this Privacy Policy we describe how we collect your personal data and why we collect it, what we do with it, with whom we share it, how we protect it, and your options regarding the processing of your personal data collected by the company for the provision of its services. If you accept the measures of this Policy, you agree that we process your personal data as defined in this Policy.
-
-2. CONTACT
-Company name: RestaSearch, S.L.
-Trade name: RestaSearch
-CIF: 00000000X
-Address: Carrer de Cartellà, 8, 17007 Girona
-e-mail: RestaSearch@restasearch.com
-
-3. Key Principles
-We have always been committed to providing our services with the highest degree of quality, which includes treating your data with security and transparency. Our principles are:
-•	Legality: We will only collect your Personal Data for specific, explicit and legitimate purposes.
-•	Data Minimization: We limit the collection of your personal data to what is strictly relevant and necessary for the purposes for which it was collected.
-•	Limitation of Purpose: We will only collect your personal data for the stated purposes and only according to your wishes.
-•	Accuracy: We will keep your personal information accurate and up to date.
-•	Data Security: We apply the appropriate technical and organizational measures proportional to the risk to ensure that your data doesn’t suffer damage, such as unauthorized disclosure or access, accidental or illegal destruction or accidental loss or alteration and in any other way of illicit treatment.
-•	Access and Rectification: We have the ways for you to access or rectify your data when you deem it appropriate.
-•	Conservation: We keep your personal data legally and appropriately and only as long as it is necessary for the purposes for which it was collected.
-•	International Transfers: In case that your data is going to be transferred outside the EU/EEA, it will be adequately protected.
-•	Third parties: The access and transfer of personal data to third parties are carried out in accordance with the applicable laws and regulation and with the appropriate contractual guarantees.
-•	Direct Marketing and cookies: We comply with the applicable legislation regarding advertising and cookies.
-4. COLLECTION AND PROCESSING OF YOUR PERSONAL DATA
-The types of data that can be requested and processed are:
-•	Identifying data.
-We also automatically collect data about your visit to our website as described in the cookies policy.
-Whenever we request your Personal Data, we will clearly inform you of what personal data we collect and for what purpose. In general we collect and process your personal data for the purpose of:
-•	Provide information, services, products, relevant information and new in the sector.
-•	Sending of communications.
-5. LEGITIMACY
-In accordance with the applicable data protection regulations, your personal data may be processed provided that:
-•	You have given us your consent for the purposes of the treatment. Of course your can withdraw your consent whenever you want.
-•	By legal requirement.
-•	Because there is a legitimate interest that isn’t undermined by your privacy rights, such as the sending of commercial information either by subscribing to our newsletter or by your client condition.
-•	Because it is necessary for the provision of any of our services through a contractual relationship between you and us.
-6. PERSONAL DATA COMUNICATION
-The data can be communicated to companies related to RESTASEARCH, S.L. for the prevision of the various services as Treatment Managers. The company won’t make any assignment, except by legal obligation.
-7. YOUR RIGHTS
-In relation to the collection and processing of your personal data, you can contact us at any time to:
-•	Access to your personal data and any other information indicated in the Article 15.1 of the RGPD.
-•	Rectify your personal data that is inaccurate or incomplete in accordance to the Article 16 of the RGPD.
-•	Delete your personal data in accordance with the Article 17 del RGPD.
-•	Limit the processing of your personal data in accordance with the Article 18 of the RGPD.
-•	Request the portability of your data in accordance with the Article 20 of the RGPD.
-•	Oppose the processing of your personal data in accordance with the Article 21 of the RGPD.
-
-
-If you have given your consent for a specific purpose, you have the right to withdraw the consent granted at any time, without affecting the legality of the treatment based on the consent to its withdrawal HR. You can exercise your rights sending a motivated and accredited communication to restasearch@restasearch.com
-You also have the right to file a claim with the competent Control Authority (www.aepd.es) if you consider that the treatment doesn’t comply with current regulations.
-8. LEGAL INFORMATION
-The requirements of this Policy complement, and don’t replace any other requirement under the applicable data protection law, which will prevail in any case.
-This Policy is subject to periodic reviews and the company can modify it at any time. When this occurs, we will notify you of any changes and ask you to reread the most recent version of our Policy and confirm your agreement.
-
-</string>
+    <!-- Idiomes -->
     <string name="language_choose">Choose your language.</string>
     <string name="language_en">english</string>
     <string name="language_es">spanish</string>
     <string name="language_ca">catalan</string>
-    <string name="button_cancel">cancel</string>
+
+    <!-- Alerts-->
     <string name="alert_distancia">Choose distance</string>
     <string name="alert_preu">Choose price</string>
     <string name="alert_valoracio">Choose the minimum rating</string>
@@ -223,11 +50,14 @@ This Policy is subject to periodic reviews and the company can modify it at any 
     <string name="alert_distance_4">40+km</string>
     <string name="alert_distance_5">50+km</string>
 
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="label_establiment_global_rating">Global rating: <b>%1$s</b></string>
-    <string name="label_establiment_total_reviews">Number of reviews: <b>%1$s</b></string>
+    <string name="label_establiment_global_rating">Global rating: <b>%1$.1f</b></string>
+    <string name="label_establiment_total_reviews">Number of reviews: <b>%1$d</b></string>
     <string name="label_establiment_loading">Loading data</string>
 
+    <string name="button_accept_policy">Accept</string>
+    <string name="checkbox_accept_policy">I have read and accept the privacy policy.</string>
+
+    <!-- Privacitat -->
     <string name="privacy_title">PRIVACY POLICY</string>
     <string name="privacy_update_date">Last update: May 2021.</string>
     <string name="privacy_title1">1. INFORMATION TO THE USER</string>

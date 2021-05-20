@@ -230,8 +230,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onResume() {
         super.onResume();
 
-        Log.d("miki", "onResume: ");
-
         /*
         Demanem els permisos en el cas de que no els tinguem. Si els tenim agafem la localització
          */

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
@@ -21,6 +22,7 @@ public class PoliticaActivity extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
+    TextView mainTitle;
     CheckBox checkPolicy;
     Button btnAccept;
     ToolbarEx toolbarEx;
@@ -39,6 +41,7 @@ public class PoliticaActivity extends AppCompatActivity {
         prefs = getSharedPreferences(Keys.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         editor = prefs.edit();
 
+        mainTitle = findViewById(R.id.main_title);
         checkPolicy = this.findViewById(R.id.box_policy);
         btnAccept = this.findViewById(R.id.btn_accept);
 
@@ -48,6 +51,7 @@ public class PoliticaActivity extends AppCompatActivity {
                 this.findViewById(R.id.navigation_view));
 
         if(prefs.getBoolean(Keys.PREFS_SAVE_POLICY,false)){
+            mainTitle.setVisibility(View.GONE);
             btnAccept.setVisibility(View.GONE);
             checkPolicy.setVisibility(View.GONE);
 

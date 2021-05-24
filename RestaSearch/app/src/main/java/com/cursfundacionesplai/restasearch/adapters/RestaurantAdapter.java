@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cursfundacionesplai.restasearch.EstablimentDetailActivity;
 import com.cursfundacionesplai.restasearch.R;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
+import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 
 import java.util.ArrayList;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<RestaurantList> restaurantLists;
+    private ArrayList<RestaurantModel> restaurantLists;
 
-    public RestaurantAdapter(Context context, ArrayList<RestaurantList> restaurantLists) {
+    public RestaurantAdapter(Context context, ArrayList<RestaurantModel> restaurantLists) {
         this.context = context;
         this.restaurantLists = restaurantLists;
     }
@@ -37,7 +38,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     @Override
     public void onBindViewHolder(RestaurantAdapter.ViewHolder holder, int position) {
 
-        RestaurantList r = restaurantLists.get(position);
+        RestaurantModel r = restaurantLists.get(position);
 
         holder.name.setText(r.getName());
 

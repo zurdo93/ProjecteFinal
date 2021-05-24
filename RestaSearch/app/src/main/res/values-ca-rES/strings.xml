@@ -67,4 +67,5 @@
     <string name="privacy_title7_line4">També té dret a presentar una reclamació davant l’Autoritat de control competent (www.aepd.es) si considera que el tractament no se ajusta a la normativa vigent.</string>
     <string name="privacy_title7_line3">Si ha atorgat el seu consentiment per alguna finalitat concreta, té dret a retirar el consentiment atorgat en qualsevol moment, sense que això afecti a la licitud del tractament basat en el consentiment previ a la seva retirada rrhh. Pot exercir aquests drets enviant comunicació, motivada y acreditada, a <b>restasearch@restasearch.com</b>.</string>
     <string name="privacy_title">POLÍTICA DE PRIVACITAT</string>
+    <string name="button_back">tornar</string>
 </resources>

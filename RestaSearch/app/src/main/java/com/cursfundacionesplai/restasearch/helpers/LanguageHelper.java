@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
-import com.cursfundacionesplai.restasearch.Keys;
+import com.cursfundacionesplai.restasearch.models.Keys;
 
 import java.util.Locale;
 

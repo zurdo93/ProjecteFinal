@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
+import com.cursfundacionesplai.restasearch.models.Keys;
 import com.google.android.material.navigation.NavigationView;
 
 public class PoliticaActivity extends AppCompatActivity {

@@ -27,6 +27,9 @@ public class RestaurantModel {
     private String vicinity;
     private String website;
 
+    public RestaurantModel() {
+    }
+
     public RestaurantModel(ArrayList<AddressComponent> address_components, String adr_address, String business_status, String formatted_address, String formatted_phone_number, Geometry geometry, String icon, String international_phone_number, String name, OpeningHour opening_hours, ArrayList<Photo> photos, String place_id, PlusCode plus_code, int price_level, double rating, String reference, ArrayList<Review> reviews, ArrayList<String> types, String url, int user_ratings_total, int utc_offset, String vicinity, String website) {
         this.address_components = address_components;
         this.adr_address = adr_address;

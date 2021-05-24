@@ -12,6 +12,7 @@ import com.cursfundacionesplai.restasearch.adapters.RestaurantAdapter;
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
+import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -47,13 +48,13 @@ public class PreferitsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<RestaurantList> restaurantLists = new ArrayList<>();
+        ArrayList<RestaurantModel> restaurantLists = new ArrayList<>();
 
-        RestaurantList r = new RestaurantList();
+        RestaurantModel r = new RestaurantModel();
         r.setPlace_id("ChIJ0Q0yD9nmuhIRyG5UM2dyVxQ");
         r.setName("Rest test 1");
 
-        RestaurantList r2 = new RestaurantList();
+        RestaurantModel r2 = new RestaurantModel();
         r2.setPlace_id("ChIJn-TkqiHnuhIRWCxxLWqeJ14");
         r2.setName("Rest test 2");
 

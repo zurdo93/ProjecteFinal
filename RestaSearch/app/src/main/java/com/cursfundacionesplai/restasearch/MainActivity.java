@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     boolean initialMovementCamera = true;
     boolean restaurantOpen = false;
 
-    double[] radiusArray = {10000,20000,30000,40000,50000};
+    double[] radiusArray = {1000,5000,10000,20000,30000,40000,50000};
     int[] priceLevelArray = {1,2,3,4};
 
 
@@ -127,7 +127,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         getResources().getString(R.string.alert_distance_2),
                         getResources().getString(R.string.alert_distance_3),
                         getResources().getString(R.string.alert_distance_4),
-                        getResources().getString(R.string.alert_distance_5)};
+                        getResources().getString(R.string.alert_distance_5),
+                        getResources().getString(R.string.alert_distance_6),
+                        getResources().getString(R.string.alert_distance_7)};
                 alert.setItems(botons, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

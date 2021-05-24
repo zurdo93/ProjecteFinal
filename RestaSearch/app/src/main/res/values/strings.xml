@@ -44,11 +44,13 @@
     <string name="alert_price_2">Moderate</string>
     <string name="alert_price_3">Expensive</string>
     <string name="alert_price_4">Very Expensive</string>
-    <string name="alert_distance_1">10km</string>
-    <string name="alert_distance_2">20+km</string>
-    <string name="alert_distance_3">30+km</string>
-    <string name="alert_distance_4">40+km</string>
-    <string name="alert_distance_5">50+km</string>
+    <string name="alert_distance_1">1+km</string>
+    <string name="alert_distance_2">5+km</string>
+    <string name="alert_distance_3">10km</string>
+    <string name="alert_distance_4">20+km</string>
+    <string name="alert_distance_5">30+km</string>
+    <string name="alert_distance_6">40+km</string>
+    <string name="alert_distance_7">50+km</string>
 
     <string name="label_establiment_global_rating">Global rating: <b>%1$.1f</b></string>
     <string name="label_establiment_total_reviews">Number of reviews: <b>%1$d</b></string>
@@ -99,4 +101,5 @@
     <string name="privacy_title8_line1">The requirements of this Policy complement, and don’t replace any other requirement under the applicable data protection law, which will prevail in any case.</string>
     <string name="privacy_title8_line2">This Policy is subject to periodic reviews and the company can modify it at any time. When this occurs, we will notify you of any changes and ask you to reread the most recent version of our Policy and confirm your agreement. </string>
     <string name="button_back">back</string>
+
 </resources>

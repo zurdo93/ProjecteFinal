@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     float rating;
 
     boolean initialMovementCamera = true;
+    boolean isZoom = false;
     boolean restaurantOpen = false;
 
     double[] radiusArray = {1000,5000,10000,20000,30000,40000,50000};
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         radius = radiusArray[which];
+                        isZoom = true;
                         markRestaurant(true);
                     }
                 });
@@ -282,21 +284,30 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
          */
         int zoom;
 
-        //Todo: actualitzar el zoom
-        if(radius == 10000){
+        if (radius == 1000){
+            zoom = 13;
+        }
+        else if (radius == 5000 || radius == 10000){
+            zoom = 11;
+        }
+        else if (radius == 20000){
             zoom = 10;
         }
-        else if (radius == 20000 || radius == 30000){
+        else if (radius == 30000){
             zoom = 9;
+        }
+        else if (radius == 40000 || radius == 50000){
+            zoom = 8;
         }
         else{
             zoom = 8;
         }
 
-        if(isCamera){
+        if(isCamera || isZoom){
             mapsFragment.possitionCamera(possition, zoom);
         }
         wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
+        isZoom = false;
     }
 
     public void cleanFilter(){
@@ -316,8 +327,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         double lat = location.getLatitude();
         double lng = location.getLongitude();
         possition = new LatLng(lat, lng);
-        /*double latEnd = EndP.latitude;
-        double lngEnd = EndP.longitude;*/
 
         markRestaurant(initialMovementCamera);
         initialMovementCamera = false;

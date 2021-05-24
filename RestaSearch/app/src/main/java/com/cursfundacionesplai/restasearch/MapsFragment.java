@@ -125,7 +125,7 @@ public class MapsFragment extends Fragment {
         Circle circle = mMap.addCircle(
                 new CircleOptions()
                         .center(position)
-                        .radius(radius+12000)
+                        .radius(radius+1200)
                         .strokeWidth(3f)
                         .strokeColor(R.color.secondary_color)
                         .fillColor(getActivity().getResources().getColor(R.color.circle_color))

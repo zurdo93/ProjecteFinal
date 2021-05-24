@@ -35,14 +35,6 @@ public class WSHelper {
     ArrayList<RestaurantList> restaurants;
     DBHelper dbHelper;
 
-    /*
-    Todo: acabar de mirar si funciona tot correctament i que es mostrin bé els valors.
-    Me trobat amb problemes de que al buscar restaurantLists per un preu, la URL la fa correctament
-    però els resultats no coincideixen amb els restaurantLists que es mostren al mapa.
-
-    Todo: hem de reduir el radi de cerca per tal de buscar els restaurants que estiguin més a prop
-     */
-
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
         restaurants = new ArrayList<>();

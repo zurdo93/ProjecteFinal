@@ -27,6 +27,8 @@ import java.util.Map;
 public class WSHelper {
 
     private static String URL_BASE = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+    private static String URL_DETAILS = "https://maps.googleapis.com/maps/api/place/details/json?";
+    private static String API_KEY = "AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw";
 
     RequestQueue cuaPeticions;
     JsonArrayRequest jsonArrayRequest;
@@ -43,10 +45,6 @@ public class WSHelper {
     private static String STATUS_CODE_NOT_FOUND = "NOT_FOUND";
 
     /*
-    Todo: quan cliquem la valoració no es necessari tornar a buscar tots els restaurants.
-    El que es pot fer es netejar els markers que hi hagin posats i després agafar l'array de
-    restaurants que ja tenim i filtrar-los. Així no sobrecarreguem l'app amb moltes crides
-
     Todo: acabar de mirar si funciona tot correctament i que es mostrin bé els valors.
     Me trobat amb problemes de que al buscar restaurants per un preu, la URL la fa correctament
     però els resultats no coincideixen amb els restaurants que es mostren al mapa.
@@ -57,7 +55,7 @@ public class WSHelper {
         restaurants = new ArrayList<>();
     }
 
-    public void buscarRestaurants(LatLng possition,
+    public void buscarRestaurants(LatLng actualPossition,
                                   double radius,
                                   int priceLevel,
                                   boolean restaurantOpen,
@@ -70,14 +68,14 @@ public class WSHelper {
         String url;
         Map<String, Object> values = new HashMap<>();
 
-        values.put("location", possition.latitude+","+possition.longitude);
+        values.put("location", actualPossition.latitude+","+actualPossition.longitude);
         values.put("minprice", priceLevel);
         values.put("maxprice", priceLevel);
         values.put("type", "restaurant");
         values.put("keyword", "restaurant,food");
-        values.put("key","AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw");
+        values.put("key",API_KEY);
         values.put("radius", radius);
-        url = posarFiltre(values);
+        url = posarFiltre(values, URL_BASE);
 
         /*
         Aquesta és la crida que s'encarrega de buscar els restaurants i de mostrar-los al mapa
@@ -104,33 +102,7 @@ public class WSHelper {
                 }
 
                 //Netejem els markers que hi hagin i podem els dels restaurants
-                for(Restaurant restaurant : restaurants){
-                    LatLng possition = new LatLng(
-                            restaurant.getGeometry().getLocation().getLat(),
-                            restaurant.getGeometry().getLocation().getLng()
-                    );
-
-                    if(restaurantOpen) {
-                        if(restaurant.getOpening_hours().isOpen_now()) {
-                            if (rating != 0) {
-                                if(restaurant.getRating() >= rating){
-                                    mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
-                                }
-                            }
-                            else{
-                                mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
-                            }
-                        }
-                    }
-                    else if(rating != 0){
-                        if(restaurant.getRating() >= rating){
-                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
-                        }
-                    }
-                    else{
-                        mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), possition);
-                    }
-                }
+                showRestaurants(restaurants, actualPossition, radius, restaurantOpen, rating, mapsFragment);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -144,9 +116,15 @@ public class WSHelper {
 
     public void getEstablimentDetails(String placeId, CustomResponse.EstablimentDetail listener) {
 
-        String key = "AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw";
+
         String fields = "business_status,opening_hours,review,photo,user_ratings_total,price_level,rating,formatted_address,international_phone_number,name";
-        String url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + placeId + "&fields=" + fields + "&language=es&key=" + key;
+
+        Map<String, Object> values = new HashMap<>();
+        values.put("key", API_KEY);
+        values.put("place_id", placeId);
+        values.put("fields", fields);
+
+        String url = posarFiltre(values, URL_DETAILS);
 
         jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
@@ -183,12 +161,46 @@ public class WSHelper {
         cuaPeticions.add(jsonObjectRequest);
     }
 
-    private String posarFiltre(Map<String, Object> values){
+    public void showRestaurants(LatLng possition, double radius, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
+        showRestaurants(restaurants, possition, radius, restaurantOpen, rating, mapsFragment);
+    }
+
+    private void showRestaurants(ArrayList<Restaurant> restaurantsList, LatLng actualPossition, double radius, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
+        mapsFragment.afegirCercle(actualPossition, radius);
+        for(Restaurant restaurant : restaurantsList){
+            LatLng restaurantPossition = new LatLng(
+                    restaurant.getGeometry().getLocation().getLat(),
+                    restaurant.getGeometry().getLocation().getLng()
+            );
+
+            if(restaurantOpen) {
+                if(restaurant.getOpening_hours().isOpen_now()) {
+                    if (rating != 0) {
+                        if(restaurant.getRating() >= rating){
+                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+                        }
+                    }
+                    else{
+                        mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+                    }
+                }
+            }
+            else if(rating != 0){
+                if(restaurant.getRating() >= rating){
+                    mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+                }
+            }
+            else{
+                mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+            }
+        }
+    }
+
+    private String posarFiltre(Map<String, Object> values, String url){
         /*
         Aquesta funció s'encarrega de crear-nos la url. El que fa es per cada entrada que hi hagi
         en el map ens afaga la key i el valor i ens el va afegint
          */
-        String url = URL_BASE;
         boolean first = true;
         for(Map.Entry<String, Object> entry : values.entrySet()){
 

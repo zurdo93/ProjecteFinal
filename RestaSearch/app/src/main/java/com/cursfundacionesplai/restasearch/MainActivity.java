@@ -177,10 +177,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         rating = ratingBar.getRating();
-                        markRestaurant(true);
-
-                        /*String rating = getResources().getString(R.string.alert_rating_stars) + ratingBar.getRating();
-                        Toast.makeText(getApplicationContext(), "\n" + rating, Toast.LENGTH_LONG).show();*/
+                        wsHelper.showRestaurants(possition, radius, restaurantOpen, rating, mapsFragment);
                     }
                 });
                 alert.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
@@ -205,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 restaurantOpen = isChecked;
-                wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
+                wsHelper.showRestaurants(possition, radius, restaurantOpen, rating, mapsFragment);
             }
         });
         //endregion
@@ -295,7 +292,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if(isCamera){
             mapsFragment.possitionCamera(possition, zoom);
         }
-        mapsFragment.afegirCercle(possition,radius);
         wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
     }
 
@@ -303,6 +299,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         radius = 10000;
         priceLevel = 1;
         rating = 0;
+        if(swtRestaurantOpened.isChecked()){
+            swtRestaurantOpened.setChecked(false);
+        }
     }
 
     @Override

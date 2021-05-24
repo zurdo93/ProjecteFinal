@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     double[] radiusArray = {10000,20000,30000,40000,50000};
     int[] priceLevelArray = {1,2,3,4};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -334,4 +335,5 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     }
     //endregion
+
 }

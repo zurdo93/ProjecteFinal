@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 
 public class EstablimentDialog extends DialogFragment {
 
+    boolean checked = false;
+
     public static final String TAG = "establiment_dialog";
 
     // Elements de vista
@@ -66,13 +68,20 @@ public class EstablimentDialog extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         toolbar.setNavigationOnClickListener(v -> dismiss());
         toolbar.setTitle(placeName);
-        /*toolbar.inflateMenu(R.menu.example_dialog);
+        toolbar.inflateMenu(R.menu.example_dialog);
         toolbar.setOnMenuItemClickListener(item -> {
-            dismiss();
+            checked = !checked;
+            if (checked){
+                item.setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
+            }
+            else{
+                item.setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
+            }
             return true;
-        });*/
+        });
 
         getChildFragmentManager().beginTransaction().replace(R.id.linear_layout, EstablimentFragment.newInstance(placeId)).commit();
     }

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.cursfundacionesplai.restasearch.adapters.RestaurantAdapter;
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
+import com.cursfundacionesplai.restasearch.helpers.WSHelper;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.material.navigation.NavigationView;
@@ -61,7 +62,9 @@ public class PreferitsActivity extends AppCompatActivity {
         restaurants.add(r);
         restaurants.add(r2);
 
-        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurants);
+        WSHelper wsh = new WSHelper(this);
+
+        RestaurantAdapter adapter = new RestaurantAdapter(this, wsh, restaurants);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));

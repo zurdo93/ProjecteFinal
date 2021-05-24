@@ -55,7 +55,7 @@ public class EstablimentFragment extends Fragment {
 
         new WSHelper(getContext()).getEstablimentDetails(placeId, new CustomResponse.EstablimentDetail() {
             @Override
-            public void onResponse(RestaurantModel r) {
+            public void onEstablimentResponse(RestaurantModel r) {
                 if (r != null) {
                     labelAddress.setText(r.getFormatted_address());
                     labelPhoneNumber.setText(r.getInternational_phone_number());

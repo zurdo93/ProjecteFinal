@@ -52,8 +52,8 @@
     <string name="alert_distance_6">40+km</string>
     <string name="alert_distance_7">50+km</string>
 
-    <string name="label_establiment_global_rating">Global rating: <b>%1$.1f</b></string>
-    <string name="label_establiment_total_reviews">Number of reviews: <b>%1$d</b></string>
+    <string name="label_establiment_global_rating">Rating: <b>%1$.1f</b></string>
+    <string name="label_establiment_total_reviews">Reviews: <b>%1$d</b></string>
     <string name="label_establiment_loading">Loading data</string>
 
     <string name="button_accept_policy">Accept</string>

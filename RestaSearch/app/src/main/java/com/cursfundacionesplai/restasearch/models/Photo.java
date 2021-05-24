@@ -46,4 +46,8 @@ public class Photo {
     public void setWidth(Integer width) {
         this.width = width;
     }
+
+    public String buildUrl() {
+        return String.format("%sphotoreference=%s&maxheight=%s&maxwidth=%s&key=%s", Keys.URL_PHOTO, photo_reference, height, width, Keys.API_KEY);
+    }
 }

@@ -15,6 +15,7 @@ import com.cursfundacionesplai.restasearch.adapters.RestaurantAdapter;
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.DBHelper;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
+import com.cursfundacionesplai.restasearch.helpers.WSHelper;
 import com.cursfundacionesplai.restasearch.models.Keys;
 import com.cursfundacionesplai.restasearch.models.Photo;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
@@ -63,7 +64,9 @@ public class HistorialActivity extends AppCompatActivity {
 
         restaurants = dbh.getRestaurantsHistoric();
 
-        adapter = new RestaurantAdapter(this, restaurants);
+        WSHelper wsh = new WSHelper(this);
+
+        adapter = new RestaurantAdapter(this, wsh, restaurants);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));

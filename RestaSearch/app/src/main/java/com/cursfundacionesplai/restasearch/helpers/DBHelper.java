@@ -227,6 +227,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 model.setName(c.getString(4));
                 model.setUser_ratings_total(c.getInt(5));
 
+                String args2[] = {model.getPlace_id()};
+                Cursor c2 = db.rawQuery("SELECT height, photo_reference, width FROM photos WHERE places_id = ? LIMIT 1", args2);
+
+                if (c2.moveToFirst()) {
+                    Photo photo = new Photo(c2.getInt(0), null, c2.getString(1), c2.getInt(2));
+                    model.setPhotos(new ArrayList<>(Arrays.asList(photo)));
+                }
+
                 list.add(model);
             } while (c.moveToNext());
         }

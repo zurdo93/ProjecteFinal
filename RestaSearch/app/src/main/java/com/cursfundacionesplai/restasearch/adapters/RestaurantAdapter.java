@@ -2,6 +2,7 @@ package com.cursfundacionesplai.restasearch.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cursfundacionesplai.restasearch.EstablimentDetailActivity;
 import com.cursfundacionesplai.restasearch.R;
+import com.cursfundacionesplai.restasearch.helpers.WSHelper;
+import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
+import com.cursfundacionesplai.restasearch.models.Keys;
+import com.cursfundacionesplai.restasearch.models.Photo;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
     private Context context;
+    private WSHelper helper;
     private ArrayList<RestaurantModel> restaurantLists;
 
-    public RestaurantAdapter(Context context, ArrayList<RestaurantModel> restaurantLists) {
+    public RestaurantAdapter(Context context, WSHelper helper, ArrayList<RestaurantModel> restaurantLists) {
         this.context = context;
+        this.helper = helper;
         this.restaurantLists = restaurantLists;
     }
 
@@ -40,10 +48,24 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         RestaurantModel r = restaurantLists.get(position);
 
+        String address = "";
+
+        if (r.getFormatted_address().length() > 25) {
+            address = String.format("%s...", r.getFormatted_address().substring(0, 25));
+        } else {
+            address = r.getFormatted_address();
+        }
+
         holder.name.setText(r.getName());
-        holder.address.setText(r.getFormatted_address());
-        holder.rating.setText(r.getRating()+"");
-        holder.reviews.setText(r.getUser_ratings_total()+"");
+        holder.address.setText(address);
+        holder.rating.setText(context.getResources().getString(R.string.label_establiment_global_rating, r.getRating()));
+        holder.reviews.setText(context.getResources().getString(R.string.label_establiment_total_reviews, r.getUser_ratings_total()));
+
+        ArrayList<Photo> photos = r.getPhotos();
+
+        if (photos != null && photos.size() > 0) {
+            Picasso.get().load(photos.get(0).buildUrl()).into(holder.photo);
+        }
     }
 
     @Override

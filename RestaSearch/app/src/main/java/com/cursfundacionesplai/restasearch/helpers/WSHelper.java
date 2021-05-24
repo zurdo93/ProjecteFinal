@@ -11,6 +11,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cursfundacionesplai.restasearch.MapsFragment;
 import com.cursfundacionesplai.restasearch.models.Keys;
+import com.cursfundacionesplai.restasearch.models.Photo;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
@@ -130,17 +131,18 @@ public class WSHelper {
                         RestaurantModel restaurant = gson.fromJson(String.valueOf(result),RestaurantModel.class);
                         dbHelper.insertRestaurantHistorial(restaurant);
 
-                        listener.onResponse(restaurant);
+                        listener.onEstablimentResponse(restaurant);
                     }
                 } catch (JSONException e) {
                     Log.d("RESTASEARCH", "onErrorResponse: " + e.getMessage());
+                    listener.onEstablimentResponse(null);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("RESTASEARCH", "onErrorResponse: " + error.getMessage());
-                listener.onResponse(null);
+                listener.onEstablimentResponse(null);
             }
         });
 

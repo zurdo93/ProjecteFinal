@@ -15,6 +15,7 @@ public abstract class Keys {
     //URLS
     public final static String URL_BASE = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
     public final static String URL_DETAILS = "https://maps.googleapis.com/maps/api/place/details/json?";
+    public final static String URL_PHOTO = "https://maps.googleapis.com/maps/api/place/photo?";
     public final static String API_KEY = "AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw";
 
     public final static String STATUS_CODE_OK = "OK";

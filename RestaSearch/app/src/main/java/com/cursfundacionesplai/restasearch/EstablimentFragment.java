@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
 import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
+import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,10 +55,10 @@ public class EstablimentFragment extends Fragment {
 
         new WSHelper(getContext()).getEstablimentDetails(placeId, new CustomResponse.EstablimentDetail() {
             @Override
-            public void onResponse(RestaurantList r) {
+            public void onResponse(RestaurantModel r) {
                 if (r != null) {
-                    labelAddress.setText(r.getFormattedAdress());
-                    labelPhoneNumber.setText(r.getInternationalPhoneNumber());
+                    labelAddress.setText(r.getFormatted_address());
+                    labelPhoneNumber.setText(r.getInternational_phone_number());
                     labelRating.setText(getResources().getString(R.string.label_establiment_global_rating, r.getRating()));
                     labelReviews.setText(getResources().getString(R.string.label_establiment_total_reviews, r.getUser_ratings_total()));
 

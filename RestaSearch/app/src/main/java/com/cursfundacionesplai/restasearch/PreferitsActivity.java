@@ -47,7 +47,7 @@ public class PreferitsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<RestaurantList> restaurantLists = new ArrayList<>();
+        ArrayList<RestaurantList> restaurants = new ArrayList<>();
 
         RestaurantList r = new RestaurantList();
         r.setPlace_id("ChIJ0Q0yD9nmuhIRyG5UM2dyVxQ");
@@ -57,10 +57,10 @@ public class PreferitsActivity extends AppCompatActivity {
         r2.setPlace_id("ChIJn-TkqiHnuhIRWCxxLWqeJ14");
         r2.setName("Rest test 2");
 
-        restaurantLists.add(r);
-        restaurantLists.add(r2);
+        restaurants.add(r);
+        restaurants.add(r2);
 
-        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantLists);
+        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurants);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));

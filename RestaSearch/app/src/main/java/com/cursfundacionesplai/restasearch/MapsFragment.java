@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cursfundacionesplai.restasearch.helpers.DBHelper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,7 +27,6 @@ public class MapsFragment extends Fragment {
 
     GoogleMap mMap;
     Context context;
-    DBHelper dbHelper;
 
     private HashMap<String, String> keys;
 

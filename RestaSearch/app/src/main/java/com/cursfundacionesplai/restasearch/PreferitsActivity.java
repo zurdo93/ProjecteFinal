@@ -11,11 +11,10 @@ import android.view.MenuItem;
 import com.cursfundacionesplai.restasearch.adapters.RestaurantAdapter;
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
-import com.cursfundacionesplai.restasearch.models.Restaurant;
+import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PreferitsActivity extends AppCompatActivity {
 
@@ -48,20 +47,20 @@ public class PreferitsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<Restaurant> restaurants = new ArrayList<>();
+        ArrayList<RestaurantList> restaurantLists = new ArrayList<>();
 
-        Restaurant r = new Restaurant();
+        RestaurantList r = new RestaurantList();
         r.setPlace_id("ChIJ0Q0yD9nmuhIRyG5UM2dyVxQ");
         r.setName("Rest test 1");
 
-        Restaurant r2 = new Restaurant();
+        RestaurantList r2 = new RestaurantList();
         r2.setPlace_id("ChIJn-TkqiHnuhIRWCxxLWqeJ14");
         r2.setName("Rest test 2");
 
-        restaurants.add(r);
-        restaurants.add(r2);
+        restaurantLists.add(r);
+        restaurantLists.add(r2);
 
-        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurants);
+        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantLists);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));

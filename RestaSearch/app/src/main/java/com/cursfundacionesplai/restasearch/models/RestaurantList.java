@@ -2,12 +2,12 @@ package com.cursfundacionesplai.restasearch.models;
 
 import java.util.ArrayList;
 
-public class Restaurant {
+public class RestaurantList {
     private String business_status;
     private Geometry geometry;
     private String icon;
     private String name;
-    private OpeningHours opening_hours;
+    private OpeningHour opening_hours;
     private ArrayList<Photo> photos;
     private String place_id;
     private PlusCode plus_code;
@@ -37,29 +37,29 @@ public class Restaurant {
         this.internationalPhoneNumber = internationalPhoneNumber;
     }
 
-    public Restaurant() {
+    public RestaurantList() {
     }
 
-    public Restaurant(String business_status,
-                      Geometry geometry,
-                      String icon,
-                      String name,
-                      OpeningHours openingHours,
-                      ArrayList<Photo> photos,
-                      String placesId,
-                      PlusCode plusCode,
-                      int priceLevel,
-                      double rating,
-                      String reference,
-                      String scope,
-                      ArrayList<String> types,
-                      int userRatingsTotal,
-                      String vicinity) {
+    public RestaurantList(String business_status,
+                          Geometry geometry,
+                          String icon,
+                          String name,
+                          OpeningHour openingHour,
+                          ArrayList<Photo> photos,
+                          String placesId,
+                          PlusCode plusCode,
+                          int priceLevel,
+                          double rating,
+                          String reference,
+                          String scope,
+                          ArrayList<String> types,
+                          int userRatingsTotal,
+                          String vicinity) {
         this.business_status = business_status;
         this.geometry = geometry;
         this.icon = icon;
         this.name = name;
-        this.opening_hours = openingHours;
+        this.opening_hours = openingHour;
         this.photos = photos;
         this.place_id = placesId;
         this.plus_code = plusCode;
@@ -104,11 +104,11 @@ public class Restaurant {
         this.name = name;
     }
 
-    public OpeningHours getOpening_hours() {
+    public OpeningHour getOpening_hours() {
         return opening_hours;
     }
 
-    public void setOpening_hours(OpeningHours opening_hours) {
+    public void setOpening_hours(OpeningHour opening_hours) {
         this.opening_hours = opening_hours;
     }
 

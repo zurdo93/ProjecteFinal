@@ -8,23 +8,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cursfundacionesplai.restasearch.EstablimentDetailActivity;
 import com.cursfundacionesplai.restasearch.R;
-import com.cursfundacionesplai.restasearch.models.Restaurant;
+import com.cursfundacionesplai.restasearch.models.RestaurantList;
 
 import java.util.ArrayList;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Restaurant> restaurants;
+    private ArrayList<RestaurantList> restaurantLists;
 
-    public RestaurantAdapter(Context context, ArrayList<Restaurant> restaurants) {
+    public RestaurantAdapter(Context context, ArrayList<RestaurantList> restaurantLists) {
         this.context = context;
-        this.restaurants = restaurants;
+        this.restaurantLists = restaurantLists;
     }
 
     @Override
@@ -38,7 +37,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     @Override
     public void onBindViewHolder(RestaurantAdapter.ViewHolder holder, int position) {
 
-        Restaurant r = restaurants.get(position);
+        RestaurantList r = restaurantLists.get(position);
 
         holder.name.setText(r.getName());
 
@@ -46,7 +45,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return restaurantLists.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -72,7 +71,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, EstablimentDetailActivity.class);
-                    intent.putExtra("place_id", restaurants.get(getAdapterPosition()).getPlace_id());
+                    intent.putExtra("place_id", restaurantLists.get(getAdapterPosition()).getPlace_id());
 
                     context.startActivity(intent);
                 }

@@ -42,6 +42,9 @@ public class HistorialActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_historial);
 
+        Bundle extras = getIntent().getExtras();
+        setTitle(extras.getString("titol"));
+
         list = findViewById(R.id.list);
 
         toolbarEx = new ToolbarEx(this,

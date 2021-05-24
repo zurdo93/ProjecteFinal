@@ -121,7 +121,7 @@ public class WSHelper {
                         JSONObject result = response.getJSONObject("result");
 
                         RestaurantModel restaurant = gson.fromJson(String.valueOf(result),RestaurantModel.class);
-                        dbHelper.insertRestaurantHistorial(restaurant);
+                        dbHelper.insertHistorial(restaurant);
 
                         listener.onEstablimentResponse(restaurant);
                     }

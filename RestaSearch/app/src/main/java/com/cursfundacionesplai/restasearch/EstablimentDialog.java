@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.cursfundacionesplai.restasearch.helpers.DBHelper;
+import com.cursfundacionesplai.restasearch.models.Keys;
+
 public class EstablimentDialog extends DialogFragment {
 
     boolean checked = false;
@@ -76,9 +79,11 @@ public class EstablimentDialog extends DialogFragment {
             checked = !checked;
             if (checked){
                 item.setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
+                new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION).insertFavourites(placeId);
             }
             else{
                 item.setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
+                new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION).deleteFavourites(placeId);
             }
             return true;
         });

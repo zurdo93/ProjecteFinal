@@ -61,13 +61,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertRestaurantHistorial(RestaurantModel restaurant){
-        Log.d("RESTASEARCH", "s'ha fet un insert a la taula historial");
+    public void insertHistorial(RestaurantModel restaurant){
 
         database = this.getReadableDatabase();
 
-        //Todo: aqui hem de mirar si el restaurant que ens passen ja esta dins la base de dades.
-        // Si es aixi, no l'haurem d'insertar.
         cursor = database.rawQuery("" +
                 "SELECT * " +
                 "FROM historial " +
@@ -124,35 +121,63 @@ public class DBHelper extends SQLiteOpenHelper {
             Log.d("NIL", "Error al llegir les dades del select. Error: " + e.getMessage());
         }
 
-        return true;
+        Log.d("RESTASEARCH", "s'ha fet un insert a la taula historial");
     }
 
-    public void insertRestaurantFavourites(String places_id){
-        Log.d("RESTASEARCH", "s'ha fet un insert a la taula favourites");
+    public void insertFavourites(String places_id){
 
-        database = this.getWritableDatabase();
+        database = this.getReadableDatabase();
+
         cursor = database.rawQuery("" +
-                "SELECT places_id, rating, address, price_level, name, user_ratings_total " +
-                "FROM historial " +
-                "WHERE places_id == '" + places_id + "'", null);
-
-        double rating = 0;
-        String address = "";
-        int price_level = 0;
-        String name = "";
-        int user_ratings_total = 0;
+                "SELECT * " +
+                "FROM favourites " +
+                "WHERE places_id = '" + places_id + "'", null);
 
         try {
-            if(cursor.moveToFirst()){
-                do{
-                    rating = cursor.getDouble(1);
-                    address = cursor.getString(2);
-                    price_level = cursor.getInt(3);
-                    name = cursor.getString(4);
-                    user_ratings_total = cursor.getInt(5);
-                    Log.d("NIL","Rating: " + rating + ", Address " + address + ", Price Level: " + price_level  + ", Name " + name + ", User ratings total " + user_ratings_total);
+            if(!cursor.moveToFirst()){
+
+                cursor = database.rawQuery("" +
+                        "SELECT rating, address, price_level, name, user_ratings_total " +
+                        "FROM historial " +
+                        "WHERE places_id = '" + places_id + "'", null);
+
+                if(cursor.moveToFirst()){
+                    double rating = 0;
+                    String address = "";
+                    int price_level = 0;
+                    String name = "";
+                    int user_ratings_total = 0;
+
+                    do{
+                        rating = cursor.getDouble(0);
+                        address = cursor.getString(1);
+                        price_level = cursor.getInt(2);
+                        name = cursor.getString(3);
+                        user_ratings_total = cursor.getInt(4);
+                        Log.d("NIL","Rating: " + rating + ", Address " + address + ", Price Level: " + price_level  + ", Name " + name + ", User ratings total " + user_ratings_total);
+                    }
+                    while (cursor.moveToNext());
+
+                    database.execSQL(
+                            "INSERT INTO favourites(" +
+                                    "places_id, rating, " +
+                                    "address, price_level, " +
+                                    "name, user_ratings_total) " +
+                                    "VALUES(" +
+                                    ":places_id, :rating," +
+                                    ":address, :price_level," +
+                                    ":name, :user_ratings_total)",
+                            new Object[]{
+                                    places_id,
+                                    rating,
+                                    address,
+                                    price_level,
+                                    name,
+                                    user_ratings_total
+                            });
+
+                    database.close();
                 }
-                while (cursor.moveToNext());
             }
             else{
                 Log.d("NIL", "No hi han dades a la base de dades");
@@ -162,48 +187,19 @@ public class DBHelper extends SQLiteOpenHelper {
             Log.d("NIL", "Error al llegir les dades del select. Error: " + e.getMessage());
         }
 
+        Log.d("RESTASEARCH", "s'ha fet un insert a la taula favourites");
+    }
 
-        //Todo: aqui hem de mirar si el restaurant que ens passen ja esta dins la base de dades.
-        // Si es aixi, no l'haurem d'insertar.
+    public void deleteFavourites(String places_id){
+        database = this.getWritableDatabase();
 
-        database.execSQL(
-                "INSERT INTO favourites(" +
-                        "places_id, rating, " +
-                        "address, price_level, " +
-                        "name, user_ratings_total) " +
-                        "VALUES(" +
-                        ":places_id, :rating," +
-                        ":address, :price_level," +
-                        ":name, :user_ratings_total)",
-                new Object[]{
-                        places_id,
-                        rating,
-                        address,
-                        price_level,
-                        name,
-                        user_ratings_total
-                });
+        database.execSQL("" +
+                "DELETE FROM favourites " +
+                "WHERE places_id = '" + places_id + "'");
 
-        /*for (Photo photo : restaurant.getPhotos()){
-            database.execSQL("" +
-                            "INSERT INTO photos(" +
-                            "places_id, height," +
-                            "html_attributions," +
-                            "photo_reference," +
-                            "width)" +
-                            "VALUES(" +
-                            ":places_id, :height," +
-                            ":html_attributions," +
-                            ":photo_reference," +
-                            ":width)",
-                    new Object[]{
-                            restaurant.getPlace_id(),
-                            photo.getHeight(),
-                            photo.getHtml_attributions().get(0),
-                            photo.getPhoto_reference(),
-                            photo.getWidth()
-                    });
-        }*/
+        database.close();
+
+        Log.d("RESTASEARCH", "s'ha fet un delete a la taula favourites");
     }
 
     public ArrayList<RestaurantModel> getRestaurantsHistoric() {

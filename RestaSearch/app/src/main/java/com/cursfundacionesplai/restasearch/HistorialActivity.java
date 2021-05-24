@@ -17,6 +17,7 @@ import com.cursfundacionesplai.restasearch.helpers.DBHelper;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 import com.cursfundacionesplai.restasearch.models.Keys;
 import com.cursfundacionesplai.restasearch.models.Photo;
+import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,9 +41,6 @@ public class HistorialActivity extends AppCompatActivity {
         LanguageHelper.loadSavedLanguage(this);
 
         setContentView(R.layout.activity_historial);
-
-        Bundle extras = getIntent().getExtras();
-        setTitle(extras.getString("titol"));
 
         list = findViewById(R.id.list);
 

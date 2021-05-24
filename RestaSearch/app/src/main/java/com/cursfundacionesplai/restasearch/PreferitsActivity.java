@@ -48,13 +48,13 @@ public class PreferitsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<RestaurantList> restaurants = new ArrayList<>();
+        ArrayList<RestaurantModel> restaurants = new ArrayList<>();
 
-        RestaurantList r = new RestaurantList();
+        RestaurantModel r = new RestaurantModel();
         r.setPlace_id("ChIJ0Q0yD9nmuhIRyG5UM2dyVxQ");
         r.setName("Rest test 1");
 
-        RestaurantList r2 = new RestaurantList();
+        RestaurantModel r2 = new RestaurantModel();
         r2.setPlace_id("ChIJn-TkqiHnuhIRWCxxLWqeJ14");
         r2.setName("Rest test 2");
 

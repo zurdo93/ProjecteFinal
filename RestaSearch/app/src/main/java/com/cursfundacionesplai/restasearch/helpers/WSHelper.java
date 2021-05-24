@@ -10,6 +10,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cursfundacionesplai.restasearch.MapsFragment;
+import com.cursfundacionesplai.restasearch.models.Keys;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
@@ -27,24 +28,12 @@ import java.util.Map;
 
 public class WSHelper {
 
-    private static String URL_BASE = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-    private static String URL_DETAILS = "https://maps.googleapis.com/maps/api/place/details/json?";
-    private static String API_KEY = "AIzaSyAH53nRGennl8oBDVBPMx1AhhWO5Kb9Ohw";
-
     RequestQueue cuaPeticions;
     JsonArrayRequest jsonArrayRequest;
     JsonObjectRequest jsonObjectRequest;
 
     ArrayList<RestaurantList> restaurants;
     DBHelper dbHelper;
-
-    private static String STATUS_CODE_OK = "OK";
-    private static String STATUS_CODE_UNKNOWN_ERROR = "UNKNOWN_ERROR";
-    private static String STATUS_CODE_ZERO_RESULTS = "ZERO_RESULTS";
-    private static String STATUS_CODE_OVER_QUERY_LIMIT = "OVER_QUERY_LIMIT";
-    private static String STATUS_CODE_REQUEST_DENIED = "REQUEST_DENIED";
-    private static String STATUS_CODE_INVALID_REQUEST = "INVALID_REQUEST";
-    private static String STATUS_CODE_NOT_FOUND = "NOT_FOUND";
 
     /*
     Todo: acabar de mirar si funciona tot correctament i que es mostrin bé els valors.
@@ -57,7 +46,7 @@ public class WSHelper {
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
         restaurants = new ArrayList<>();
-        dbHelper = new DBHelper(context,"restaurants",null,1);
+        dbHelper = new DBHelper(context, Keys.DATABASE_NAME,null,Keys.DATABASE_VERSION);
     }
 
     public void buscarRestaurants(LatLng actualPossition,
@@ -78,9 +67,9 @@ public class WSHelper {
         values.put("maxprice", priceLevel);
         values.put("type", "restaurant");
         values.put("keyword", "restaurant,food");
-        values.put("key",API_KEY);
+        values.put("key",Keys.API_KEY);
         values.put("radius", radius);
-        url = posarFiltre(values, URL_BASE);
+        url = posarFiltre(values, Keys.URL_BASE);
 
         /*
         Aquesta és la crida que s'encarrega de buscar els restaurantLists i de mostrar-los al mapa
@@ -92,7 +81,7 @@ public class WSHelper {
 
                 try {
                     //Mirem que el status sigui OK
-                    if(response.getString("status").equals(STATUS_CODE_OK)){
+                    if(response.getString("status").equals(Keys.STATUS_CODE_OK)){
                         Log.d("RESTASEARCH", "Restaurants rebuts");
 
                         //Agafem l'array de results i el convertim a una array de restaurantLists i els guardem
@@ -122,17 +111,17 @@ public class WSHelper {
     public void getEstablimentDetails(String placeId, CustomResponse.EstablimentDetail listener) {
 
         Map<String, Object> values = new HashMap<>();
-        values.put("key", API_KEY);
+        values.put("key", Keys.API_KEY);
         values.put("place_id", placeId);
 
-        String url = posarFiltre(values, URL_DETAILS);
+        String url = posarFiltre(values, Keys.URL_DETAILS);
 
         jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getString("status").equals(STATUS_CODE_OK)) {
+                    if (response.getString("status").equals(Keys.STATUS_CODE_OK)) {
 
                         Log.d("RESTASEARCH", "onResponse: getting results");
                         Gson gson = new Gson();

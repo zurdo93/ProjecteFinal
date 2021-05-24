@@ -69,7 +69,7 @@ public class PoliticaActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("miki", "onClick: ");
+                Log.d("RESTASEARCH", "onClick: ");
                 boolean isChecked = checkPolicy.isChecked();
                 if (isChecked) {
                     editor.putBoolean(Keys.PREFS_SAVE_POLICY, true);

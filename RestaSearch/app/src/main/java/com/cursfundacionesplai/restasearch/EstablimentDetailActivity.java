@@ -14,7 +14,7 @@ public class EstablimentDetailActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        Log.d("miki", "onCreate: " + bundle.getString("place_id"));
+        Log.d("RESTASEARCH", "onCreate: " + bundle.getString("place_id"));
 
         EstablimentFragment fragment = EstablimentFragment.newInstance(bundle.getString("place_id"));
 

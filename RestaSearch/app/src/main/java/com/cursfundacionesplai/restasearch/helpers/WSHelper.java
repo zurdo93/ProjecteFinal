@@ -120,12 +120,10 @@ public class WSHelper {
     }
 
     public void getEstablimentDetails(String placeId, CustomResponse.EstablimentDetail listener) {
-        String fields = "business_status,opening_hours,review,photo,user_ratings_total,price_level,rating,formatted_address,international_phone_number,name";
 
         Map<String, Object> values = new HashMap<>();
         values.put("key", API_KEY);
         values.put("place_id", placeId);
-        values.put("fields", fields);
 
         String url = posarFiltre(values, URL_DETAILS);
 
@@ -146,13 +144,13 @@ public class WSHelper {
                         listener.onResponse(restaurant);
                     }
                 } catch (JSONException e) {
-                    Log.d("miki", "onErrorResponse: " + e.getMessage());
+                    Log.d("RESTASEARCH", "onErrorResponse: " + e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("miki", "onErrorResponse: " + error.getMessage());
+                Log.d("RESTASEARCH", "onErrorResponse: " + error.getMessage());
                 listener.onResponse(null);
             }
         });

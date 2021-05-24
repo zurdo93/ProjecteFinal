@@ -48,20 +48,20 @@ public class PreferitsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<RestaurantModel> restaurantLists = new ArrayList<>();
+        ArrayList<RestaurantList> restaurants = new ArrayList<>();
 
-        RestaurantModel r = new RestaurantModel();
+        RestaurantList r = new RestaurantList();
         r.setPlace_id("ChIJ0Q0yD9nmuhIRyG5UM2dyVxQ");
         r.setName("Rest test 1");
 
-        RestaurantModel r2 = new RestaurantModel();
+        RestaurantList r2 = new RestaurantList();
         r2.setPlace_id("ChIJn-TkqiHnuhIRWCxxLWqeJ14");
         r2.setName("Rest test 2");
 
-        restaurantLists.add(r);
-        restaurantLists.add(r2);
+        restaurants.add(r);
+        restaurants.add(r2);
 
-        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurantLists);
+        RestaurantAdapter adapter = new RestaurantAdapter(this, restaurants);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));

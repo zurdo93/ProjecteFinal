@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<RestaurantModel> restaurantLists;
+    private ArrayList<RestaurantList> restaurantLists;
 
-    public RestaurantAdapter(Context context, ArrayList<RestaurantModel> restaurantLists) {
+    public RestaurantAdapter(Context context, ArrayList<RestaurantList> restaurantLists) {
         this.context = context;
         this.restaurantLists = restaurantLists;
     }
@@ -38,7 +38,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     @Override
     public void onBindViewHolder(RestaurantAdapter.ViewHolder holder, int position) {
 
-        RestaurantModel r = restaurantLists.get(position);
+        RestaurantList r = restaurantLists.get(position);
 
         holder.name.setText(r.getName());
 

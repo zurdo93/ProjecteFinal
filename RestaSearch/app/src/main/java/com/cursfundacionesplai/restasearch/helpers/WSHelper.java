@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.cursfundacionesplai.restasearch.MapsFragment;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
+import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -34,7 +35,8 @@ public class WSHelper {
     JsonArrayRequest jsonArrayRequest;
     JsonObjectRequest jsonObjectRequest;
 
-    ArrayList<RestaurantList> restaurantLists;
+    ArrayList<RestaurantList> restaurants;
+    DBHelper dbHelper;
 
     private static String STATUS_CODE_OK = "OK";
     private static String STATUS_CODE_UNKNOWN_ERROR = "UNKNOWN_ERROR";
@@ -48,11 +50,14 @@ public class WSHelper {
     Todo: acabar de mirar si funciona tot correctament i que es mostrin bé els valors.
     Me trobat amb problemes de que al buscar restaurantLists per un preu, la URL la fa correctament
     però els resultats no coincideixen amb els restaurantLists que es mostren al mapa.
+
+    Todo: hem de reduir el radi de cerca per tal de buscar els restaurants que estiguin més a prop
      */
 
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
-        restaurantLists = new ArrayList<>();
+        restaurants = new ArrayList<>();
+        dbHelper = new DBHelper(context,"restaurants",null,1);
     }
 
     public void buscarRestaurants(LatLng actualPossition,
@@ -93,8 +98,8 @@ public class WSHelper {
                         //Agafem l'array de results i el convertim a una array de restaurantLists i els guardem
                         JSONArray result = response.getJSONArray("results");
                         ArrayList<RestaurantList> results = new ArrayList<>(Arrays.asList(gson.fromJson(String.valueOf(result), RestaurantList[].class)));
-                        restaurantLists.clear();
-                        restaurantLists.addAll(results);
+                        restaurants.clear();
+                        restaurants.addAll(results);
                     }
                     //Todo: falta tindre en compte els altres STATUS_CODE
                 } catch (JSONException e) {
@@ -102,7 +107,7 @@ public class WSHelper {
                 }
 
                 //Netejem els markers que hi hagin i podem els dels restaurantLists
-                showRestaurants(restaurantLists, actualPossition, radius, restaurantOpen, rating, mapsFragment);
+                showRestaurants(restaurants, actualPossition, radius, restaurantOpen, rating, mapsFragment);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -115,8 +120,6 @@ public class WSHelper {
     }
 
     public void getEstablimentDetails(String placeId, CustomResponse.EstablimentDetail listener) {
-
-
         String fields = "business_status,opening_hours,review,photo,user_ratings_total,price_level,rating,formatted_address,international_phone_number,name";
 
         Map<String, Object> values = new HashMap<>();
@@ -131,20 +134,16 @@ public class WSHelper {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getString("status").equals("OK")) {
+                    if (response.getString("status").equals(STATUS_CODE_OK)) {
 
-                        Log.d("miki", "onResponse: getting results");
-
+                        Log.d("RESTASEARCH", "onResponse: getting results");
+                        Gson gson = new Gson();
                         JSONObject result = response.getJSONObject("result");
 
-                        RestaurantList r = new RestaurantList();
-                        r.setName(result.getString("name"));
-                        r.setFormattedAdress(result.getString("formatted_address"));
-                        r.setInternationalPhoneNumber(result.getString("international_phone_number"));
-                        r.setRating(result.getDouble("rating"));
-                        r.setUser_ratings_total(result.getInt("user_ratings_total"));
+                        RestaurantModel restaurant = gson.fromJson(String.valueOf(result),RestaurantModel.class);
+                        dbHelper.insertRestaurantHistorial(restaurant);
 
-                        listener.onResponse(r);
+                        listener.onResponse(restaurant);
                     }
                 } catch (JSONException e) {
                     Log.d("miki", "onErrorResponse: " + e.getMessage());
@@ -162,36 +161,36 @@ public class WSHelper {
     }
 
     public void showRestaurants(LatLng possition, double radius, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
-        showRestaurants(restaurantLists, possition, radius, restaurantOpen, rating, mapsFragment);
+        showRestaurants(restaurants, possition, radius, restaurantOpen, rating, mapsFragment);
     }
 
     private void showRestaurants(ArrayList<RestaurantList> restaurantsList, LatLng actualPossition, double radius, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
         mapsFragment.afegirCercle(actualPossition, radius);
-        for(RestaurantList restaurantList : restaurantsList){
+        for(RestaurantList restaurant : restaurantsList){
             LatLng restaurantPossition = new LatLng(
-                    restaurantList.getGeometry().getLocation().getLat(),
-                    restaurantList.getGeometry().getLocation().getLng()
+                    restaurant.getGeometry().getLocation().getLat(),
+                    restaurant.getGeometry().getLocation().getLng()
             );
 
             if(restaurantOpen) {
-                if(restaurantList.getOpening_hours().isOpen_now()) {
+                if(restaurant.getOpening_hours() == null || (restaurant.getOpening_hours() != null && restaurant.getOpening_hours().isOpen_now())) {
                     if (rating != 0) {
-                        if(restaurantList.getRating() >= rating){
-                            mapsFragment.loadPossition(restaurantList.getPlace_id(), restaurantList.getName(), restaurantPossition);
+                        if(restaurant.getRating() >= rating){
+                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
                         }
                     }
                     else{
-                        mapsFragment.loadPossition(restaurantList.getPlace_id(), restaurantList.getName(), restaurantPossition);
+                        mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
                     }
                 }
             }
             else if(rating != 0){
-                if(restaurantList.getRating() >= rating){
-                    mapsFragment.loadPossition(restaurantList.getPlace_id(), restaurantList.getName(), restaurantPossition);
+                if(restaurant.getRating() >= rating){
+                    mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
                 }
             }
             else{
-                mapsFragment.loadPossition(restaurantList.getPlace_id(), restaurantList.getName(), restaurantPossition);
+                mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
             }
         }
     }

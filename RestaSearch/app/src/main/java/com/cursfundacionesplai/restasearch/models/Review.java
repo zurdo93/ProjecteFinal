@@ -2,6 +2,7 @@ package com.cursfundacionesplai.restasearch.models;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Review {
     private String author_name;
@@ -11,9 +12,8 @@ public class Review {
     private double rating;
     private String relative_time_description;
     private String text;
-    private Timestamp time;
 
-    public Review(String author_name, String author_url, String language, String profile_photo_url, double rating, String relative_time_description, String text, Timestamp time) {
+    public Review(String author_name, String author_url, String language, String profile_photo_url, double rating, String relative_time_description, String text) {
         this.author_name = author_name;
         this.author_url = author_url;
         this.language = language;
@@ -21,7 +21,6 @@ public class Review {
         this.rating = rating;
         this.relative_time_description = relative_time_description;
         this.text = text;
-        this.time = time;
     }
 
     public String getAuthor_name() {
@@ -78,13 +77,5 @@ public class Review {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
     }
 }

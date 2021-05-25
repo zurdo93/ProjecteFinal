@@ -101,5 +101,8 @@
     <string name="privacy_title8_line1">The requirements of this Policy complement, and don’t replace any other requirement under the applicable data protection law, which will prevail in any case.</string>
     <string name="privacy_title8_line2">This Policy is subject to periodic reviews and the company can modify it at any time. When this occurs, we will notify you of any changes and ask you to reread the most recent version of our Policy and confirm your agreement. </string>
     <string name="button_back">back</string>
+    <string name="establiment_weekdays">Weekly schedule</string>
+    <string name="establiment_photo_page">%1$d of %2$d</string>
+    <string name="establiment_reviews">Reviews</string>
 
 </resources>

@@ -70,4 +70,7 @@
     <string name="privacy_title7_line2"><ul><li>Acceder a sus datos personales y a cualquier otra información indicada en el Artículo 15.1 del RGPD.</li>\n<li>Rectificar sus datos personales que sean inexactos o estén incompletos de acuerdo con el Artículo 16 del RGPD.</li>\n<li>Suprimir sus datos personales de acuerdo con el Artículo 17 del RGPD.</li>\n<li>Limitar el tratamiento de sus datos personales de acuerdo con el Artículo 18 del RGPD.</li>\n<li>Solicitar la portabilidad de sus datos de acuerdo con el Artículo 20 del RGPD.</li>\n<li>Oponerse al tratamiento de sus datos personales de acuerdo con el artículo 21 del RGPD.</li></ul></string>
     <string name="privacy_title">POLITICA DE PRIVACIDAD</string>
     <string name="button_back">volver</string>
+    <string name="establiment_weekdays">Horario semanal</string>
+    <string name="establiment_photo_page">%1$d de %2$d</string>
+    <string name="establiment_reviews">Críticas</string>
 </resources>

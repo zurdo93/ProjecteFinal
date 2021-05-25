@@ -49,4 +49,13 @@ public class LanguageHelper {
         editor.putString(Keys.PREFS_SAVED_LANG, lang);
         editor.apply();
     }
+
+    public static String getSavedLanguage(Context context) {
+
+        if (prefs == null) {
+            prefs = context.getSharedPreferences(Keys.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        }
+
+        return prefs.getString(Keys.PREFS_SAVED_LANG, defaultLanguage);
+    }
 }

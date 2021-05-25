@@ -57,7 +57,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
 
         holder.name.setText(r.getName());
-        holder.address.setText(address);
+        holder.address.setText(r.getFormatted_address());
         holder.rating.setText(context.getResources().getString(R.string.label_establiment_global_rating, r.getRating()));
         holder.reviews.setText(context.getResources().getString(R.string.label_establiment_total_reviews, r.getUser_ratings_total()));
 

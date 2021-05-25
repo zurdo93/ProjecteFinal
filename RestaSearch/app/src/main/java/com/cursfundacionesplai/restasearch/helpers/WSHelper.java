@@ -36,9 +36,12 @@ public class WSHelper {
     ArrayList<RestaurantList> restaurants;
     DBHelper dbHelper;
 
+    private Context context;
+
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
         restaurants = new ArrayList<>();
+        this.context = context;
         dbHelper = new DBHelper(context, Keys.DATABASE_NAME,null,Keys.DATABASE_VERSION);
     }
 
@@ -106,6 +109,7 @@ public class WSHelper {
         Map<String, Object> values = new HashMap<>();
         values.put("key", Keys.API_KEY);
         values.put("place_id", placeId);
+        values.put("language", LanguageHelper.getSavedLanguage(context));
 
         String url = posarFiltre(values, Keys.URL_DETAILS);
 

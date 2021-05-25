@@ -114,10 +114,6 @@ public class EstablimentFragment extends Fragment {
                     listReviews.setAdapter(adapter);
                     listReviews.setLayoutManager(new LinearLayoutManager(getContext()));
 
-                    Log.d("miki", "rest id: " + r.getPlace_id());
-                    Log.d("miki", "onEstablimentResponse: " + r.getWebsite());
-                    Log.d("miki", "restaurant photos: " + r.getPhotos().size());
-
                     // amaga el contenidor del progress bar i mostrar el contenidor de les dades
                     notVisible.setVisibility(View.GONE);
                     visible.setVisibility(View.VISIBLE);

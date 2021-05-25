@@ -15,7 +15,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -126,7 +125,7 @@ public class MapsFragment extends Fragment {
         markerOptions.position(position);
         mMap.clear();
         keys.clear();
-        Circle circle = mMap.addCircle(
+        mMap.addCircle(
                 new CircleOptions()
                         .center(position)
                         .radius(radius+1200)

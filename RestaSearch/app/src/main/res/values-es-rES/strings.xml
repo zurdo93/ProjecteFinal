@@ -76,4 +76,5 @@
     <string name="alert_call_title">Llamar</string>
     <string name="alert_call_message">Quieres llamar a este número de teléfono?</string>
     <string name="accept_privacity">Debe aceptar las politicas de privacidad</string>
+    <string name="alert_price_0">Muy barato</string>
 </resources>

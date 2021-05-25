@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     boolean restaurantOpen = false;
 
     double[] radiusArray = {1000,5000,10000,20000,30000,40000,50000};
-    int[] priceLevelArray = {1,2,3,4};
+    int[] priceLevelArray = {0,1,2,3,4};
 
 
     @Override
@@ -153,7 +153,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
                 alert.setTitle(getResources().getString(R.string.alert_preu));
-                String[] botons = {getResources().getString(R.string.alert_price_1),
+                String[] botons = {getResources().getString(R.string.alert_price_0),
+                        getResources().getString(R.string.alert_price_1),
                         getResources().getString(R.string.alert_price_2),
                         getResources().getString(R.string.alert_price_3),
                         getResources().getString(R.string.alert_price_4)};
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         rating = ratingBar.getRating();
-                        wsHelper.showRestaurants(possition, radius, restaurantOpen, rating, mapsFragment);
+                        wsHelper.showRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
                     }
                 });
                 alert.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
@@ -212,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 restaurantOpen = isChecked;
-                wsHelper.showRestaurants(possition, radius, restaurantOpen, rating, mapsFragment);
+                wsHelper.showRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
             }
         });
         //endregion
@@ -310,13 +311,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if(isCamera || isZoom){
             mapsFragment.possitionCamera(possition, zoom);
         }
-        wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
+        wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment,false);
         isZoom = false;
     }
 
     public void cleanFilter(){
-        radius = 10000;
-        priceLevel = 1;
+        radius = 1000;
+        priceLevel = 0;
         rating = 0;
         if(swtRestaurantOpened.isChecked()){
             swtRestaurantOpened.setChecked(false);

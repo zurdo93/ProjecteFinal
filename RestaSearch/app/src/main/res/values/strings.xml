@@ -39,6 +39,7 @@
     <string name="alert_preu">Choose price</string>
     <string name="alert_valoracio">Choose the minimum rating</string>
     <string name="alert_rating_text">Leave your rating</string>
+    <string name="alert_price_0">Less inexpensive</string>
     <string name="alert_price_1">Inexpensive</string>
     <string name="alert_rating_stars">Rating:</string>
     <string name="alert_price_2">Moderate</string>

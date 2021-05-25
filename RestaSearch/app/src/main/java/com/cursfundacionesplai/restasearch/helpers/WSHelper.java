@@ -30,14 +30,19 @@ import java.util.Map;
 
 public class WSHelper {
 
-    RequestQueue cuaPeticions;
-    JsonArrayRequest jsonArrayRequest;
-    JsonObjectRequest jsonObjectRequest;
+    private RequestQueue cuaPeticions;
+    private JsonArrayRequest jsonArrayRequest;
+    private JsonObjectRequest jsonObjectRequest;
 
-    ArrayList<RestaurantList> restaurants;
-    DBHelper dbHelper;
+    private ArrayList<RestaurantList> restaurants;
+    private DBHelper dbHelper;
 
     private Context context;
+    private String nextPageToken = "";
+
+    public boolean getNextPageToken() {
+        return !nextPageToken.equals("");
+    }
 
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
@@ -54,7 +59,8 @@ public class WSHelper {
                                   int priceLevel,
                                   boolean restaurantOpen,
                                   float rating,
-                                  MapsFragment mapsFragment){
+                                  MapsFragment mapsFragment,
+                                  boolean nextPage){
         /*
         Aquí és on es posarà la informació dels filtres i despres es passaran a una funció per
         que ens crei la URL
@@ -62,13 +68,17 @@ public class WSHelper {
         String url;
         Map<String, Object> values = new HashMap<>();
 
-        values.put("location", actualPossition.latitude+","+actualPossition.longitude);
-        values.put("minprice", priceLevel);
-        values.put("maxprice", priceLevel);
-        values.put("type", "restaurant");
-        values.put("keyword", "restaurant,food");
-        values.put("key",Keys.API_KEY);
-        values.put("radius", radius);
+        if(nextPage){
+            values.put("pagetoken",nextPageToken);
+            values.put("key",Keys.API_KEY);
+        }
+        else{
+            values.put("location", actualPossition.latitude+","+actualPossition.longitude);
+            values.put("type", "restaurant");
+            values.put("keyword", "restaurant,food");
+            values.put("radius", radius);
+            values.put("key",Keys.API_KEY);
+        }
         url = posarFiltre(values, Keys.URL_BASE);
 
         /*
@@ -85,10 +95,17 @@ public class WSHelper {
                         Log.d("RESTASEARCH", "Restaurants rebuts");
 
                         //Agafem l'array de results i el convertim a una array de restaurantLists i els guardem
+                        if(response.has("next_page_token")){
+                            nextPageToken = response.getString("next_page_token");
+                        }
                         JSONArray result = response.getJSONArray("results");
                         ArrayList<RestaurantList> results = new ArrayList<>(Arrays.asList(gson.fromJson(String.valueOf(result), RestaurantList[].class)));
-                        restaurants.clear();
-                        restaurants.addAll(results);
+
+                        for(RestaurantList rest : results){
+                            if(!restaurants.contains(rest)){
+                                restaurants.add(rest);
+                            }
+                        }
                     }
                     //Todo: falta tindre en compte els altres STATUS_CODE
                 } catch (JSONException e) {
@@ -96,7 +113,7 @@ public class WSHelper {
                 }
 
                 //Netejem els markers que hi hagin i podem els dels restaurantLists
-                showRestaurants(restaurants, actualPossition, radius, restaurantOpen, rating, mapsFragment);
+                showRestaurants(restaurants, actualPossition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -151,11 +168,17 @@ public class WSHelper {
         cuaPeticions.add(jsonObjectRequest);
     }
 
-    public void showRestaurants(LatLng possition, double radius, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
-        showRestaurants(restaurants, possition, radius, restaurantOpen, rating, mapsFragment);
+    public void showRestaurants(LatLng possition, double radius, int priceLevel, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
+        showRestaurants(restaurants, possition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
     }
 
-    private void showRestaurants(ArrayList<RestaurantList> restaurantsList, LatLng actualPossition, double radius, boolean restaurantOpen, float rating, MapsFragment mapsFragment){
+    private void showRestaurants(ArrayList<RestaurantList> restaurantsList,
+                                 LatLng actualPossition,
+                                 double radius,
+                                 int priceLevel,
+                                 boolean restaurantOpen,
+                                 float rating,
+                                 MapsFragment mapsFragment){
         mapsFragment.afegirCercle(actualPossition, radius);
         for(RestaurantList restaurant : restaurantsList){
             LatLng restaurantPossition = new LatLng(
@@ -167,6 +190,15 @@ public class WSHelper {
                 if(restaurant.getOpening_hours() == null || (restaurant.getOpening_hours() != null && restaurant.getOpening_hours().isOpen_now())) {
                     if (rating != 0) {
                         if(restaurant.getRating() >= rating){
+                            if(priceLevel != 0){
+                                if(restaurant.getPrice_level() == priceLevel){
+                                    mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+                                }
+                            }
+                        }
+                    }
+                    else if(priceLevel != 0){
+                        if(restaurant.getPrice_level() == priceLevel){
                             mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
                         }
                     }
@@ -175,8 +207,20 @@ public class WSHelper {
                     }
                 }
             }
-            else if(rating != 0){
+            else if (rating != 0) {
                 if(restaurant.getRating() >= rating){
+                    if(priceLevel != 0){
+                        if(restaurant.getPrice_level() == priceLevel){
+                            mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+                        }
+                    }
+                    else{
+                        mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
+                    }
+                }
+            }
+            else if(priceLevel != 0){
+                if(restaurant.getPrice_level() == priceLevel){
                     mapsFragment.loadPossition(restaurant.getPlace_id(), restaurant.getName(), restaurantPossition);
                 }
             }

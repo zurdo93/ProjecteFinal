@@ -76,5 +76,6 @@
     <string name="alert_call_title">Trucar</string>
     <string name="alert_call_message">Vols trucar a aquest número de telèfon?</string>
     <string name="accept_privacity">Ha d\'acceptar les polítiques de privacitat</string>
+    <string name="alert_price_0">Molt barat</string>
 
 </resources>

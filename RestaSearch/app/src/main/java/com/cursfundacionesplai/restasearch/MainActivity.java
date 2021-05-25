@@ -36,6 +36,7 @@ import android.widget.CompoundButton;
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe MainActivity");
 
         LanguageHelper.loadSavedLanguage(this);
 

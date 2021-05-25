@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 import com.cursfundacionesplai.restasearch.models.Keys;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.Locale;
 
@@ -21,6 +22,8 @@ public class LanguageHelper {
      * @param context El context per agafar les preferencies
      */
     public static void loadSavedLanguage(Context context) {
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe LanguageHelper");
 
         if (prefs == null) {
             prefs = context.getSharedPreferences(Keys.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
@@ -39,6 +42,8 @@ public class LanguageHelper {
      * @param lang el codi de l'idioma que es vol guardar
      */
     public static void saveLanguage(Context context, String lang) {
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe LanguageHelper");
 
         if (prefs == null) {
             prefs = context.getSharedPreferences(Keys.SHARED_PREFS_NAME, Context.MODE_PRIVATE);

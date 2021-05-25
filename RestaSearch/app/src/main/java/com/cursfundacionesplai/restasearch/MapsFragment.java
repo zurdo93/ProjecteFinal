@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.HashMap;
 
@@ -45,6 +46,9 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
+
+            FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+            FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe MapsFragment");
 
             mMap = googleMap;
             keys = new HashMap<>();

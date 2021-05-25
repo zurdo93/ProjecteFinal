@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.cursfundacionesplai.restasearch.helpers.DBHelper;
 import com.cursfundacionesplai.restasearch.models.Keys;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class EstablimentDialog extends DialogFragment {
 
@@ -40,6 +41,9 @@ public class EstablimentDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe EstablimentDialog");
     }
 
     @Override

@@ -73,4 +73,6 @@
     <string name="establiment_weekdays">Horario semanal</string>
     <string name="establiment_photo_page">%1$d de %2$d</string>
     <string name="establiment_reviews">Críticas</string>
+    <string name="alert_call_title">Llamar</string>
+    <string name="alert_call_message">Quieres llamar a este número de teléfono?</string>
 </resources>

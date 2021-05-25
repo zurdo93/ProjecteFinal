@@ -59,6 +59,9 @@
     <string name="button_accept_policy">Accept</string>
     <string name="checkbox_accept_policy">I have read and accept the privacy policy.</string>
 
+    <string name="alert_call_title">Call</string>
+    <string name="alert_call_message">Do you want to call the following number telephone?</string>
+
     <!-- Privacitat -->
     <string name="privacy_title">PRIVACY POLICY</string>
     <string name="privacy_update_date">Last update: May 2021.</string>

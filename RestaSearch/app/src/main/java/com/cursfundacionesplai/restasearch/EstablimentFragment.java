@@ -1,6 +1,10 @@
 package com.cursfundacionesplai.restasearch;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -9,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,9 +96,36 @@ public class EstablimentFragment extends Fragment {
             public void onEstablimentResponse(RestaurantModel r) {
                 if (r != null) {
                     labelAddress.setText(r.getFormatted_address());
-                    labelPhoneNumber.setText(r.getInternational_phone_number());
                     labelRating.setText(getResources().getString(R.string.label_establiment_global_rating, r.getRating()));
                     labelReviews.setText(getResources().getString(R.string.label_establiment_total_reviews, r.getUser_ratings_total()));
+
+                    labelPhoneNumber.setText(r.getInternational_phone_number());
+                    labelPhoneNumber.setOnClickListener(v -> {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+                        alert.setTitle(getResources().getString(R.string.alert_call_title));
+                        alert.setMessage(getResources().getString(R.string.alert_call_message) + " " + r.getInternational_phone_number());
+                        alert.setPositiveButton(getResources().getString(R.string.button_accept_policy),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String numero = r.getInternational_phone_number();
+                                        if(!TextUtils.isEmpty(numero)){
+                                            String dial = "tel:" + numero;
+                                            startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
+                                        }
+                                        Log.d("RESTASEARCH","S'ha volgut trucar al següent número de teléfon: " + numero);
+                                    }
+                                });
+                        alert.setNeutralButton(getResources().getString(R.string.button_cancel),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Log.d("RESTASEARCH","S'ha cancel·lat el trucar a un número de teléfon");
+                                    }
+                                });
+                        alert.show();
+                    });
+
 
                     // comprova si l'establiment conté una pàgina web
                     if (r.getWebsite() == null) {

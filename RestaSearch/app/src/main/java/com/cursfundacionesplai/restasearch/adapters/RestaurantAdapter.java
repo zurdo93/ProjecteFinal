@@ -48,14 +48,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         RestaurantModel r = restaurantLists.get(position);
 
-        String address = "";
-
-        if (r.getFormatted_address().length() > 25) {
-            address = String.format("%s...", r.getFormatted_address().substring(0, 25));
-        } else {
-            address = r.getFormatted_address();
-        }
-
         holder.name.setText(r.getName());
         holder.address.setText(r.getFormatted_address());
         holder.rating.setText(context.getResources().getString(R.string.label_establiment_global_rating, r.getRating()));

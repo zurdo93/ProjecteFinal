@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -35,9 +36,12 @@ public class IdiomaActivity extends AppCompatActivity {
             }
         };
 
-        findViewById(R.id.lang_en).setOnClickListener(listener);
-        findViewById(R.id.lang_es).setOnClickListener(listener);
-        findViewById(R.id.lang_ca).setOnClickListener(listener);
+        Button en = findViewById(R.id.lang_en);
+        en.setOnClickListener(listener);
+        Button es = findViewById(R.id.lang_es);
+        es.setOnClickListener(listener);
+        Button ca = findViewById(R.id.lang_ca);
+        ca.setOnClickListener(listener);
 
         findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,5 +49,19 @@ public class IdiomaActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        int color = R.color.primary_color;
+
+        switch (LanguageHelper.getSavedLanguage(this)) {
+            case "en":
+                en.setBackgroundColor(getResources().getColor(color));
+                break;
+            case "es":
+                es.setBackgroundColor(getResources().getColor(color));
+                break;
+            case "ca":
+                ca.setBackgroundColor(getResources().getColor(color));
+                break;
+        }
     }
 }

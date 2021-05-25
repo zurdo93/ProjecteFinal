@@ -13,5 +13,6 @@
     <color name="secondary_color">#FF4F95B4</color>
     <color name="terciary_color">#FF09468A</color>
     <color name="circle_color">#33115DB0</color>
+    <color name="grey">#747880</color>
 
 </resources>

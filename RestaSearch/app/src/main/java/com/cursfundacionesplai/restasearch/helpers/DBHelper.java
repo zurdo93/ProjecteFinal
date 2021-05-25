@@ -14,6 +14,7 @@ import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.cursfundacionesplai.restasearch.models.Photo;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
+import com.google.android.gms.common.internal.ServiceSpecificExtraArgs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Creacio taula Restaurant
         db.execSQL("CREATE TABLE historial(" +
-                "places_id TEXT PRIMARY KEY," +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "places_id TEXT," +
                 "rating REAL," +
                 "address TEXT," +
                 "price_level INTEGER," +
@@ -202,38 +204,56 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("RESTASEARCH", "s'ha fet un delete a la taula favourites");
     }
 
-    public void deleteFirstHistorial (){
+    public void deleteFirstHistorial(String place_id){
+        boolean isRestaurantFind = false;
         database = this.getReadableDatabase();
-        cursor = database.rawQuery("SELECT places_id FROM historial ORDER BY places_id desc", null);
-        String places_id = "";
+        cursor = database.rawQuery("SELECT places_id FROM historial WHERE places_id = '" + place_id + "'", null);
 
+        String placesIdHistorial = "";
         try{
             if(cursor.moveToFirst()){
-                places_id = cursor.getString(0);
+                placesIdHistorial = cursor.getString(0);
+                isRestaurantFind = true;
             }
         }
-        catch(Exception e){
+        catch (Exception e){
             Log.d("RESTASEARCH", e.getMessage());
         }
 
-        if(!places_id.equals("")){
-            cursor = database.rawQuery("SELECT places_id FROM favourites WHERE places_id = '"+places_id+"'", null);
-            String places_id_favourites = "";
-            try{
-                if(cursor.moveToFirst()){
-                    places_id_favourites = cursor.getString(0);
+        if((countHistorial() == 15) || isRestaurantFind){
+            if(placesIdHistorial.equals("") && !isRestaurantFind){
+                cursor = database.rawQuery("SELECT places_id FROM historial ORDER BY id", null);
+
+                try{
+                    if(cursor.moveToFirst()){
+                        placesIdHistorial = cursor.getString(0);
+                        Log.d("NIL", "ID:" + placesIdHistorial);
+                    }
+                }
+                catch(Exception e){
+                    Log.d("RESTASEARCH", e.getMessage());
                 }
             }
-            catch(Exception e){
-                Log.d("RESTASEARCH", e.getMessage());
-            }
 
-            if(!places_id.equals(places_id_favourites)){
-                database = this.getWritableDatabase();
-                database.execSQL("DELETE FROM photos WHERE places_id = '"+places_id+"'");
-            }
+            if(!placesIdHistorial.equals("")){
+                cursor = database.rawQuery("SELECT places_id FROM favourites WHERE places_id = '"+placesIdHistorial+"'", null);
+                String placesIdFavourites = "";
+                try{
+                    if(cursor.moveToFirst()){
+                        placesIdFavourites = cursor.getString(0);
+                    }
+                }
+                catch(Exception e){
+                    Log.d("RESTASEARCH", e.getMessage());
+                }
 
-            database.execSQL("DELETE FROM historial WHERE places_id = '"+places_id+"'");
+                if(!placesIdHistorial.equals(placesIdFavourites)){
+                    database = this.getWritableDatabase();
+                    database.execSQL("DELETE FROM photos WHERE places_id = '"+placesIdHistorial+"'");
+                }
+
+                database.execSQL("DELETE FROM historial WHERE places_id = '"+placesIdHistorial+"'");
+            }
         }
     }
 
@@ -333,5 +353,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public int countHistorial(){
+        int result = 0;
+        database = this.getReadableDatabase();
+        cursor = database.rawQuery("SELECT COUNT(*) FROM historial",null);
+
+        try{
+            if(cursor.moveToFirst()){
+                result = cursor.getInt(0);
+            }
+        }
+        catch (Exception e){
+            Log.d("RESTASEARCH", e.getMessage());
+        }
+
+        return result;
+    }
 
 }

@@ -121,6 +121,8 @@ public class WSHelper {
                         JSONObject result = response.getJSONObject("result");
 
                         RestaurantModel restaurant = gson.fromJson(String.valueOf(result),RestaurantModel.class);
+
+                        dbHelper.deleteFirstHistorial(restaurant.getPlace_id());
                         dbHelper.insertHistorial(restaurant);
 
                         listener.onEstablimentResponse(restaurant);

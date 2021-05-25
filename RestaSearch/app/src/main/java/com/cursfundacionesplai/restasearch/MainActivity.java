@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
                 ratingBar = view.findViewById(R.id.ratingBar);
                 alert.setView(view);
-                Log.d("daniel", "rating:"+ (ratingBar == null));
+                Log.d("RESTASEARCH", "rating:"+ (ratingBar == null));
 
                 alert.setPositiveButton(getResources().getString(R.string.button_accept_policy), new DialogInterface.OnClickListener() {
                     @Override

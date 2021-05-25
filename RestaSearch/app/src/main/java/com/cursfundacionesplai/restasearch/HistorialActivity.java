@@ -68,5 +68,11 @@ public class HistorialActivity extends AppCompatActivity {
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));
+
+
+        Log.d("RESTASEARCH", "count: " + restaurants.size());
+
+//        adapter.notifyDataSetChanged();
+
     }
 }

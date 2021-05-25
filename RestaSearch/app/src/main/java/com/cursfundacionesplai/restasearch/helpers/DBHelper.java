@@ -118,7 +118,7 @@ public class DBHelper extends SQLiteOpenHelper {
             database.close();
         }
         catch (Exception e){
-            Log.d("NIL", "Error al llegir les dades del select. Error: " + e.getMessage());
+            Log.d("RESTASEARCH", "Error al llegir les dades del select. Error: " + e.getMessage());
         }
 
         Log.d("RESTASEARCH", "s'ha fet un insert a la taula historial");
@@ -154,7 +154,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         price_level = cursor.getInt(2);
                         name = cursor.getString(3);
                         user_ratings_total = cursor.getInt(4);
-                        Log.d("NIL","Rating: " + rating + ", Address " + address + ", Price Level: " + price_level  + ", Name " + name + ", User ratings total " + user_ratings_total);
+                        Log.d("RESTASEARCH","Rating: " + rating + ", Address " + address + ", Price Level: " + price_level  + ", Name " + name + ", User ratings total " + user_ratings_total);
                     }
                     while (cursor.moveToNext());
 
@@ -180,11 +180,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 }
             }
             else{
-                Log.d("NIL", "No hi han dades a la base de dades");
+                Log.d("RESTASEARCH", "No hi han dades a la base de dades");
             }
         }
         catch (Exception e){
-            Log.d("NIL", "Error al llegir les dades del select. Error: " + e.getMessage());
+            Log.d("RESTASEARCH", "Error al llegir les dades del select. Error: " + e.getMessage());
         }
 
         Log.d("RESTASEARCH", "s'ha fet un insert a la taula favourites");
@@ -202,7 +202,44 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("RESTASEARCH", "s'ha fet un delete a la taula favourites");
     }
 
+    public void deleteFirstHistorial (){
+        database = this.getReadableDatabase();
+        cursor = database.rawQuery("SELECT places_id FROM historial ORDER BY places_id desc", null);
+        String places_id = "";
+
+        try{
+            if(cursor.moveToFirst()){
+                places_id = cursor.getString(0);
+            }
+        }
+        catch(Exception e){
+            Log.d("RESTASEARCH", e.getMessage());
+        }
+
+        if(!places_id.equals("")){
+            cursor = database.rawQuery("SELECT places_id FROM favourites WHERE places_id = '"+places_id+"'", null);
+            String places_id_favourites = "";
+            try{
+                if(cursor.moveToFirst()){
+                    places_id_favourites = cursor.getString(0);
+                }
+            }
+            catch(Exception e){
+                Log.d("RESTASEARCH", e.getMessage());
+            }
+
+            if(!places_id.equals(places_id_favourites)){
+                database = this.getWritableDatabase();
+                database.execSQL("DELETE FROM photos WHERE places_id = '"+places_id+"'");
+            }
+
+            database.execSQL("DELETE FROM historial WHERE places_id = '"+places_id+"'");
+        }
+    }
+
     public ArrayList<RestaurantModel> getRestaurantsHistoric() {
+
+        Log.d("RESTASEARCH", "getRestaurantsHistoric: ");
 
         ArrayList<RestaurantModel> list = new ArrayList<>();
 
@@ -290,9 +327,11 @@ public class DBHelper extends SQLiteOpenHelper {
             result = cursor.moveToFirst();
         }
         catch (Exception e){
-            Log.d("NIL", "Error al llegir les dades del select. Error: " + e.getMessage());
+            Log.d("RESTASEARCH", "Error al llegir les dades del select. Error: " + e.getMessage());
         }
 
         return result;
     }
+
+
 }

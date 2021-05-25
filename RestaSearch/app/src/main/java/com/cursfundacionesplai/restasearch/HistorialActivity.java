@@ -64,15 +64,9 @@ public class HistorialActivity extends AppCompatActivity {
 
         restaurants = dbh.getRestaurantsHistoric();
 
-        WSHelper wsh = new WSHelper(this);
-
-        adapter = new RestaurantAdapter(this, wsh, restaurants);
+        adapter = new RestaurantAdapter(this, new WSHelper(this), restaurants);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));
-
-        Log.d("miki", "count: " + restaurants.size());
-
-//        adapter.notifyDataSetChanged();
     }
 }

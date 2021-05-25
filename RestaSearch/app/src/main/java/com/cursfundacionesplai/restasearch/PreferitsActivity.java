@@ -10,8 +10,10 @@ import android.view.MenuItem;
 
 import com.cursfundacionesplai.restasearch.adapters.RestaurantAdapter;
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
+import com.cursfundacionesplai.restasearch.helpers.DBHelper;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
+import com.cursfundacionesplai.restasearch.models.Keys;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.material.navigation.NavigationView;
@@ -23,6 +25,10 @@ public class PreferitsActivity extends AppCompatActivity {
     ToolbarEx toolbarEx;
 
     RecyclerView list;
+
+    DBHelper dbh;
+    RestaurantAdapter adapter;
+    ArrayList<RestaurantModel> restaurants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,22 +55,11 @@ public class PreferitsActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<RestaurantModel> restaurants = new ArrayList<>();
+        dbh = new DBHelper(this, Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION);
 
-        RestaurantModel r = new RestaurantModel();
-        r.setPlace_id("ChIJ0Q0yD9nmuhIRyG5UM2dyVxQ");
-        r.setName("Rest test 1");
+        restaurants = dbh.getRestaurantsPreferits();
 
-        RestaurantModel r2 = new RestaurantModel();
-        r2.setPlace_id("ChIJn-TkqiHnuhIRWCxxLWqeJ14");
-        r2.setName("Rest test 2");
-
-        restaurants.add(r);
-        restaurants.add(r2);
-
-        WSHelper wsh = new WSHelper(this);
-
-        RestaurantAdapter adapter = new RestaurantAdapter(this, wsh, restaurants);
+        adapter = new RestaurantAdapter(this, new WSHelper(this), restaurants);
 
         list.setAdapter(adapter);
         list.setLayoutManager(new LinearLayoutManager(this));

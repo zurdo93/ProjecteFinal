@@ -203,14 +203,48 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<RestaurantModel> getRestaurantsHistoric() {
-        Log.d("miki", "getRestaurantsHistoric: ");
 
         ArrayList<RestaurantModel> list = new ArrayList<>();
 
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
 
         String args[] = {Keys.DATABASE_LIMIT_HISTORIC};
         Cursor c = db.rawQuery("SELECT places_id, rating, address, price_level, name, user_ratings_total FROM historial LIMIT ?", args);
+
+        if (c.moveToFirst()) {
+            do {
+                RestaurantModel model = new RestaurantModel();
+
+                model.setPlace_id(c.getString(0));
+                model.setRating(c.getDouble(1));
+                model.setFormatted_address(c.getString(2));
+                model.setPrice_level(c.getInt(3));
+                model.setName(c.getString(4));
+                model.setUser_ratings_total(c.getInt(5));
+
+                String args2[] = {model.getPlace_id()};
+                Cursor c2 = db.rawQuery("SELECT height, photo_reference, width FROM photos WHERE places_id = ? LIMIT 1", args2);
+
+                if (c2.moveToFirst()) {
+                    Photo photo = new Photo(c2.getInt(0), null, c2.getString(1), c2.getInt(2));
+                    model.setPhotos(new ArrayList<>(Arrays.asList(photo)));
+                }
+
+                list.add(model);
+            } while (c.moveToNext());
+        }
+
+        return list;
+    }
+
+    public ArrayList<RestaurantModel> getRestaurantsPreferits() {
+
+        ArrayList<RestaurantModel> list = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        String args[] = {Keys.DATABASE_LIMIT_HISTORIC};
+        Cursor c = db.rawQuery("SELECT places_id, rating, address, price_level, name, user_ratings_total FROM favourites LIMIT ?", args);
 
         if (c.moveToFirst()) {
             do {

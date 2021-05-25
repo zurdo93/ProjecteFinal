@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
@@ -76,10 +77,11 @@ public class PoliticaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("RESTASEARCH", "onClick: ");
                 boolean isChecked = checkPolicy.isChecked();
+                if (!isChecked)
+                    Toast.makeText(PoliticaActivity.this, "Debe aceptar las politicas de privacidad", Toast.LENGTH_SHORT).show();
                 if (isChecked) {
                     editor.putBoolean(Keys.PREFS_SAVE_POLICY, true);
                     editor.apply();
-
                     finish();
                 }
             }

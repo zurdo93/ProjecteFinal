@@ -19,14 +19,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.cursfundacionesplai.restasearch.adapters.ReviewAdapter;
+import com.cursfundacionesplai.restasearch.helpers.DBHelper;
 import com.cursfundacionesplai.restasearch.helpers.WSHelper;
 import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
+import com.cursfundacionesplai.restasearch.models.Keys;
 import com.cursfundacionesplai.restasearch.models.Photo;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
@@ -63,6 +66,8 @@ public class EstablimentFragment extends Fragment {
 
     private int currentPhotoPos;
     private ArrayList<Photo> photos;
+
+    Boolean checked = false;
 
     // variables
     private String placeId;
@@ -215,6 +220,34 @@ public class EstablimentFragment extends Fragment {
         listHours = view.findViewById(R.id.list_hours);
         listReviews = view.findViewById(R.id.list_reviews);
 
+        DBHelper dbHelper;
+        ImageView btnFavourite;
+        btnFavourite = view.findViewById(R.id.btnFavourite);
+
+        dbHelper = new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION);
+
+        if (dbHelper.isRestaurantByPlacesId(placeId)){
+            btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
+
+        }
+        else{
+            btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
+
+        }
+
+        btnFavourite.setOnClickListener(item -> {
+            checked = !checked;
+            if (checked){
+                btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
+                dbHelper.insertFavourites(placeId);
+            }
+            else{
+                btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
+                dbHelper.deleteFavourites(placeId);
+            }
+        });
         return view;
+
     }
+
 }

@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class IdiomaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe IdiomaActivity");
 
         LanguageHelper.loadSavedLanguage(this);
 

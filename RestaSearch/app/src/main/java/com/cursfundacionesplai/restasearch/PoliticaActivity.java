@@ -17,6 +17,7 @@ import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 import com.cursfundacionesplai.restasearch.models.Keys;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class PoliticaActivity extends AppCompatActivity {
 
@@ -31,6 +32,9 @@ public class PoliticaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe PoliticaActivity");
 
         LanguageHelper.loadSavedLanguage(this);
 

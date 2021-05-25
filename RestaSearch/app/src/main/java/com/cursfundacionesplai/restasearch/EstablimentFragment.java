@@ -25,6 +25,7 @@ import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
 import com.cursfundacionesplai.restasearch.models.Photo;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -77,6 +78,10 @@ public class EstablimentFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe EstablimentFragment");
+
         if (getArguments() != null) {
             placeId = getArguments().getString("placeId");
         }

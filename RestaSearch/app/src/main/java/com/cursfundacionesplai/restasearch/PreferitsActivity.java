@@ -17,6 +17,7 @@ import com.cursfundacionesplai.restasearch.models.Keys;
 import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,9 @@ public class PreferitsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe PreferitsActivity");
 
         LanguageHelper.loadSavedLanguage(this);
 

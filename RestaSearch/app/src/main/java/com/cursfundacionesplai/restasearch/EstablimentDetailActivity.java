@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 public class EstablimentDetailActivity extends AppCompatActivity {
 
     Button back;
@@ -15,6 +17,9 @@ public class EstablimentDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establiment_detail);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe EstablimentDetailActivity");
 
         back = findViewById(R.id.btn_back);
 

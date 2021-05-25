@@ -16,6 +16,7 @@ import com.cursfundacionesplai.restasearch.models.RestaurantList;
 import com.cursfundacionesplai.restasearch.interfaces.CustomResponse;
 import com.cursfundacionesplai.restasearch.models.RestaurantModel;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -43,6 +44,9 @@ public class WSHelper {
         restaurants = new ArrayList<>();
         this.context = context;
         dbHelper = new DBHelper(context, Keys.DATABASE_NAME,null,Keys.DATABASE_VERSION);
+
+        FirebaseCrashlytics.getInstance().setUserId("RESTASEARCH_PROVA");
+        FirebaseCrashlytics.getInstance().setCustomKey("RESTASEARCH_PROVA","S'ha produit un error a la classe WSHelper");
     }
 
     public void buscarRestaurants(LatLng actualPossition,

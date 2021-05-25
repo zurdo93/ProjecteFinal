@@ -50,7 +50,7 @@ public class EstablimentDialog extends DialogFragment {
         // si el dialeg no es null canviar la mida per que ocupi tota la pantalla
         if (dialog != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
-            int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
             dialog.getWindow().setLayout(width, height);
 
             // aplicar animacions quan s'obre i es tancar el dialeg
@@ -71,19 +71,28 @@ public class EstablimentDialog extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        DBHelper dbHelper = new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION);
 
         toolbar.setNavigationOnClickListener(v -> dismiss());
         toolbar.setTitle(placeName);
-        toolbar.inflateMenu(R.menu.example_dialog);
+        toolbar.inflateMenu(R.menu.menu_dialog);
+
+        if (dbHelper.isRestaurantByPlacesId(placeId)){
+            toolbar.getMenu().getItem(0).setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
+        }
+        else{
+            toolbar.getMenu().getItem(0).setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
+        }
+
         toolbar.setOnMenuItemClickListener(item -> {
             checked = !checked;
             if (checked){
                 item.setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
-                new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION).insertFavourites(placeId);
+                dbHelper.insertFavourites(placeId);
             }
             else{
                 item.setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
-                new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION).deleteFavourites(placeId);
+                dbHelper.deleteFavourites(placeId);
             }
             return true;
         });

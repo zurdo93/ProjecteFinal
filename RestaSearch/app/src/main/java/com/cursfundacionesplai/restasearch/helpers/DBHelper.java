@@ -271,4 +271,28 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return list;
     }
+
+    public boolean isRestaurantByPlacesId(String places_id){
+        boolean result = false;
+        database = this.getReadableDatabase();
+
+        try{
+            cursor = database.rawQuery("" +
+                    "SELECT * " +
+                    "FROM favourites " +
+                    "WHERE places_id = '" + places_id + "'", null);
+        }
+        catch (Exception e){
+            Log.d("RESTASEARCH", e.getMessage());
+        }
+
+        try {
+            result = cursor.moveToFirst();
+        }
+        catch (Exception e){
+            Log.d("NIL", "Error al llegir les dades del select. Error: " + e.getMessage());
+        }
+
+        return result;
+    }
 }

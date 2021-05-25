@@ -18,6 +18,7 @@ import com.cursfundacionesplai.restasearch.classesextended.ToolbarEx;
 import com.cursfundacionesplai.restasearch.helpers.LanguageHelper;
 import com.cursfundacionesplai.restasearch.models.Keys;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class PoliticaActivity extends AppCompatActivity {
@@ -78,7 +79,7 @@ public class PoliticaActivity extends AppCompatActivity {
                 Log.d("RESTASEARCH", "onClick: ");
                 boolean isChecked = checkPolicy.isChecked();
                 if (!isChecked)
-                    Toast.makeText(PoliticaActivity.this, "Debe aceptar las politicas de privacidad", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PoliticaActivity.this, getResources().getString(R.string.accept_privacity), Toast.LENGTH_SHORT).show();
                 if (isChecked) {
                     editor.putBoolean(Keys.PREFS_SAVE_POLICY, true);
                     editor.apply();

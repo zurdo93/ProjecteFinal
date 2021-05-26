@@ -23,7 +23,6 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 public class EstablimentDetailActivity extends AppCompatActivity {
 
     ToolbarEx toolbar;
-    private String placeName;
     private String placeId;
     DBHelper dbHelper;
 
@@ -31,7 +30,6 @@ public class EstablimentDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establiment_detail);
-        this.placeName = placeName;
         Bundle bundle = getIntent().getExtras();
         placeId = bundle.getString("place_id");
 
@@ -50,6 +48,9 @@ public class EstablimentDetailActivity extends AppCompatActivity {
                 return toolbar.onNavigationItemSelected(item);
             }
         });
+
+        setTitle(bundle.getString("place_name"));
+
         toolbar.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

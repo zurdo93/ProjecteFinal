@@ -60,6 +60,8 @@ public class EstablimentFragment extends Fragment {
     TextView labelReviews;
     ImageView iconWebsite;
     TextView labelWebsite;
+    TextView labelReview;
+    TextView weekText;
 
     ListView listHours;
     RecyclerView listReviews;
@@ -67,7 +69,7 @@ public class EstablimentFragment extends Fragment {
     private int currentPhotoPos;
     private ArrayList<Photo> photos;
 
-    Boolean checked = false;
+
 
     // variables
     private String placeId;
@@ -140,23 +142,36 @@ public class EstablimentFragment extends Fragment {
                         labelWebsite.setText(r.getWebsite());
                     }
 
-                    if (r.getOpening_hours().getWeekday_text() != null) {
-                        ArrayList<String> weekdays = r.getOpening_hours().getWeekday_text();
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.simple_list_item, weekdays);
+                    if (r.getOpening_hours()!= null && r.getOpening_hours().getWeekday_text() != null) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.simple_list_item, r.getOpening_hours().getWeekday_text());
                         listHours.setAdapter(adapter);
+                    }
+                    else{
+                        weekText.setVisibility(View.GONE);
+                        listHours.setVisibility(View.GONE);
                     }
 
                     photos = r.getPhotos();
 
-                    if (photos.size() > 0) {
+                    if (photos != null && photos.size() > 0) {
                         loadPhotoIntoContainer();
                     }
+                    else{
+                        photo.setVisibility(View.GONE);
+                        iconPrev.setVisibility(View.GONE);
+                        iconNext.setVisibility(View.GONE);
+                        labelPhotoPos.setVisibility(View.GONE);
+                    }
+                    if (r.getReviews() != null){
+                        ReviewAdapter adapter = new ReviewAdapter(r.getReviews());
 
-                    ReviewAdapter adapter = new ReviewAdapter(r.getReviews());
-
-                    listReviews.setAdapter(adapter);
-                    listReviews.setLayoutManager(new LinearLayoutManager(getContext()));
-
+                        listReviews.setAdapter(adapter);
+                        listReviews.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+                    else{
+                        listReviews.setVisibility(View.GONE);
+                        labelReview.setVisibility(View.GONE);
+                    }
                     // amaga el contenidor del progress bar i mostrar el contenidor de les dades
                     notVisible.setVisibility(View.GONE);
                     visible.setVisibility(View.VISIBLE);
@@ -176,8 +191,10 @@ public class EstablimentFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_establiment, container, false);
 
+        labelReview = view.findViewById(R.id.labelReview);
         visible = view.findViewById(R.id.scroll_loaded);
         notVisible = view.findViewById(R.id.constraint_not_loaded);
+        weekText = view.findViewById(R.id.weekText);
 
         photo = view.findViewById(R.id.rest_photo);
         iconPrev = view.findViewById(R.id.iconPrev);
@@ -221,34 +238,6 @@ public class EstablimentFragment extends Fragment {
         listHours = view.findViewById(R.id.list_hours);
         listReviews = view.findViewById(R.id.list_reviews);
 
-        DBHelper dbHelper;
-        ImageView btnFavourite;
-        btnFavourite = view.findViewById(R.id.btnFavourite);
-
-        dbHelper = new DBHelper(view.getContext(), Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION);
-
-        if (dbHelper.isRestaurantByPlacesId(placeId)){
-            btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
-
-        }
-        else{
-            btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
-
-        }
-
-        btnFavourite.setOnClickListener(item -> {
-            checked = !checked;
-            if (checked){
-                btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, getContext().getPackageName()));
-                dbHelper.insertFavourites(placeId);
-            }
-            else{
-                btnFavourite.setImageResource(getResources().getIdentifier("@drawable/baseline_bookmark_border_24", null, getContext().getPackageName()));
-                dbHelper.deleteFavourites(placeId);
-            }
-        });
         return view;
-
     }
-
 }

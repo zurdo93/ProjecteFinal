@@ -149,7 +149,7 @@
                     app:layout_constraintTop_toTopOf="@+id/icon_website" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/weekText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -173,7 +173,7 @@
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline5"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/weekText" />
 
                 <ImageView
                     android:id="@+id/rest_photo"
@@ -217,7 +217,7 @@
                     app:layout_constraintTop_toTopOf="@+id/rest_photo" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/labelReview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -226,8 +226,8 @@
                     android:text="@string/establiment_reviews"
                     android:textColor="@color/secondary_color"
                     android:textSize="24sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView7"
-                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintEnd_toEndOf="@+id/weekText"
+                    app:layout_constraintStart_toStartOf="@+id/weekText"
                     app:layout_constraintTop_toBottomOf="@+id/list_hours" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -242,15 +242,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-                <ImageView
-                    android:id="@+id/btnFavourite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_bookmark_border_24"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toTopOf="@+id/rest_photo" />
+                    app:layout_constraintTop_toBottomOf="@+id/labelReview" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

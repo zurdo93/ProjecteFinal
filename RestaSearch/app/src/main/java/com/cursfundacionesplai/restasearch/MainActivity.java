@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 
@@ -19,6 +20,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cursfundacionesplai.restasearch.helpers.AdsHelper;
@@ -27,8 +29,11 @@ import com.cursfundacionesplai.restasearch.models.Keys;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 
 import android.widget.CompoundButton;
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     LatLng possition = new LatLng(0,0);
     double radius;
+    int radiusSelected;
     int priceLevel;
     float rating;
 
@@ -66,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     boolean isZoom = false;
     boolean restaurantOpen = false;
 
-    double[] radiusArray = {1000,5000,10000,20000,30000,40000,50000};
-    int[] priceLevelArray = {0,1,2,3,4};
+    double[] radiusArray = {1000, 2000, 3000, 4000, 5000, 10000};
+    int[] priceLevelArray = {0, 1, 2, 3, 4};
 
 
     @Override
@@ -88,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         btnRating = findViewById(R.id.btn_rating);
         btnClear = findViewById(R.id.btn_clean);
         swtRestaurantOpened = findViewById(R.id.swt_restaurant_opened);
+
+        rating = 0;
+        priceLevel = 0;
+        radiusSelected = 0;
 
         /*
         Agafem el valor del sharedPreferences per saber si hem de mostrar la pantalla de política
@@ -126,23 +136,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         btnDistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
                 alert.setTitle(getResources().getString(R.string.alert_distancia));
-                String[] botons = {getResources().getString(R.string.alert_distance_1),
-                        getResources().getString(R.string.alert_distance_2),
-                        getResources().getString(R.string.alert_distance_3),
-                        getResources().getString(R.string.alert_distance_4),
-                        getResources().getString(R.string.alert_distance_5),
-                        getResources().getString(R.string.alert_distance_6),
-                        getResources().getString(R.string.alert_distance_7)};
-                alert.setItems(botons, new DialogInterface.OnClickListener() {
+
+                LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.alert_distance_layout,null);
+
+                RadioGroup group = view.findViewById(R.id.list_radio);
+
+                RadioButton radio = (RadioButton) group.getChildAt(radiusSelected);
+                radio.setChecked(true);
+
+                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        radius = radiusArray[which];
-                        isZoom = true;
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        radiusSelected = group.indexOfChild(view.findViewById(group.getCheckedRadioButtonId()));
+                        radius = radiusArray[radiusSelected];
                         markRestaurant(true);
+                        alert.dismiss();
                     }
                 });
+
+                alert.setView(view);
 
                 alert.show();
             }
@@ -151,38 +166,49 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         btnPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
                 alert.setTitle(getResources().getString(R.string.alert_preu));
-                String[] botons = {getResources().getString(R.string.alert_price_0),
-                        getResources().getString(R.string.alert_price_1),
-                        getResources().getString(R.string.alert_price_2),
-                        getResources().getString(R.string.alert_price_3),
-                        getResources().getString(R.string.alert_price_4)};
-                alert.setItems(botons, new DialogInterface.OnClickListener() {
+
+                LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.alert_price_layout,null);
+
+                RadioGroup group = view.findViewById(R.id.list_radio);
+
+                RadioButton radio = (RadioButton) group.getChildAt(priceLevel);
+
+                if (radio != null) {
+                    radio.setChecked(true);
+                }
+
+                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        priceLevel = priceLevelArray[which];
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        priceLevel = priceLevelArray[group.indexOfChild(view.findViewById(group.getCheckedRadioButtonId()))];
                         markRestaurant(true);
+                        alert.dismiss();
                     }
                 });
+
+                alert.setView(view);
+
                 alert.show();
             }
         });
 
-        //ratingBar = findViewById(R.id.ratingBar);
         btnRating.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-                alert.setTitle(getResources().getString(R.string.alert_rating_text));
+                alert.setTitle(getResources().getString(R.string.alert_valoracio));
 
                 LayoutInflater inflater = MainActivity.this.getLayoutInflater();
                 View view = inflater.inflate(R.layout.alert_rating_layout,null);
 
                 ratingBar = view.findViewById(R.id.ratingBar);
                 alert.setView(view);
-                Log.d("RESTASEARCH", "rating:"+ (ratingBar == null));
+
+                ratingBar.setRating(rating);
 
                 alert.setPositiveButton(getResources().getString(R.string.button_accept_policy), new DialogInterface.OnClickListener() {
                     @Override
@@ -287,25 +313,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Cridem a les funcions per posar la càmara en la nostre posició i perquè busqui els restaurants
         que estan dins del radi que hem especificat
          */
-        int zoom;
+        int zoom = 11;
 
         if (radius == 1000){
             zoom = 13;
-        }
-        else if (radius == 5000 || radius == 10000){
+        } else if (radius == 2000) {
+            zoom = 13;
+        } else if (radius == 3000){
+            zoom = 12;
+        } else if (radius == 4000){
+            zoom = 12;
+        } else if (radius == 5000){
+            zoom = 12;
+        } else{
             zoom = 11;
-        }
-        else if (radius == 20000){
-            zoom = 10;
-        }
-        else if (radius == 30000){
-            zoom = 9;
-        }
-        else if (radius == 40000 || radius == 50000){
-            zoom = 8;
-        }
-        else{
-            zoom = 8;
         }
 
         if(isCamera || isZoom){
@@ -318,6 +339,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     public void cleanFilter(){
         radius = 1000;
         priceLevel = 0;
+        radiusSelected = 0;
         rating = 0;
         if(swtRestaurantOpened.isChecked()){
             swtRestaurantOpened.setChecked(false);

@@ -14,7 +14,7 @@
     <string name="menu_privacitat_us">Privacy and conditions of use</string>
 
     <!-- Filtres -->
-    <string name="filtres_restaurant_obert">Opened</string>
+    <string name="filtres_restaurant_obert">Opened restaurants</string>
     <string name="filtres_distancia">Distance</string>
     <string name="filtres_preu">Price</string>
     <string name="filtres_valoracio">Rating</string>
@@ -45,13 +45,12 @@
     <string name="alert_price_2">Moderate</string>
     <string name="alert_price_3">Expensive</string>
     <string name="alert_price_4">Very Expensive</string>
-    <string name="alert_distance_1">1+km</string>
-    <string name="alert_distance_2">5+km</string>
-    <string name="alert_distance_3">10km</string>
-    <string name="alert_distance_4">20+km</string>
-    <string name="alert_distance_5">30+km</string>
-    <string name="alert_distance_6">40+km</string>
-    <string name="alert_distance_7">50+km</string>
+    <string name="alert_distance_1" translatable="false">1+ km</string>
+    <string name="alert_distance_2" translatable="false">2+ km</string>
+    <string name="alert_distance_3" translatable="false">3+ km</string>
+    <string name="alert_distance_4" translatable="false">4+ km</string>
+    <string name="alert_distance_5" translatable="false">5+ km</string>
+    <string name="alert_distance_6" translatable="false">10+ km</string>
 
     <string name="label_establiment_global_rating">Rating: <b>%1$.1f</b></string>
     <string name="label_establiment_total_reviews">Reviews: <b>%1$d</b></string>

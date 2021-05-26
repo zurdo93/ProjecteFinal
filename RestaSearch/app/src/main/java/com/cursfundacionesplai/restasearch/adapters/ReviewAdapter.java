@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         holder.author.setText(r.getAuthor_name());
         holder.desc.setText(r.getText());
         holder.time.setText(r.getRelative_time_description());
+        holder.rating.setRating(Float.parseFloat("" + r.getRating()));
 
     }
 
@@ -55,6 +57,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         TextView author;
         TextView desc;
         TextView time;
+        RatingBar rating;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +66,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
             author = itemView.findViewById(R.id.review_author_name);
             desc = itemView.findViewById(R.id.review_text);
             time = itemView.findViewById(R.id.review_relative_time);
+            rating = itemView.findViewById(R.id.review_rating);
         }
     }
 }

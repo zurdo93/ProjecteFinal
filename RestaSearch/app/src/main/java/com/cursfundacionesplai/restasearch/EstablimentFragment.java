@@ -141,7 +141,8 @@ public class EstablimentFragment extends Fragment {
                     }
 
                     if (r.getOpening_hours().getWeekday_text() != null) {
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, r.getOpening_hours().getWeekday_text());
+                        ArrayList<String> weekdays = r.getOpening_hours().getWeekday_text();
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.simple_list_item, weekdays);
                         listHours.setAdapter(adapter);
                     }
 

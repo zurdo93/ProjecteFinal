@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
         }
         else{
-            locationManager.requestLocationUpdates(PROVIDER, 0, 0, this);
+            locationManager.requestLocationUpdates(PROVIDER, 30000, 0, this);
         }
 
         initialMovementCamera = true;
@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             case 1:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        locationManager.requestLocationUpdates(PROVIDER, 0, 0, this);
+                        locationManager.requestLocationUpdates(PROVIDER, 30000, 0, this);
                     }
                 }
                 break;
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if(isCamera || isZoom){
             mapsFragment.possitionCamera(possition, zoom);
         }
-        wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment,false);
+        wsHelper.buscarRestaurants(possition, radius, priceLevel, restaurantOpen, rating, mapsFragment,"");
         isZoom = false;
     }
 

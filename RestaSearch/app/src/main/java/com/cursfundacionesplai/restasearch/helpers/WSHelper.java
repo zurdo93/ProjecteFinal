@@ -31,18 +31,13 @@ import java.util.Map;
 public class WSHelper {
 
     private RequestQueue cuaPeticions;
-    private JsonArrayRequest jsonArrayRequest;
     private JsonObjectRequest jsonObjectRequest;
 
     private ArrayList<RestaurantList> restaurants;
     private DBHelper dbHelper;
-
     private Context context;
-    private String nextPageToken = "";
 
-    public boolean getNextPageToken() {
-        return !nextPageToken.equals("");
-    }
+    private double radius;
 
     public WSHelper(Context context){
         cuaPeticions = Volley.newRequestQueue(context);
@@ -60,7 +55,7 @@ public class WSHelper {
                                   boolean restaurantOpen,
                                   float rating,
                                   MapsFragment mapsFragment,
-                                  boolean nextPage){
+                                  String nextPage){
         /*
         Aquí és on es posarà la informació dels filtres i despres es passaran a una funció per
         que ens crei la URL
@@ -68,9 +63,15 @@ public class WSHelper {
         String url;
         Map<String, Object> values = new HashMap<>();
 
-        if(nextPage){
-            values.put("pagetoken",nextPageToken);
+        if(radius < this.radius){
+            restaurants.clear();
+        }
+
+        this.radius = radius;
+
+        if(!nextPage.equals("")){
             values.put("key",Keys.API_KEY);
+            values.put("pagetoken",nextPage);
         }
         else{
             values.put("location", actualPossition.latitude+","+actualPossition.longitude);
@@ -88,6 +89,7 @@ public class WSHelper {
             @Override
             public void onResponse(JSONObject response) {
                 Gson gson = new Gson();
+                String nextPageToken = "";
 
                 try {
                     //Mirem que el status sigui OK
@@ -97,6 +99,9 @@ public class WSHelper {
                         //Agafem l'array de results i el convertim a una array de restaurantLists i els guardem
                         if(response.has("next_page_token")){
                             nextPageToken = response.getString("next_page_token");
+                        }
+                        else{
+                            nextPageToken = "";
                         }
                         JSONArray result = response.getJSONArray("results");
                         ArrayList<RestaurantList> results = new ArrayList<>(Arrays.asList(gson.fromJson(String.valueOf(result), RestaurantList[].class)));
@@ -113,7 +118,12 @@ public class WSHelper {
                 }
 
                 //Netejem els markers que hi hagin i podem els dels restaurantLists
-                showRestaurants(restaurants, actualPossition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
+                if(!nextPageToken.equals("")){
+                    buscarRestaurants(actualPossition, radius, priceLevel, restaurantOpen, rating, mapsFragment, nextPageToken);
+                }
+                else{
+                    showRestaurants(restaurants, actualPossition, radius, priceLevel, restaurantOpen, rating, mapsFragment);
+                }
             }
         }, new Response.ErrorListener() {
             @Override

@@ -84,7 +84,7 @@ public class EstablimentDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_dialog, menu);
-        if (!dbHelper.isRestaurantByPlacesId(placeId)){
+        if (dbHelper.isRestaurantByPlacesId(placeId)){
             menu.getItem(0).setIcon(getResources().getIdentifier("@drawable/baseline_bookmark_24", null, this.getPackageName()));
         }
         else{

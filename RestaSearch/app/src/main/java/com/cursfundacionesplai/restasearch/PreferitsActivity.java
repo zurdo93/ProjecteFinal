@@ -58,9 +58,13 @@ public class PreferitsActivity extends AppCompatActivity {
                 return toolbarEx.onNavigationItemSelected(item);
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         dbh = new DBHelper(this, Keys.DATABASE_NAME, null, Keys.DATABASE_VERSION);
-
+        
         restaurants = dbh.getRestaurantsPreferits();
 
         adapter = new RestaurantAdapter(this, new WSHelper(this), restaurants);

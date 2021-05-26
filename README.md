@@ -46,6 +46,6 @@ els diferents restaurants de la zona.
 
 ## Autors
 
-* @zurdo93
-* @NIELOXS
-* @xDemorn
+* [Dani](https://github.com/zurdo93)
+* [Nil](https://github.com/NIELOXS)
+* [Miki](https://github.com/xDemorn)
